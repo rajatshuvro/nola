@@ -8,9 +8,11 @@ import com.nola.parsers.BookParser;
 import com.nola.parsers.CheckoutParser;
 import com.nola.parsers.TransactionParser;
 import com.nola.parsers.UserParser;
+import com.nola.utilities.FileUtilities;
 import com.nola.utilities.PrintUtilities;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -73,5 +75,18 @@ public class DbUtilities {
             PrintUtilities.PrintWarningLine("Error reading book fob file");
             return null;
         }
+    }
+
+    public static InputStream GetFileReadStream(String filePath){
+        if(!FileUtilities.Exists(filePath)){
+            return null;
+        }
+        try {
+            var inputStream = new FileInputStream(filePath);
+            return inputStream;
+        } catch (FileNotFoundException e) {
+
+        }
+        return null;
     }
 }
