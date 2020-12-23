@@ -8,24 +8,20 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-public class MainDb {
-    public final String UsersFileName = "Users.fob";
-    public final String BooksFileName = "Books.fob";
-    public final String TransactionsFileName = "Transactions.fob";
-    public final String CheckoutsFileName = "Checkouts.fob";
+import static com.nola.databases.DbCommons.BooksFileName;
 
-    private String _dataDir;
+public class MainDb {
     public BookDb BookDb;
     public UserDb UserDb;
     public CheckoutDb CheckoutDb;
     public TransactionDb TransactionDb;
 
-    public MainDb(String dataDir){
-        _dataDir = dataDir;
+    public MainDb(){
+        LoadBookDb();
     }
 
     private boolean LoadBookDb() {
-        String filePath = PathUtilities.combine(_dataDir, BooksFileName);//DataDir+ File.separatorChar+BooksFileName;
+        String filePath = DbCommons.getBooksFilePath();
         var inputStream = DbUtilities.GetFileReadStream(filePath);
         if (inputStream == null)
         {

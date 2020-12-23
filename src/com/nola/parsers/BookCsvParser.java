@@ -31,10 +31,16 @@ public class BookCsvParser {
         _reader.close();
     }
 
-    public ArrayList<Book> GetBooks() throws IOException {
+    public ArrayList<Book> GetBooks() {
         var books = new ArrayList<Book>();
-        Iterable<CSVRecord> records = CSVFormat.RFC4180.withHeader(TimeTag, IsbnTag,TitleTag, AuthorTag, PublisherTag,
-                YearTag, GenreTag, ReadingLevelTag, PageCountTag, PriceTag).parse(_reader);
+        Iterable<CSVRecord> records = null;
+        try {
+            records = CSVFormat.RFC4180.withHeader(TimeTag, IsbnTag,TitleTag, AuthorTag, PublisherTag,
+                    YearTag, GenreTag, ReadingLevelTag, PageCountTag, PriceTag).parse(_reader);
+        } catch (IOException e) {
+            PrintUtilities.PrintErrorLine("Book CSV parser failed.");
+            e.printStackTrace();
+        }
         var isHeaderRecord = true;
         for (CSVRecord record : records) {
             //the first line is also reported as entry. We need to skip it

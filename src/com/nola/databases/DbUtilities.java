@@ -11,10 +11,7 @@ import com.nola.parsers.UserParser;
 import com.nola.utilities.FileUtilities;
 import com.nola.utilities.PrintUtilities;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
 
 public class DbUtilities {
@@ -84,6 +81,35 @@ public class DbUtilities {
         try {
             var inputStream = new FileInputStream(filePath);
             return inputStream;
+        } catch (FileNotFoundException e) {
+
+        }
+        return null;
+    }
+
+    public static BookDb LoadBookDb() {
+        var filePath = DbCommons.getBooksFilePath();
+        var inputStream = GetFileReadStream(filePath);
+        var parser = new BookParser(inputStream);
+
+        try {
+            var bookDb = new BookDb(parser.GetBooks());
+            inputStream.close();
+            return bookDb;
+        } catch (IOException e) {
+            PrintUtilities.PrintErrorLine("Failed to load Book DB.");
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static OutputStream GetAppendStream(String filePath) {
+        if(!FileUtilities.Exists(filePath)){
+            return null;
+        }
+        try {
+            var appendStream = new FileOutputStream(filePath,true);
+            return appendStream;
         } catch (FileNotFoundException e) {
 
         }
