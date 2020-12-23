@@ -73,18 +73,23 @@ public class TestStreams {
         memStream.close();
         return new ByteArrayInputStream(buffer);
     }
-    public static InputStream GetBookCsvStream() throws IOException{
+    public static InputStream GetBookCsvStream() {
         var memStream = new ByteArrayOutputStream();
         var writer = new OutputStreamWriter(memStream);
+        byte[] buffer = null;
+        try{
+            writer.write("\"Timestamp\",\"ISBN\",\"Title\",\"Author\",\"Publisher\",\"Year\",\"Genre\",\"Reading level\",\"Page count\",\"Price\"\n");
+            writer.write("\"2020/01/31 3:45:48 PM PST\",\"\",\"Golper Asor (4)\",\"Brac\",\"Brac\",\"2017\",\"General\",\"4\",\"10\",\"5\"\n");
+            writer.write("\"2020/01/31 3:54:45 PM PST\",\"\",\"Golper Asor (2)\",\"Brac\",\"Brac\",\"2017\",\"General\",\"2\",\"10\",\"5\"\n");
+            writer.write("\"2020/01/25 7:01:51 PM PST\",\"\",\"Pani\",\"Md.shah alam\",\"Sisemi workshop \",\"2013\",\"Science\",\"5\",\"10\",\"5\"\n");
+            writer.close();
 
-        writer.write("\"Timestamp\",\"ISBN\",\"Title\",\"Author\",\"Publisher\",\"Year\",\"Genre\",\"Reading level\",\"Page count\",\"Price\"\n");
-        writer.write("\"2020/01/31 3:45:48 PM PST\",\"\",\"Golper Asor (4)\",\"Brac\",\"Brac\",\"2017\",\"General\",\"4\",\"10\",\"5\"\n");
-        writer.write("\"2020/01/31 3:54:45 PM PST\",\"\",\"Golper Asor (2)\",\"Brac\",\"Brac\",\"2017\",\"General\",\"2\",\"10\",\"5\"\n");
-        writer.write("\"2020/01/25 7:01:51 PM PST\",\"\",\"Pani\",\"Md.shah alam\",\"Sisemi workshop \",\"2013\",\"Science\",\"5\",\"10\",\"5\"\n");
-        writer.close();
+            buffer = memStream.toByteArray();
+            memStream.close();
 
-        var buffer = memStream.toByteArray();
-        memStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return new ByteArrayInputStream(buffer);
     }
     public static InputStream GetTransactionStreamReduced() throws IOException {

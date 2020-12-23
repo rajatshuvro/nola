@@ -2,6 +2,7 @@ package com.nola.subcommands;
 
 import com.nola.dataStructures.Book;
 import com.nola.databases.AppendUtilities;
+import com.nola.databases.BookDb;
 import com.nola.databases.DbCommons;
 import com.nola.databases.DbUtilities;
 import com.nola.parsers.BookCsvParser;
@@ -51,7 +52,7 @@ public class add {
                     System.out.println("Specified file does not exist: "+filePath);
                 }
 
-                var count = AddNewBooks(new FileInputStream(filePath));
+                var count = AddNewBooks(DbUtilities.LoadBookDb(), new FileInputStream(filePath));
                 System.out.println("Number of new books added: "+count);
             }
         }
@@ -61,9 +62,9 @@ public class add {
         }
     }
 
-    public static int AddNewBooks(InputStream inputStream){
+    public static int AddNewBooks(BookDb bookDb, InputStream inputStream){
         if(inputStream == null) return 0;
-        var bookDb = DbUtilities.LoadBookDb();
+
         var csvParser = new BookCsvParser(inputStream);
 
         var validEntries = new ArrayList<Book>();
