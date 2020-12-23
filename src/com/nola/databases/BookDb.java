@@ -31,7 +31,7 @@ public class BookDb {
         return _books.size();
     }
 
-    public BookDb(Iterable<Book> books) {
+    public BookDb(ArrayList<Book> books) {
         _books = new HashMap<>();
         _newBooks = new ArrayList<>();
         _latestCopyNumbers = new HashMap<>();

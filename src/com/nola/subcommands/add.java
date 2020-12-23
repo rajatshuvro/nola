@@ -1,10 +1,7 @@
 package com.nola.subcommands;
 
 import com.nola.dataStructures.Book;
-import com.nola.databases.AppendUtilities;
-import com.nola.databases.BookDb;
-import com.nola.databases.DbCommons;
-import com.nola.databases.DbUtilities;
+import com.nola.databases.*;
 import com.nola.parsers.BookCsvParser;
 import com.nola.utilities.FileUtilities;
 import org.apache.commons.cli.*;
@@ -55,11 +52,24 @@ public class add {
                 var count = AddNewBooks(DbUtilities.LoadBookDb(), new FileInputStream(filePath));
                 System.out.println("Number of new books added: "+count);
             }
+            if (cmd.hasOption("co")){
+                var filePath = cmd.getOptionValue("co");
+                if(!FileUtilities.Exists(filePath)){
+                    System.out.println("Specified file does not exist: "+filePath);
+                }
+
+                var count = AddCheckouts(DbUtilities.LoadMainDb(), new FileInputStream(filePath));
+                System.out.println("Number of new books added: "+count);
+            }
         }
         catch (ParseException | IOException e) {
             System.out.println(e.getMessage());
             formatter.printHelp(commandSyntex, options);
         }
+    }
+
+    private static int AddCheckouts(MainDb mainDb, FileInputStream inputStream) {
+        return 0;
     }
 
     public static int AddNewBooks(BookDb bookDb, InputStream inputStream){
