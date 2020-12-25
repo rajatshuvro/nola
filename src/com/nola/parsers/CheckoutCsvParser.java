@@ -2,6 +2,7 @@ package com.nola.parsers;
 
 import com.nola.dataStructures.Book;
 import com.nola.dataStructures.Checkout;
+import com.nola.utilities.PrintUtilities;
 import com.nola.utilities.TimeUtilities;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
@@ -27,9 +28,15 @@ public class CheckoutCsvParser {
         _reader.close();
     }
 
-    public ArrayList<Checkout> GetCheckouts() throws IOException {
+    public ArrayList<Checkout> GetCheckouts() {
         var checkouts = new ArrayList<Checkout>();
-        Iterable<CSVRecord> records = CSVFormat.RFC4180.withHeader(TimeTag, UsernameTag, BookIdTag, UserIdTag, DueDateTag).parse(_reader);
+        Iterable<CSVRecord> records = null;
+        try {
+            records = CSVFormat.RFC4180.withHeader(TimeTag, UsernameTag, BookIdTag, UserIdTag, DueDateTag).parse(_reader);
+        } catch (IOException e) {
+            PrintUtilities.PrintErrorLine("Failed to parse checkout CSV file.");
+            return null;
+        }
         var isHeaderRecord = true;
         for (CSVRecord record : records) {
             //the first line is also reported as entry. We need to skip it

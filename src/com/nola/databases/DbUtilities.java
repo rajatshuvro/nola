@@ -141,13 +141,13 @@ public class DbUtilities {
         return transactionDb;
     }
 
-    private static CheckoutDb LoadCheckoutDb(BookDb bookDb, UserDb userDb) {
+    public static CheckoutDb LoadCheckoutDb(BookDb bookDb, UserDb userDb) {
         var filePath = DbCommons.getCheckoutsFilePath();
         var inputStream = GetFileReadStream(filePath);
 
         return getCheckoutDb(bookDb, userDb, inputStream);
     }
-    
+
     private static CheckoutDb getCheckoutDb(BookDb bookDb, UserDb userDb, InputStream inputStream) {
         var checkouts = ReadCheckouts(inputStream);
         var checkoutDb = new CheckoutDb(checkouts, userDb, bookDb);

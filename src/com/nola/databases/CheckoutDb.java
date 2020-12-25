@@ -6,12 +6,11 @@ import com.nola.parsers.FlatObjectParser;
 import com.nola.utilities.PrintUtilities;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CheckoutDb {
-    private final BufferedWriter _appender;
-    private OutputStream _outputStream;
     private HashMap<String, Checkout> _checkouts;
     private boolean _hasReturns =false;
     public final int CheckoutLimit = 15;
@@ -30,9 +29,6 @@ public class CheckoutDb {
                  checkouts) {
                 _checkouts.put(checkout.BookId, checkout);
             }
-
-        if(_outputStream != null) _appender = new BufferedWriter(new OutputStreamWriter(_outputStream));
-        else _appender = null;
     }
 
 
@@ -79,33 +75,17 @@ public class CheckoutDb {
         }
         _checkouts.put(bookId, checkout);
 
-        return _appender == null? true: Append(checkout);
-    }
-
-    private boolean Append(Checkout checkout) {
-
-        try {
-            _appender.write(checkout.toString()+'\n');
-            _appender.write(FlatObjectParser.RecordSeparator+'\n');
-            _appender.flush();
-        } catch (IOException e) {
-            System.out.println("Failed to append checkouts.\n"+ checkout.toString());
-            return false;
-        }
-
         return true;
     }
 
-    public int TryAddRange(Iterable<Checkout> checkouts) {
-        var count =0;
-        if (_appender == null)
-            PrintUtilities.PrintWarningLine("Checkout appender set to null. No entry was saved");
-
+    public ArrayList<Checkout> TryAddRange(Iterable<Checkout> checkouts) {
+        var validEntries = new ArrayList<Checkout>();
         for (var checkout:
              checkouts) {
-            if(TryAdd(checkout)) count++;
+            if(TryAdd(checkout)) validEntries.add(checkout);
         }
-        return count;
+
+        return validEntries;
     }
 
     public boolean Return (Return record){
@@ -151,11 +131,6 @@ public class CheckoutDb {
         if(!leaveOpen) rewriteStream.close();
         _hasReturns = false;
 
-    }
-
-    public void Close() throws IOException {
-        if(_appender != null)_appender.close();
-        if(_outputStream != null) _outputStream.close();
     }
 
     public boolean HasReturns() {

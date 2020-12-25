@@ -3,6 +3,7 @@ package com.nola.subcommands;
 import com.nola.dataStructures.Book;
 import com.nola.databases.*;
 import com.nola.parsers.BookCsvParser;
+import com.nola.parsers.CheckoutCsvParser;
 import com.nola.utilities.FileUtilities;
 import org.apache.commons.cli.*;
 
@@ -49,7 +50,7 @@ public class add {
                     System.out.println("Specified file does not exist: "+filePath);
                 }
 
-                var count = AddNewBooks(DbUtilities.LoadBookDb(), new FileInputStream(filePath));
+                var count = AddBooks(DbUtilities.LoadBookDb(), new FileInputStream(filePath));
                 System.out.println("Number of new books added: "+count);
             }
             if (cmd.hasOption("co")){
@@ -58,7 +59,9 @@ public class add {
                     System.out.println("Specified file does not exist: "+filePath);
                 }
 
-                var count = AddCheckouts(DbUtilities.LoadMainDb(), new FileInputStream(filePath));
+                var bookDb = DbUtilities.LoadBookDb();
+                var userDb = DbUtilities.LoadUserDb();
+                var count = AddCheckouts(DbUtilities.LoadCheckoutDb(bookDb, userDb), new FileInputStream(filePath));
                 System.out.println("Number of new books added: "+count);
             }
         }
@@ -68,11 +71,7 @@ public class add {
         }
     }
 
-    private static int AddCheckouts(MainDb mainDb, FileInputStream inputStream) {
-        return 0;
-    }
-
-    public static int AddNewBooks(BookDb bookDb, InputStream inputStream){
+    public static int AddBooks(BookDb bookDb, InputStream inputStream){
         if(inputStream == null) return 0;
 
         var csvParser = new BookCsvParser(inputStream);
@@ -84,7 +83,21 @@ public class add {
         }
         if(validEntries.size()>0){
             var appendStream = DbUtilities.GetAppendStream(DbCommons.getBooksFilePath());
-            if(AppendUtilities.AppendBooks(validEntries, appendStream)) return validEntries.size();
+            if(AppendUtilities.AppendItems(validEntries, appendStream)) return validEntries.size();
+            else return 0;
+        }
+        return 0;
+    }
+
+    public static int AddCheckouts(CheckoutDb checkoutDb, InputStream inputStream){
+        if(inputStream == null) return 0;
+
+        var csvParser = new CheckoutCsvParser(inputStream);
+
+        var validEntries = checkoutDb.TryAddRange(csvParser.GetCheckouts());
+        if(validEntries.size()>0){
+            var appendStream = DbUtilities.GetAppendStream(DbCommons.getCheckoutsFilePath());
+            if(AppendUtilities.AppendItems(validEntries, appendStream)) return validEntries.size();
             else return 0;
         }
         return 0;
