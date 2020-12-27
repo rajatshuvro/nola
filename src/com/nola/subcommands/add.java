@@ -109,10 +109,12 @@ public class add {
         var validEntries = checkoutDb.TryAddRange(csvParser.GetCheckouts());
         if(validEntries.size()>0){
             var appendStream = DbUtilities.GetAppendStream(DbCommons.getCheckoutsFilePath());
-            if(AppendUtilities.AppendItems(validEntries, appendStream)) return validEntries.size();
-            else return 0;
+            AppendUtilities.AppendItems(validEntries, appendStream);
+            var transactions = TransactionDb.GetCheckoutTransactions(validEntries);
+            var transactionStream = DbUtilities.GetAppendStream(DbCommons.getTransactionsFilePath());
+            AppendUtilities.AppendItems(transactions, transactionStream);
         }
-        return 0;
+        return validEntries.size();
     }
 
     public static int AddReturns(CheckoutDb checkoutDb, InputStream inputStream){
@@ -120,11 +122,14 @@ public class add {
 
         var csvParser = new ReturnCsvParser(inputStream);
 
-        var count = checkoutDb.ReturnRange(csvParser.GetReturnes());
-        if(count > 0){
+        var validEntries = checkoutDb.ReturnRange(csvParser.GetReturnes());
+        if(validEntries.size()>0){
             var writeStream = DbUtilities.GetWriteStream(DbCommons.getCheckoutsFilePath());
             AppendUtilities.Rewrite(CheckoutDb.HeaderLines, checkoutDb.GetAllCheckouts(), writeStream, false);
+            var transactions = TransactionDb.GetReturnTransactions(validEntries);
+            var transactionStream = DbUtilities.GetAppendStream(DbCommons.getTransactionsFilePath());
+            AppendUtilities.AppendItems(transactions, transactionStream);
         }
-        return count;
+        return validEntries.size();
     }
 }

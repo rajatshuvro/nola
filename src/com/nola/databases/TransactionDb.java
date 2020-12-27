@@ -49,6 +49,23 @@ public class TransactionDb {
         }
     }
 
+    public static ArrayList<Transaction> GetCheckoutTransactions(ArrayList<Checkout> checkouts) {
+        var transactions = new ArrayList<Transaction>();
+        for (var checkout:
+             checkouts) {
+            transactions.add(Transaction.Create(checkout.BookId, checkout.UserId, checkout.CheckoutDate, Transaction.CheckoutTag));
+        }
+        return transactions;
+    }
+    public static ArrayList<Transaction> GetReturnTransactions(ArrayList<Return> returns) {
+        var transactions = new ArrayList<Transaction>();
+        for (var record:
+                returns) {
+            transactions.add(Transaction.Create(record.BookId, null, record.DateTime, Transaction.ReturnTag));
+        }
+        return transactions;
+    }
+
     public Transaction GetLatest(String bookId){
         if(_latestTransactions.containsKey(bookId)) return _latestTransactions.get(bookId);
         return null;

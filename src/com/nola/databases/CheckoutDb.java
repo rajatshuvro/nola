@@ -121,11 +121,11 @@ public class CheckoutDb {
         return _hasReturns;
     }
 
-    public int ReturnRange(ArrayList<Return> records) {
-        var count =0;
+    public ArrayList<Return> ReturnRange(ArrayList<Return> records) {
+        var validEntries = new ArrayList<Return>();
         for (var record: records) {
-            if (Return(record)) count++;
+            if (Return(record)) validEntries.add(record);
         }
-        return count;
+        return validEntries;
     }
 }
