@@ -6,6 +6,8 @@ import com.nola.unitTests.TestStreams;
 import com.nola.unitTests.testData;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class addBooksTests {
@@ -15,7 +17,8 @@ public class addBooksTests {
         var bookDb = new BookDb(testData.GetBooks());
         var originalCount = bookDb.Count();
 
-        add.AddBooks(bookDb, newBookCsvStream);
+        var appendStream = new ByteArrayOutputStream();
+        add.AddBooks(bookDb, newBookCsvStream, appendStream);
         var newCount = bookDb.Count();
 
         assertEquals(3, newCount - originalCount);

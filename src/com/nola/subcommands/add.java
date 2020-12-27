@@ -11,6 +11,7 @@ import org.apache.commons.cli.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 public class add {
@@ -50,8 +51,8 @@ public class add {
                 if(!FileUtilities.Exists(filePath)){
                     System.out.println("Specified file does not exist: "+filePath);
                 }
-
-                var count = AddBooks(DbUtilities.LoadBookDb(), new FileInputStream(filePath));
+                var appendStream = DbUtilities.GetAppendStream(DbCommons.getBooksFilePath());
+                var count = AddBooks(DbUtilities.LoadBookDb(), new FileInputStream(filePath), appendStream);
                 System.out.println("Number of new books added: "+count);
             }
             if (cmd.hasOption("co")){
@@ -83,7 +84,7 @@ public class add {
         }
     }
 
-    public static int AddBooks(BookDb bookDb, InputStream inputStream){
+    public static int AddBooks(BookDb bookDb, InputStream inputStream, OutputStream appendStream){
         if(inputStream == null) return 0;
 
         var csvParser = new BookCsvParser(inputStream);
@@ -94,11 +95,9 @@ public class add {
             if (id != null) validEntries.add(book);
         }
         if(validEntries.size()>0){
-            var appendStream = DbUtilities.GetAppendStream(DbCommons.getBooksFilePath());
-            if(AppendUtilities.AppendItems(validEntries, appendStream)) return validEntries.size();
-            else return 0;
+            AppendUtilities.AppendItems(validEntries, appendStream);
         }
-        return 0;
+        return validEntries.size();
     }
 
     public static int AddCheckouts(CheckoutDb checkoutDb, InputStream inputStream){
