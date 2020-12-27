@@ -4,6 +4,7 @@ import com.nola.dataStructures.Book;
 import com.nola.databases.*;
 import com.nola.parsers.BookCsvParser;
 import com.nola.parsers.CheckoutCsvParser;
+import com.nola.parsers.ReturnCsvParser;
 import com.nola.utilities.FileUtilities;
 import org.apache.commons.cli.*;
 
@@ -62,7 +63,18 @@ public class add {
                 var bookDb = DbUtilities.LoadBookDb();
                 var userDb = DbUtilities.LoadUserDb();
                 var count = AddCheckouts(DbUtilities.LoadCheckoutDb(bookDb, userDb), new FileInputStream(filePath));
-                System.out.println("Number of new books added: "+count);
+                System.out.println("Number of successful checkouts: "+count);
+            }
+            if (cmd.hasOption("ret")){
+                var filePath = cmd.getOptionValue("ret");
+                if(!FileUtilities.Exists(filePath)){
+                    System.out.println("Specified file does not exist: "+filePath);
+                }
+
+                var bookDb = DbUtilities.LoadBookDb();
+                var userDb = DbUtilities.LoadUserDb();
+                var count = AddReturns(DbUtilities.LoadCheckoutDb(bookDb, userDb), new FileInputStream(filePath));
+                System.out.println("Number of successful returns: "+count);
             }
         }
         catch (ParseException | IOException e) {
@@ -101,5 +113,18 @@ public class add {
             else return 0;
         }
         return 0;
+    }
+
+    public static int AddReturns(CheckoutDb checkoutDb, InputStream inputStream){
+        if(inputStream == null) return 0;
+
+        var csvParser = new ReturnCsvParser(inputStream);
+
+        var count = checkoutDb.ReturnRange(csvParser.GetReturnes());
+        if(count > 0){
+            var writeStream = DbUtilities.GetWriteStream(DbCommons.getCheckoutsFilePath());
+            AppendUtilities.Rewrite(CheckoutDb.HeaderLines, checkoutDb.GetAllCheckouts(), writeStream, false);
+        }
+        return count;
     }
 }

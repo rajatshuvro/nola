@@ -124,6 +124,14 @@ public class TransactionDb {
         return false;
     }
 
+    public int AddRange(Iterable<Transaction> transactions){
+        var count =0;
+        for (var transaction: transactions) {
+            if(Add(transaction)) count++;
+        }
+        return count;
+    }
+
     public boolean Add(Transaction record) {
         //make sure the book exists in the book database and the user in user database
         if(_bookDb.GetBook(record.BookId)== null){

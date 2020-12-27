@@ -182,4 +182,16 @@ public class DbUtilities {
     }
 
 
+    public static OutputStream GetWriteStream(String filePath) {
+        if(!FileUtilities.Exists(filePath)){
+            return null;
+        }
+        try {
+            var writeStream = new FileOutputStream(filePath);
+            return writeStream;
+        } catch (FileNotFoundException e) {
+
+        }
+        return null;
+    }
 }

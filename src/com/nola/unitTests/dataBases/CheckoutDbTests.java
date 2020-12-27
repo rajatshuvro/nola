@@ -1,11 +1,18 @@
 package com.nola.unitTests.dataBases;
 
 import com.nola.dataStructures.Checkout;
+import com.nola.dataStructures.Return;
+import com.nola.databases.AppendUtilities;
 import com.nola.databases.CheckoutDb;
+import com.nola.parsers.CheckoutParser;
+import com.nola.parsers.ReturnCsvParser;
+import com.nola.unitTests.TestStreams;
 import com.nola.utilities.TimeUtilities;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 import static com.nola.unitTests.testData.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -59,4 +66,63 @@ public class CheckoutDbTests {
         assertFalse(chekoutDb.TryAdd(invalidCheckout));
     }
 
+    @Test
+    public void Bulk_return(){
+        var csvParser = new ReturnCsvParser(TestStreams.GetReturnCsvStream());
+        var checkoutDb = new CheckoutDb(GetCheckouts(), GetUserDb(), GetBookDb());
+
+        for (var returnRecord: csvParser.GetReturnes()) {
+            assertTrue(checkoutDb.Return(returnRecord));
+        }
+
+        assertFalse(checkoutDb.Return(new Return("1234567-(3)", TimeUtilities.GetCurrentTime())));
+    }
+
+    @Test
+    public void Bulk_return_shortId(){
+        var csvParser = new ReturnCsvParser(TestStreams.GetReturnCsvStream_shortId());
+        var checkoutDb = new CheckoutDb(GetCheckouts(), GetUserDb(), GetBookDb());
+
+        for (var returnRecord: csvParser.GetReturnes()) {
+            assertTrue(checkoutDb.Return(returnRecord));
+        }
+        assertFalse(checkoutDb.Return(new Return("1234567-(3)", TimeUtilities.GetCurrentTime())));
+    }
+
+    @Test
+    public void Bulk_return_without_userid(){
+        var csvParser = new ReturnCsvParser(TestStreams.GetReturnCsvStream());
+        var checkoutDb = new CheckoutDb(GetCheckouts_without_userid(), GetUserDb(), GetBookDb());
+
+        for (var returnRecord: csvParser.GetReturnes()) {
+            assertTrue(checkoutDb.Return(returnRecord));
+        }
+
+        assertFalse(checkoutDb.Return(new Return("1234567-(3)", TimeUtilities.GetCurrentTime())));
+
+    }
+
+    @Test
+    public void Return_write() throws IOException {
+        var csvParser = new ReturnCsvParser(TestStreams.GetReturnCsvStream());
+        var checkoutDb = new CheckoutDb(GetCheckouts(), GetUserDb(), GetBookDb());
+
+        for (var bookId: csvParser.GetReturnes()) {
+            assertTrue(checkoutDb.Return(bookId));
+        }
+        var allCheckouts = checkoutDb.GetAllCheckouts();
+
+        //write out returns
+        var memStream = new ByteArrayOutputStream();
+        AppendUtilities.Rewrite(CheckoutDb.HeaderLines, allCheckouts, memStream, true);
+
+        //read re-written checkouts
+        var buffer = memStream.toByteArray();
+        memStream.close();
+        var readStream = new ByteArrayInputStream(buffer);
+
+        var checkoutParser = new CheckoutParser(readStream);
+        checkoutDb = new CheckoutDb(checkoutParser.GetCheckouts(), GetUserDb(), GetBookDb());
+        assertFalse(checkoutDb.Return(new Return("1234567-(3)", TimeUtilities.GetCurrentTime())));
+    }
 }

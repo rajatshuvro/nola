@@ -2,12 +2,10 @@ package com.nola.databases;
 
 import com.nola.dataStructures.Checkout;
 import com.nola.dataStructures.Return;
-import com.nola.parsers.FlatObjectParser;
 import com.nola.utilities.PrintUtilities;
 
-import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class CheckoutDb {
@@ -101,6 +99,16 @@ public class CheckoutDb {
         return false;
     }
 
+    public Checkout[] GetAllCheckouts(){
+        var checkouts = new Checkout[_checkouts.size()];
+        var i=0;
+        for (var checkout: _checkouts.values()) {
+            checkouts[i++]= checkout;
+        }
+        Arrays.sort(checkouts);
+        return checkouts;
+    }
+
     public static final String[] HeaderLines = new String[]{
             "#Onkur library book checkout records\n",
             "#Book Id = Onkur book id. Value = <String>\n",
@@ -109,31 +117,15 @@ public class CheckoutDb {
             "#Due Date = Due date. Value = <YYYY-MM-DD HH:MM:ss>\n"
     };
 
-    public void WriteReturns(OutputStream rewriteStream, boolean leaveOpen) throws IOException{
-        if (!_hasReturns) return;
-        if(rewriteStream == null) {
-            PrintUtilities.PrintErrorLine("Pending returns require a re-write stream to be recorded.");
-            throw new IOException("Missing re-write stream");
-        }
-        var writer =  new BufferedWriter(new OutputStreamWriter(rewriteStream));
-        for (var line:
-                HeaderLines) {
-            writer.write(line);
-
-        }
-        writer.write(FlatObjectParser.RecordSeparator+"\n");
-        for (var checkout: _checkouts.values()) {
-            writer.write(checkout.toString()+'\n');
-            writer.write(FlatObjectParser.RecordSeparator+"\n");
-        }
-
-        writer.close();
-        if(!leaveOpen) rewriteStream.close();
-        _hasReturns = false;
-
-    }
-
     public boolean HasReturns() {
         return _hasReturns;
+    }
+
+    public int ReturnRange(ArrayList<Return> records) {
+        var count =0;
+        for (var record: records) {
+            if (Return(record)) count++;
+        }
+        return count;
     }
 }

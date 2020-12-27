@@ -4,7 +4,7 @@ import com.nola.utilities.TimeUtilities;
 
 import java.util.Date;
 
-public class Checkout {
+public class Checkout implements Comparable<Checkout>{
     public final String BookId;
     public final String UserId;
     public final String Email;
@@ -27,5 +27,10 @@ public class Checkout {
                 "Checkout Date:  "+ TimeUtilities.ToString(CheckoutDate)+'\n'+
                 "Due Date:       "+TimeUtilities.ToString(DueDate);
 
+    }
+
+    @Override
+    public int compareTo(Checkout other) {
+        return CheckoutDate.compareTo(other.CheckoutDate);
     }
 }
