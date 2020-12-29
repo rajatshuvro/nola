@@ -6,19 +6,28 @@ import com.nola.parsers.FlatObjectParser;
 import java.io.*;
 
 public class TestStreams {
-    public static InputStream GetCheckoutCsvStream() throws IOException{
+    public static InputStream GetCheckoutCsvStream(){
         var memStream = new ByteArrayOutputStream();
         var writer = new OutputStreamWriter(memStream);
 
-        writer.write("\"Timestamp\",\"Username\",\"Book id\",\"User id\",\"Due Date\"\n");
-        writer.write("\"2020/09/30 9:29:20 AM MDT\",\"someone@email.com\",\"123456789-(1)\",\"111\",\"2020-10-07\"\n");
-        writer.write("\"2020/09/22 8:05:04 AM MDT\",\"someone@email.com\",\"9848494226-FIC-5-(1)\",\"474\",\"2020-10-07\"\n");
-        writer.write("\"2020/09/22 8:09:24 AM MDT\",\"someone@email.com\",\"9848494234-SOC-5-(1)\",\"472\",\"2020-10-07\"\n");
-        writer.write("\"2020/09/22 8:11:44 AM MDT\",\"someone@email.com\",\"9848494049-FIC-1-(1)\",\"480\",\"2020-10-07\"\n");
-        writer.close();
+        try {
+            writer.write("\"Timestamp\",\"Username\",\"Book id\",\"User id\",\"Due Date\"\n");
+            writer.write("\"2020/09/30 9:29:20 AM MDT\",\"someone@email.com\",\"7890788-(2)\",\"name.1\",\"2020-10-07\"\n");
+            writer.write("\"2020/09/22 8:05:04 AM MDT\",\"someone@email.com\",\"678564-FIC-5-(1)\",\"name.2\",\"2020-10-07\"\n");
+            writer.write("\"2020/09/22 8:09:24 AM MDT\",\"someone@email.com\",\"DOG99\",\"name.3\",\"2020-10-07\"\n");
+            writer.write("\"2020/09/22 8:11:44 AM MDT\",\"someone@email.com\",\"PIG07\",\"name.4\",\"2020-10-07\"\n");
+            writer.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         var buffer = memStream.toByteArray();
-        memStream.close();
+        try {
+            memStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return new ByteArrayInputStream(buffer);
     }
 

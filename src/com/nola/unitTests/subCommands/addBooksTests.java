@@ -24,6 +24,4 @@ public class addBooksTests {
         assertEquals(3, newCount - originalCount);
 
     }
-
-
 }

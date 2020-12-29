@@ -20,14 +20,13 @@ public class Transaction {
         Id = date.getTime();
     }
 
-    private static boolean IsValid(String bookId, String userId, Date date, String type){
+    private static boolean IsValid(String bookId, String type){
         return bookId != null &&
-                userId != null &&
                 IsValidType(type);
     }
 
     public static Transaction Create(String bookId, String userId, Date date, String type){
-        if(!IsValid( bookId, userId, date, type)) return null;
+        if(!IsValid( bookId, type)) return null;
         return new Transaction(bookId, userId, date, type);
     }
 
