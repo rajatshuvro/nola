@@ -2,6 +2,7 @@ package com.nola;
 
 import com.nola.subcommands.add;
 import com.nola.subcommands.co;
+import com.nola.subcommands.ret;
 import com.nola.utilities.PrintUtilities;
 
 public class Main {
@@ -19,6 +20,9 @@ public class Main {
                 break;
             case "co":
                 co.Run(args);
+                break;
+            case "ret":
+                ret.Run(args);
                 break;
 //            case "$":
 //            case "search":

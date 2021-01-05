@@ -42,6 +42,8 @@ public class ret {
                 var transactionStream = DbUtilities.GetAppendStream(DbCommons.getTransactionsFilePath());
                 var count = AddReturns(DbUtilities.LoadCheckoutDb(bookDb, userDb), new FileInputStream(filePath),
                         writeStream, transactionStream);
+                writeStream.close();
+                transactionStream.close();
                 System.out.println("Number of successful returns: "+count);
             }
         }
