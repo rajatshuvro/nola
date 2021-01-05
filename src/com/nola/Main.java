@@ -1,6 +1,7 @@
 package com.nola;
 
 import com.nola.subcommands.add;
+import com.nola.subcommands.co;
 import com.nola.utilities.PrintUtilities;
 
 public class Main {
@@ -16,7 +17,9 @@ public class Main {
             case "add":
                 add.Run(args);
                 break;
-//            case "cs":
+            case "co":
+                co.Run(args);
+                break;
 //            case "$":
 //            case "search":
 //                TokenSearch.Run(subArgs, dataProvider);
@@ -28,7 +31,7 @@ public class Main {
                 PrintMainMenu();
                 break;
             default:
-                System.out.println("Unrecognized command: "+subCommand+"\nType \"help\" for the help menu or \"quit\" to exit");
+                System.out.println("Unrecognized command: "+subCommand+"\nType \"help\" for the help menu");
         }
 
     }

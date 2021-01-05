@@ -2,7 +2,6 @@ package com.nola.subcommands;
 
 import com.nola.databases.*;
 import com.nola.parsers.CheckoutCsvParser;
-import com.nola.parsers.ReturnCsvParser;
 import com.nola.utilities.FileUtilities;
 import org.apache.commons.cli.*;
 
@@ -43,6 +42,8 @@ public class co {
                 var transactionStream = DbUtilities.GetAppendStream(DbCommons.getTransactionsFilePath());
                 var count = AddCheckouts(DbUtilities.LoadCheckoutDb(bookDb, userDb), new FileInputStream(filePath),
                         appendStream, transactionStream);
+                appendStream.close();
+                transactionStream.close();
                 System.out.println("Number of successful checkouts: "+count);
             }
         }
