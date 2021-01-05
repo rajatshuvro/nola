@@ -1,7 +1,7 @@
-package com.nola.unitTests.parsers;
+package com.nola.parsers.tests;
 
 import com.nola.parsers.TransactionParser;
-import com.nola.unitTests.TestStreams;
+import com.nola.testUtilities.TestStreams;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

@@ -1,8 +1,8 @@
-package com.nola.unitTests.dataBases;
+package com.nola.databases.tests;
 
 import com.nola.dataStructures.User;
 import com.nola.databases.UserDb;
-import com.nola.unitTests.testData;
+import com.nola.testUtilities.testData;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

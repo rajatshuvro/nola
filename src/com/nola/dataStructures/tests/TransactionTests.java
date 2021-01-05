@@ -1,11 +1,11 @@
-package com.nola.unitTests.dataStructures;
+package com.nola.dataStructures.tests;
 
 import com.nola.dataStructures.Transaction;
 import com.nola.databases.AppendUtilities;
 import com.nola.databases.TransactionDb;
 import com.nola.parsers.TransactionParser;
-import com.nola.unitTests.TestStreams;
-import com.nola.unitTests.testData;
+import com.nola.testUtilities.TestStreams;
+import com.nola.testUtilities.testData;
 import com.nola.utilities.TimeUtilities;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static com.nola.unitTests.testData.*;
+import static com.nola.testUtilities.testData.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

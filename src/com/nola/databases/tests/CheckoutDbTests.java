@@ -1,4 +1,4 @@
-package com.nola.unitTests.dataBases;
+package com.nola.databases.tests;
 
 import com.nola.dataStructures.Checkout;
 import com.nola.dataStructures.Return;
@@ -6,7 +6,7 @@ import com.nola.databases.AppendUtilities;
 import com.nola.databases.CheckoutDb;
 import com.nola.parsers.CheckoutParser;
 import com.nola.parsers.ReturnCsvParser;
-import com.nola.unitTests.TestStreams;
+import com.nola.testUtilities.TestStreams;
 import com.nola.utilities.TimeUtilities;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import static com.nola.unitTests.testData.*;
+import static com.nola.testUtilities.testData.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 

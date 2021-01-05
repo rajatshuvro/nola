@@ -1,4 +1,4 @@
-package com.nola.unitTests;
+package com.nola.testUtilities;
 
 import com.nola.dataStructures.Book;
 import com.nola.dataStructures.Checkout;

@@ -1,4 +1,4 @@
-package com.nola.unitTests;
+package com.nola.utilities.tests;
 
 import com.nola.utilities.TimeUtilities;
 import org.junit.jupiter.api.Test;

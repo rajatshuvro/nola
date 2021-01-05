@@ -1,11 +1,11 @@
-package com.nola.unitTests.dataBases;
+package com.nola.databases.tests;
 
 import com.nola.databases.BookDb;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static com.nola.unitTests.testData.*;
+import static com.nola.testUtilities.testData.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 

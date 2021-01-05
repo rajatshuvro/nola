@@ -1,17 +1,16 @@
-package com.nola.unitTests.subCommands;
+package com.nola.subcommands.tests;
 
 import com.nola.databases.CheckoutDb;
 import com.nola.parsers.CheckoutCsvParser;
-import com.nola.subcommands.co;
 import com.nola.subcommands.ret;
-import com.nola.unitTests.TestStreams;
+import com.nola.testUtilities.TestStreams;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 
-import static com.nola.unitTests.testData.GetBookDb;
-import static com.nola.unitTests.testData.GetUserDb;
+import static com.nola.testUtilities.testData.GetBookDb;
+import static com.nola.testUtilities.testData.GetUserDb;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class retTests {

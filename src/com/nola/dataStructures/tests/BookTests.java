@@ -1,4 +1,4 @@
-package com.nola.unitTests.dataStructures;
+package com.nola.dataStructures.tests;
 
 import com.nola.dataStructures.Book;
 import org.junit.jupiter.api.Test;

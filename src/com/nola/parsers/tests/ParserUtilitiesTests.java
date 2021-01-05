@@ -1,4 +1,4 @@
-package com.nola.unitTests.parsers;
+package com.nola.parsers.tests;
 
 import com.nola.parsers.ParserUtilities;
 import org.junit.jupiter.api.Test;

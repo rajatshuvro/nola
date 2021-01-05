@@ -1,9 +1,9 @@
-package com.nola.unitTests.subCommands;
+package com.nola.subcommands.tests;
 
 import com.nola.databases.BookDb;
 import com.nola.subcommands.add;
-import com.nola.unitTests.TestStreams;
-import com.nola.unitTests.testData;
+import com.nola.testUtilities.TestStreams;
+import com.nola.testUtilities.testData;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
