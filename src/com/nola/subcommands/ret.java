@@ -60,11 +60,10 @@ public class ret {
         var csvParser = new ReturnCsvParser(inputStream);
 
         var validEntries = checkoutDb.ReturnRange(csvParser.GetReturnes());
-        if(validEntries.size()>0){
-            AppendUtilities.Rewrite(CheckoutDb.HeaderLines, checkoutDb.GetAllCheckouts(), writeStream, false);
-            var transactions = TransactionDb.GetReturnTransactions(validEntries);
-            AppendUtilities.AppendItems(transactions, transactionStream);
-        }
+        // we need to re-write regardless of valid entries since existing checkouts has to be re-written
+        AppendUtilities.Rewrite(CheckoutDb.HeaderLines, checkoutDb.GetAllCheckouts(), writeStream, false);
+        var transactions = TransactionDb.GetReturnTransactions(validEntries);
+        AppendUtilities.AppendItems(transactions, transactionStream);
         return validEntries.size();
     }
 }

@@ -55,7 +55,7 @@ public class CheckoutDbTests {
         var chekoutDb = new CheckoutDb(GetCheckouts(), GetUserDb(), GetBookDb());
         var invalidCheckout = new Checkout("678564-(2)", "name.10","name10@onkur.com", TimeUtilities.parseGoogleDateTime("2020/09/30 3:21:27 PM MDT"), TimeUtilities.parseDate("2020-10-29") );
 
-        assertFalse(chekoutDb.TryAdd(invalidCheckout));
+        assertNull(chekoutDb.TryAdd(invalidCheckout));
     }
 
     @Test
@@ -63,7 +63,7 @@ public class CheckoutDbTests {
         var chekoutDb = new CheckoutDb(GetCheckouts(), GetUserDb(), GetBookDb());
         var invalidCheckout = new Checkout("678564-(3)", "name.3","name1@onkur.com",TimeUtilities.parseGoogleDateTime("2020/09/30 3:21:27 PM MDT"), TimeUtilities.parseDate("2020-10-29") );
 
-        assertFalse(chekoutDb.TryAdd(invalidCheckout));
+        assertNull(chekoutDb.TryAdd(invalidCheckout));
     }
 
     @Test

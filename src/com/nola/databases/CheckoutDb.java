@@ -46,41 +46,41 @@ public class CheckoutDb {
         return checkouts;
     }
 
-    public boolean TryAdd(Checkout checkout)  {
+    public Checkout TryAdd(Checkout checkout)  {
         var book =_bookDb.GetBook(checkout.BookId);
         if( book == null) {
             PrintUtilities.PrintWarningLine("WARNING: Invalid book id:"+checkout.BookId+". Ignoring transaction.");
-            return false;
+            return null;
         }
         var user = _userDb.ResolveUser(checkout.UserId, checkout.Email);
 
         if( user == null){
             PrintUtilities.PrintWarningLine("WARNING: Invalid user id:"+checkout.UserId+". Ignoring transaction.");
-            return false;
+            return null;
         }
 
         var bookId = book.GetId();
         if(IsCheckedOut(bookId)) {
             PrintUtilities.PrintWarningLine("Can not checkout the same book twice:"+checkout.BookId);
-            return false;
+            return null;
         }
         var checkouts = ReadCheckouts(user.Id);
         var checkoutCount = checkouts.size();
         if(checkoutCount >= CheckoutLimit)
         {
             PrintUtilities.PrintWarningLine("Checkout limit reached. Cannot issue more books to user id:"+checkout.UserId);
-            return false;
+            return null;
         }
         _checkouts.put(bookId, checkout);
 
-        return true;
+        return new Checkout(bookId, user.Id, user.Email, checkout.CheckoutDate, checkout.DueDate);
     }
 
     public ArrayList<Checkout> TryAddRange(Iterable<Checkout> checkouts) {
         var validEntries = new ArrayList<Checkout>();
-        for (var checkout:
-             checkouts) {
-            if(TryAdd(checkout)) validEntries.add(checkout);
+        for (var checkout: checkouts) {
+            var newCheckout = TryAdd(checkout);
+            if(newCheckout != null) validEntries.add(checkout);
         }
 
         return validEntries;
