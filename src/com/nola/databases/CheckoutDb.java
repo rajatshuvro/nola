@@ -80,23 +80,23 @@ public class CheckoutDb {
         var validEntries = new ArrayList<Checkout>();
         for (var checkout: checkouts) {
             var newCheckout = TryAdd(checkout);
-            if(newCheckout != null) validEntries.add(checkout);
+            if(newCheckout != null) validEntries.add(newCheckout);
         }
 
         return validEntries;
     }
 
-    public boolean Return (Return record){
+    public Return Return (Return record){
         var book = _bookDb.GetBook(record.BookId);
-        if (book == null) return false;
+        if (book == null) return null;
 
         var bookId = book.GetId();
         if (_checkouts.containsKey(bookId)){
             _checkouts.remove(bookId);
             _hasReturns = true;
-            return true;
+            return new Return(bookId, record.DateTime);
         }
-        return false;
+        return null;
     }
 
     public Checkout[] GetAllCheckouts(){
@@ -124,7 +124,8 @@ public class CheckoutDb {
     public ArrayList<Return> ReturnRange(ArrayList<Return> records) {
         var validEntries = new ArrayList<Return>();
         for (var record: records) {
-            if (Return(record)) validEntries.add(record);
+            var newReturn =Return(record);
+            if (newReturn != null) validEntries.add(newReturn);
         }
         return validEntries;
     }

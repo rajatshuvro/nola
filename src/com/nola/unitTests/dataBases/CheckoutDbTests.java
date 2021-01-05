@@ -72,10 +72,10 @@ public class CheckoutDbTests {
         var checkoutDb = new CheckoutDb(GetCheckouts(), GetUserDb(), GetBookDb());
 
         for (var returnRecord: csvParser.GetReturnes()) {
-            assertTrue(checkoutDb.Return(returnRecord));
+            assertNotNull(checkoutDb.Return(returnRecord));
         }
 
-        assertFalse(checkoutDb.Return(new Return("1234567-(3)", TimeUtilities.GetCurrentTime())));
+        assertNull(checkoutDb.Return(new Return("1234567-(3)", TimeUtilities.GetCurrentTime())));
     }
 
     @Test
@@ -84,9 +84,9 @@ public class CheckoutDbTests {
         var checkoutDb = new CheckoutDb(GetCheckouts(), GetUserDb(), GetBookDb());
 
         for (var returnRecord: csvParser.GetReturnes()) {
-            assertTrue(checkoutDb.Return(returnRecord));
+            assertNotNull(checkoutDb.Return(returnRecord));
         }
-        assertFalse(checkoutDb.Return(new Return("1234567-(3)", TimeUtilities.GetCurrentTime())));
+        assertNull(checkoutDb.Return(new Return("1234567-(3)", TimeUtilities.GetCurrentTime())));
     }
 
     @Test
@@ -95,10 +95,10 @@ public class CheckoutDbTests {
         var checkoutDb = new CheckoutDb(GetCheckouts_without_userid(), GetUserDb(), GetBookDb());
 
         for (var returnRecord: csvParser.GetReturnes()) {
-            assertTrue(checkoutDb.Return(returnRecord));
+            assertNotNull(checkoutDb.Return(returnRecord));
         }
 
-        assertFalse(checkoutDb.Return(new Return("1234567-(3)", TimeUtilities.GetCurrentTime())));
+        assertNull(checkoutDb.Return(new Return("1234567-(3)", TimeUtilities.GetCurrentTime())));
 
     }
 
@@ -108,7 +108,7 @@ public class CheckoutDbTests {
         var checkoutDb = new CheckoutDb(GetCheckouts(), GetUserDb(), GetBookDb());
 
         for (var bookId: csvParser.GetReturnes()) {
-            assertTrue(checkoutDb.Return(bookId));
+            assertNotNull(checkoutDb.Return(bookId));
         }
         var allCheckouts = checkoutDb.GetAllCheckouts();
 
@@ -123,6 +123,6 @@ public class CheckoutDbTests {
 
         var checkoutParser = new CheckoutParser(readStream);
         checkoutDb = new CheckoutDb(checkoutParser.GetCheckouts(), GetUserDb(), GetBookDb());
-        assertFalse(checkoutDb.Return(new Return("1234567-(3)", TimeUtilities.GetCurrentTime())));
+        assertNull(checkoutDb.Return(new Return("1234567-(3)", TimeUtilities.GetCurrentTime())));
     }
 }
