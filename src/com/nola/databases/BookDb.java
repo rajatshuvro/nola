@@ -108,7 +108,7 @@ public class BookDb {
         else _latestCopyNumbers.put(book.Isbn, book.CopyNum);
     }
 
-    public String Add(Book book){
+    public Book Add(Book book){
         book = StandardizeFields(book);
         if (book == null) return null;
         var id = book.GetId();
@@ -119,7 +119,7 @@ public class BookDb {
         _books.put(id, book);
         _newBooks.add(book);
         UpdateLatestCopyNum(book);
-        return book.GetUserFriendlyId();
+        return book;
     }
 
     public String GetTitle(String bookId) {

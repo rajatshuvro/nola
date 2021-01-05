@@ -43,6 +43,7 @@ public class add {
                 }
                 var appendStream = DbUtilities.GetAppendStream(DbCommons.getBooksFilePath());
                 var count = AddBooks(DbUtilities.LoadBookDb(), new FileInputStream(filePath), appendStream);
+                appendStream.close();
                 System.out.println("Number of new books added: "+count);
             }
         }
@@ -59,8 +60,8 @@ public class add {
 
         var validEntries = new ArrayList<Book>();
         for (var book: csvParser.GetBooks()) {
-            var id = bookDb.Add(book);
-            if (id != null) validEntries.add(book);
+            var newBook = bookDb.Add(book);
+            if (newBook != null) validEntries.add(newBook);
         }
         if(validEntries.size()>0){
             AppendUtilities.AppendItems(validEntries, appendStream);
