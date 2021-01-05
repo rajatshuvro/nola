@@ -38,9 +38,10 @@ public class ret {
 
                 var bookDb = DbUtilities.LoadBookDb();
                 var userDb = DbUtilities.LoadUserDb();
+                var checkoutDb = DbUtilities.LoadCheckoutDb(bookDb, userDb);
                 var writeStream = DbUtilities.GetWriteStream(DbCommons.getCheckoutsFilePath());
                 var transactionStream = DbUtilities.GetAppendStream(DbCommons.getTransactionsFilePath());
-                var count = AddReturns(DbUtilities.LoadCheckoutDb(bookDb, userDb), new FileInputStream(filePath),
+                var count = AddReturns(checkoutDb, new FileInputStream(filePath),
                         writeStream, transactionStream);
                 writeStream.close();
                 transactionStream.close();
