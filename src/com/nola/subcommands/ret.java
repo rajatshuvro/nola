@@ -42,7 +42,7 @@ public class ret {
                 var writeStream = DbUtilities.GetWriteStream(DbCommons.getCheckoutsFilePath());
                 var transactionStream = DbUtilities.GetAppendStream(DbCommons.getTransactionsFilePath());
                 var count = AddReturns(checkoutDb, new FileInputStream(filePath),
-                        writeStream, transactionStream);
+                        writeStream, transactionStream, false);
                 writeStream.close();
                 transactionStream.close();
                 System.out.println("Number of successful returns: "+count);
@@ -54,13 +54,18 @@ public class ret {
         }
     }
     public static int AddReturns(CheckoutDb checkoutDb, InputStream inputStream,
-                                 OutputStream writeStream, OutputStream transactionStream){
+                                 OutputStream writeStream, OutputStream transactionStream , boolean forceCommit){
         if(inputStream == null) return 0;
-
+        var existingCheckouts = checkoutDb.GetAllCheckouts();
         var csvParser = new ReturnCsvParser(inputStream);
 
         var validEntries = checkoutDb.ReturnRange(csvParser.GetReturnes());
         // we need to re-write regardless of valid entries since existing checkouts has to be re-written
+        if(!forceCommit && !PromptUtilities.CommitValidEntries(validEntries)) {
+            AppendUtilities.Rewrite(CheckoutDb.HeaderLines, existingCheckouts, writeStream, false);
+            return 0;
+        }
+
         AppendUtilities.Rewrite(CheckoutDb.HeaderLines, checkoutDb.GetAllCheckouts(), writeStream, false);
         var transactions = TransactionDb.GetReturnTransactions(validEntries);
         AppendUtilities.AppendItems(transactions, transactionStream);

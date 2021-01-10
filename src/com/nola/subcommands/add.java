@@ -4,6 +4,7 @@ import com.nola.dataStructures.Book;
 import com.nola.databases.*;
 import com.nola.parsers.BookCsvParser;
 import com.nola.utilities.FileUtilities;
+import com.nola.utilities.PrintUtilities;
 import org.apache.commons.cli.*;
 
 import java.io.FileInputStream;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class add {
     private static String commandSyntex = "nola add  -b [books CSV file] -u [users CSV file]";
@@ -39,10 +41,10 @@ public class add {
             if (cmd.hasOption("book")){
                 var filePath = cmd.getOptionValue("book");
                 if(!FileUtilities.Exists(filePath)){
-                    System.out.println("Specified file does not exist: "+filePath);
+                    PrintUtilities.PrintErrorLine("Specified file does not exist: "+filePath);
                 }
                 var appendStream = DbUtilities.GetAppendStream(DbCommons.getBooksFilePath());
-                var count = AddBooks(DbUtilities.LoadBookDb(), new FileInputStream(filePath), appendStream);
+                var count = AddBooks(DbUtilities.LoadBookDb(), new FileInputStream(filePath), appendStream, false);
                 appendStream.close();
                 System.out.println("Number of new books added: "+count);
             }
@@ -53,8 +55,8 @@ public class add {
         }
     }
 
-    public static int AddBooks(BookDb bookDb, InputStream inputStream, OutputStream appendStream){
-        if(inputStream == null) return 0;
+    public static int AddBooks(BookDb bookDb, InputStream inputStream, OutputStream appendStream, boolean forceCommit){
+        if(inputStream == null || appendStream == null) return 0;
 
         var csvParser = new BookCsvParser(inputStream);
 
@@ -63,7 +65,10 @@ public class add {
             var newBook = bookDb.Add(book);
             if (newBook != null) validEntries.add(newBook);
         }
+
         if(validEntries.size()>0){
+            if(!forceCommit && !PromptUtilities.CommitValidEntries(validEntries)) return 0;
+
             AppendUtilities.AppendItems(validEntries, appendStream);
         }
         return validEntries.size();

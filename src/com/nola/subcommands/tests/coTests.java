@@ -19,7 +19,7 @@ public class coTests {
 
         var appendStream = new ByteArrayOutputStream();
         var transactionStream = new ByteArrayOutputStream();
-        co.AddCheckouts(checkoutDb, TestStreams.GetCheckoutCsvStream(), appendStream, transactionStream);
+        co.AddCheckouts(checkoutDb, TestStreams.GetCheckoutCsvStream(), appendStream, transactionStream, true);
 
         var checkouts = checkoutDb.GetAllCheckouts();
         assertEquals(4, checkouts.length);

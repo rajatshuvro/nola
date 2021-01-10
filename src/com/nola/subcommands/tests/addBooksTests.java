@@ -18,7 +18,7 @@ public class addBooksTests {
         var originalCount = bookDb.Count();
 
         var appendStream = new ByteArrayOutputStream();
-        add.AddBooks(bookDb, newBookCsvStream, appendStream);
+        add.AddBooks(bookDb, newBookCsvStream, appendStream, true);
         var newCount = bookDb.Count();
 
         assertEquals(3, newCount - originalCount);

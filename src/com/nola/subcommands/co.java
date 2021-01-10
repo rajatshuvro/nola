@@ -3,12 +3,14 @@ package com.nola.subcommands;
 import com.nola.databases.*;
 import com.nola.parsers.CheckoutCsvParser;
 import com.nola.utilities.FileUtilities;
+import com.nola.utilities.PrintUtilities;
 import org.apache.commons.cli.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Scanner;
 
 public class co {
     private static String commandSyntex = "nola co -f [checkout CSV file]";
@@ -41,7 +43,7 @@ public class co {
                 var appendStream = DbUtilities.GetAppendStream(DbCommons.getCheckoutsFilePath());
                 var transactionStream = DbUtilities.GetAppendStream(DbCommons.getTransactionsFilePath());
                 var count = AddCheckouts(DbUtilities.LoadCheckoutDb(bookDb, userDb), new FileInputStream(filePath),
-                        appendStream, transactionStream);
+                        appendStream, transactionStream, false);
                 appendStream.close();
                 transactionStream.close();
                 System.out.println("Number of successful checkouts: "+count);
@@ -53,13 +55,15 @@ public class co {
         }
     }
     public static int AddCheckouts(CheckoutDb checkoutDb, InputStream inputStream,
-                                   OutputStream appendStream, OutputStream transactionStream){
+                                   OutputStream appendStream, OutputStream transactionStream, boolean forceCommit){
         if(inputStream == null) return 0;
 
         var csvParser = new CheckoutCsvParser(inputStream);
 
         var validEntries = checkoutDb.TryAddRange(csvParser.GetCheckouts());
         if(validEntries.size()>0){
+            if(!forceCommit && !PromptUtilities.CommitValidEntries(validEntries)) return 0;
+
             AppendUtilities.AppendItems(validEntries, appendStream);
             var transactions = TransactionDb.GetCheckoutTransactions(validEntries);
             AppendUtilities.AppendItems(transactions, transactionStream);
