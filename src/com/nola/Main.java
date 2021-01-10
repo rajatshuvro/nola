@@ -1,8 +1,6 @@
 package com.nola;
 
-import com.nola.subcommands.add;
-import com.nola.subcommands.co;
-import com.nola.subcommands.ret;
+import com.nola.subcommands.*;
 import com.nola.utilities.PrintUtilities;
 
 public class Main {
@@ -24,14 +22,18 @@ public class Main {
             case "ret":
                 ret.Run(args);
                 break;
+            case "status":
+                status.Run(args);
+                break;
+            case "label":
+                label.Run(args);
+                break;
+
 //            case "$":
 //            case "search":
 //                TokenSearch.Run(subArgs, dataProvider);
 //                break;
-//            case "label":
-//                LabelPrinter.Run(subArgs, dataProvider.BookDb);
-//                break;
-              case "help":
+            case "help":
                 PrintMainMenu();
                 break;
             default:
@@ -41,13 +43,12 @@ public class Main {
     }
 
     private static void PrintMainMenu() {
-        PrintUtilities.PrintInfoLine("ola sub-command [options] ");
+        PrintUtilities.PrintInfoLine("nola sub-command [options] ");
         PrintUtilities.PrintInfoLine("sub-commands:");
         PrintUtilities.PrintInfoLine("\tadd            (add new books or users)");
-        PrintUtilities.PrintInfoLine("\tcs             (checkout status)");
-        PrintUtilities.PrintInfoLine("\tsearch/$       (search book and user records)");
-        PrintUtilities.PrintInfoLine("\tfilter         (filter book database by genre, level, etc fields)");
-        PrintUtilities.PrintInfoLine("\tlabel          (print out book titles and Ids)");
+        PrintUtilities.PrintInfoLine("\tco             (checkout books)");
+        PrintUtilities.PrintInfoLine("\tret            (return books)");
+        PrintUtilities.PrintInfoLine("\tstatus         (checkout status)");
         PrintUtilities.PrintInfoLine("\thelp           (print this menu)");
         PrintUtilities.PrintInfoLine("\t[Type sub-command to get detailed help]");
     }
