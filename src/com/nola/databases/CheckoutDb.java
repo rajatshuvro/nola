@@ -37,7 +37,8 @@ public class CheckoutDb {
     public boolean IsCheckedOut(String bookId){
         return _checkouts.containsKey(bookId);
     }
-    public ArrayList<Checkout> ReadCheckouts(String userId){
+
+    public ArrayList<Checkout> GetUserCheckouts(String userId){
         var checkouts = new ArrayList<Checkout>();
         for (var checkout:
              _checkouts.values()) {
@@ -64,7 +65,7 @@ public class CheckoutDb {
             PrintUtilities.PrintWarningLine("Can not checkout the same book twice:"+checkout.BookId);
             return null;
         }
-        var checkouts = ReadCheckouts(user.Id);
+        var checkouts = GetUserCheckouts(user.Id);
         var checkoutCount = checkouts.size();
         if(checkoutCount >= CheckoutLimit)
         {
