@@ -44,7 +44,7 @@ public class BookDb {
             idMaps.add(new IdMap(book.ShortId, book.GetId()));
             UpdateLatestCopyNum(book);
         }
-        _idDbb = new IdDb(idMaps, null);
+        _idDbb = new IdDb(idMaps);
     }
 
     public void AppendBooks(Iterable<Book> books, OutputStream appendStream) throws IOException {

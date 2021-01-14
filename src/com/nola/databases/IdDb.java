@@ -12,18 +12,12 @@ import java.util.Random;
 public class IdDb {
     private HashMap<String, String> _shortToLong;
     private HashMap<String, String> _longToShort;
-    private final BufferedWriter _appender;
-    private OutputStream _outputStream;
     private static final String shortIdChars= "THEEQUUIICKBROOEEWNFOUXJUAAMPSOOVUEERTHELAAZEYDOOG1234567890";
     public static final int ShortIdLength = 5;
 
-    public IdDb(Iterable<IdMap> idMaps, OutputStream outputStream){
-        _outputStream = outputStream;
+    public IdDb(Iterable<IdMap> idMaps){
         _shortToLong = new HashMap<>();
         _longToShort = new HashMap<>();
-
-        if(_outputStream != null) _appender = new BufferedWriter(new OutputStreamWriter(_outputStream));
-        else _appender = null;
 
         if(idMaps==null) return;
 
@@ -31,6 +25,11 @@ public class IdDb {
             _shortToLong.put(idMap.ShortId, idMap.LongId);
             _longToShort.put(idMap.LongId, idMap.ShortId);
         }
+    }
+
+    public IdDb() {
+        _shortToLong = new HashMap<>();
+        _longToShort = new HashMap<>();
     }
 
     public String GetShortId(String longId){
@@ -48,23 +47,8 @@ public class IdDb {
         _shortToLong.put(shortId, longId);
         _longToShort.put(longId, shortId);
 
-        return _appender == null? true: Append(shortId, longId);
-    }
-
-    private boolean Append(String shortId, String longId) {
-        var idMap = new IdMap(shortId, longId);
-        try {
-            _appender.write(idMap.toString()+'\n');
-            _appender.write(FlatObjectParser.RecordSeparator+'\n');
-            _appender.flush();
-        } catch (IOException e) {
-            System.out.println("Failed to append id map.\n"+ idMap.toString());
-            return false;
-        }
-
         return true;
     }
-
 
     public String GenerateShortId(){
         var shortId = "";
@@ -90,11 +74,6 @@ public class IdDb {
             if(!Character.isAlphabetic(c) && !Character.isDigit(c)) return false;
         }
         return true;
-    }
-
-    public void Close() throws IOException {
-        if(_appender != null)_appender.close();
-        if(_outputStream != null) _outputStream.close();
     }
 
     public boolean IsRecognizedId(String id) {
