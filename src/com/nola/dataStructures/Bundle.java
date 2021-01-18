@@ -1,23 +1,29 @@
 package com.nola.dataStructures;
 
-import java.util.Arrays;
+import com.nola.utilities.TimeUtilities;
 
-public class BookBundle {
+import java.util.Arrays;
+import java.util.Date;
+
+public class Bundle {
     public final String Id;
     public final String Description;
     public final String[] BookIds;
+    public final Date Date;
 
-    public BookBundle(String id, String description, String[] bookIds){
+    public Bundle(String id, String description, String[] bookIds, Date date){
         Id = id;
         Description = description;
         BookIds = bookIds;
+        Date = date;
     }
 
     @Override
     public String toString(){
         return  "Id:           "+Id+'\n'+
                 "Description:  "+Description+'\n'+
-                "BookIds:      "+String.join(",", BookIds);
+                "BookIds:      "+String.join(",", BookIds)+'\n'+
+                "Date:         "+ TimeUtilities.ToString(Date);
     }
 
     public boolean contains(String bookId) {

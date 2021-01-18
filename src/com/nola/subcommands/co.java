@@ -1,5 +1,6 @@
 package com.nola.subcommands;
 
+import com.nola.dataStructures.Checkout;
 import com.nola.databases.*;
 import com.nola.parsers.CheckoutCsvParser;
 import com.nola.utilities.FileUtilities;
@@ -10,16 +11,20 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class co {
-    private static String commandSyntex = "nola co -f [checkout CSV file]";
+    private static String commandSyntex = "nola co -b [book checkout CSV file] -B [bundle checkout CSV file]";
     public static void Run(String[] args) {
         Options options = new Options();
 
-        Option checkoutOption = new Option("f", "file", true, "file with checkout records");
-        checkoutOption.setRequired(false);
-        options.addOption(checkoutOption);
+        Option bookOption = new Option("b", "book", true, "file with book checkout records");
+        bookOption.setRequired(false);
+        options.addOption(bookOption);
+
+        Option bundleOption = new Option("B", "bundle", true, "file with bundle checkout records");
+        bundleOption.setRequired(false);
+        options.addOption(bundleOption);
 
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
@@ -32,35 +37,69 @@ public class co {
 
         try{
             cmd = parser.parse(options, args);
-            if (cmd.hasOption("file")){
-                var filePath = cmd.getOptionValue("file");
+            if (cmd.hasOption("book")){
+                var filePath = cmd.getOptionValue("book");
                 if(!FileUtilities.Exists(filePath)){
                     System.out.println("Specified file does not exist: "+filePath);
                 }
 
+                var inputStream = new FileInputStream(filePath);
+                if(inputStream == null) {
+                    PrintUtilities.PrintWarningLine("No entries to checkout");
+                    return ;
+                }
+
+                var csvParser = new CheckoutCsvParser(inputStream);
+
                 var bookDb = DbUtilities.LoadBookDb();
                 var userDb = DbUtilities.LoadUserDb();
+
                 var appendStream = DbUtilities.GetAppendStream(DbCommons.getCheckoutsFilePath());
                 var transactionStream = DbUtilities.GetAppendStream(DbCommons.getTransactionsFilePath());
-                var count = AddCheckouts(DbUtilities.LoadCheckoutDb(bookDb, userDb), new FileInputStream(filePath),
+                var count = CheckoutBooks(DbUtilities.LoadCheckoutDb(bookDb, userDb), csvParser.GetCheckouts(),
                         appendStream, transactionStream, false);
                 appendStream.close();
                 transactionStream.close();
                 System.out.println("Number of successful checkouts: "+count);
             }
+//            if (cmd.hasOption("bundle")){
+//                var filePath = cmd.getOptionValue("bundle");
+//                if(!FileUtilities.Exists(filePath)){
+//                    System.out.println("Specified file does not exist: "+filePath);
+//                }
+//
+//                var inputStream = new FileInputStream(filePath);
+//                if(inputStream == null) {
+//                    PrintUtilities.PrintWarningLine("No entries to checkout");
+//                    return ;
+//                }
+//
+//                var csvParser = new CheckoutCsvParser(inputStream);
+//
+//                var bookDb = DbUtilities.LoadBookDb();
+//                var userDb = DbUtilities.LoadUserDb();
+//                var bundleDb = DbUtilities.LoadBundleDb();
+//
+//                var checkouts = GetBundleCheckouts(csvParser.GetCheckouts(), bundleDb);
+//
+//                var appendStream = DbUtilities.GetAppendStream(DbCommons.getCheckoutsFilePath());
+//                var transactionStream = DbUtilities.GetAppendStream(DbCommons.getTransactionsFilePath());
+//                var count = CheckoutBooks(DbUtilities.LoadCheckoutDb(bookDb, userDb), checkouts,
+//                        appendStream, transactionStream, false);
+//                appendStream.close();
+//                transactionStream.close();
+//                System.out.println("Number of successful checkouts: "+count);
+//            }
         }
         catch (ParseException | IOException e) {
             System.out.println(e.getMessage());
             formatter.printHelp(commandSyntex, options);
         }
     }
-    public static int AddCheckouts(CheckoutDb checkoutDb, InputStream inputStream,
-                                   OutputStream appendStream, OutputStream transactionStream, boolean forceCommit){
-        if(inputStream == null) return 0;
+    public static int CheckoutBooks(CheckoutDb checkoutDb, ArrayList<Checkout> checkouts,
+                                    OutputStream appendStream, OutputStream transactionStream, boolean forceCommit){
 
-        var csvParser = new CheckoutCsvParser(inputStream);
-
-        var validEntries = checkoutDb.TryAddRange(csvParser.GetCheckouts());
+        var validEntries = checkoutDb.TryAddRange(checkouts);
         if(validEntries.size()>0){
             if(!forceCommit && !PromptUtilities.CommitValidEntries(validEntries)) return 0;
 

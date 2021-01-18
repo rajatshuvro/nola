@@ -1,13 +1,7 @@
 package com.nola.databases;
 
-import com.nola.dataStructures.Book;
-import com.nola.dataStructures.Checkout;
-import com.nola.dataStructures.Transaction;
-import com.nola.dataStructures.User;
-import com.nola.parsers.BookParser;
-import com.nola.parsers.CheckoutParser;
-import com.nola.parsers.TransactionParser;
-import com.nola.parsers.UserParser;
+import com.nola.dataStructures.*;
+import com.nola.parsers.*;
 import com.nola.utilities.FileUtilities;
 import com.nola.utilities.PrintUtilities;
 
@@ -15,21 +9,39 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class DbUtilities {
-    public static ArrayList<Checkout> ReadCheckouts(InputStream inputStream)  {
-        if(inputStream !=null){
-            var parser = new CheckoutParser(inputStream);
-            ArrayList<Checkout> checkouts;
-            try {
-                checkouts = parser.GetCheckouts();
-                inputStream.close();
-                return checkouts;
-            } catch (IOException e) {
-                PrintUtilities.PrintWarningLine("Error reading checkout fob file");
-                return null;
-            }
 
+    private static ArrayList<Bundle> ReadBundles(InputStream inputStream) {
+        if (inputStream == null) {
+            return null;
         }
-        return null;
+
+        var parser = new BundleParser(inputStream);
+        ArrayList<Bundle> bundles;
+        try {
+            bundles = parser.GetBundles();
+            inputStream.close();
+            return bundles;
+        } catch (IOException e) {
+            PrintUtilities.PrintWarningLine("Error reading bundle fob file");
+            return null;
+        }
+    }
+
+    public static ArrayList<Checkout> ReadCheckouts(InputStream inputStream)  {
+        if (inputStream == null) {
+            return null;
+        }
+        var parser = new CheckoutParser(inputStream);
+        ArrayList<Checkout> checkouts;
+        try {
+            checkouts = parser.GetCheckouts();
+            inputStream.close();
+            return checkouts;
+        } catch (IOException e) {
+            PrintUtilities.PrintWarningLine("Error reading checkout fob file");
+            return null;
+        }
+
     }
 
     public static ArrayList<Book> ReadBooks(InputStream inputStream) {
@@ -194,4 +206,24 @@ public class DbUtilities {
         }
         return null;
     }
+
+    public static BundleDb LoadBundleDb() {
+        var filePath = DbCommons.getBundleFilePath();
+        var inputStream = GetFileReadStream(filePath);
+
+        return getBundleDb(inputStream);
+    }
+
+    private static BundleDb getBundleDb(InputStream inputStream) {
+        var bundles = ReadBundles(inputStream);
+        var checkoutDb = new BundleDb(bundles);
+        try {
+            inputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return checkoutDb;
+    }
+
+
 }
