@@ -9,7 +9,6 @@ import org.apache.commons.cli.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
@@ -62,40 +61,56 @@ public class co {
                 transactionStream.close();
                 System.out.println("Number of successful checkouts: "+count);
             }
-//            if (cmd.hasOption("bundle")){
-//                var filePath = cmd.getOptionValue("bundle");
-//                if(!FileUtilities.Exists(filePath)){
-//                    System.out.println("Specified file does not exist: "+filePath);
-//                }
-//
-//                var inputStream = new FileInputStream(filePath);
-//                if(inputStream == null) {
-//                    PrintUtilities.PrintWarningLine("No entries to checkout");
-//                    return ;
-//                }
-//
-//                var csvParser = new CheckoutCsvParser(inputStream);
-//
-//                var bookDb = DbUtilities.LoadBookDb();
-//                var userDb = DbUtilities.LoadUserDb();
-//                var bundleDb = DbUtilities.LoadBundleDb();
-//
-//                var checkouts = GetBundleCheckouts(csvParser.GetCheckouts(), bundleDb);
-//
-//                var appendStream = DbUtilities.GetAppendStream(DbCommons.getCheckoutsFilePath());
-//                var transactionStream = DbUtilities.GetAppendStream(DbCommons.getTransactionsFilePath());
-//                var count = CheckoutBooks(DbUtilities.LoadCheckoutDb(bookDb, userDb), checkouts,
-//                        appendStream, transactionStream, false);
-//                appendStream.close();
-//                transactionStream.close();
-//                System.out.println("Number of successful checkouts: "+count);
-//            }
+            if (cmd.hasOption("bundle")){
+                var filePath = cmd.getOptionValue("bundle");
+                if(!FileUtilities.Exists(filePath)){
+                    System.out.println("Specified file does not exist: "+filePath);
+                }
+
+                var inputStream = new FileInputStream(filePath);
+                if(inputStream == null) {
+                    PrintUtilities.PrintWarningLine("No entries to checkout");
+                    return ;
+                }
+
+                var csvParser = new CheckoutCsvParser(inputStream);
+
+                var bookDb = DbUtilities.LoadBookDb();
+                var userDb = DbUtilities.LoadUserDb();
+                var bundleDb = DbUtilities.LoadBundleDb();
+
+                var checkouts = GetBundleCheckouts(csvParser.GetCheckouts(), bundleDb);
+
+                var appendStream = DbUtilities.GetAppendStream(DbCommons.getCheckoutsFilePath());
+                var transactionStream = DbUtilities.GetAppendStream(DbCommons.getTransactionsFilePath());
+                var count = CheckoutBooks(DbUtilities.LoadCheckoutDb(bookDb, userDb), checkouts,
+                        appendStream, transactionStream, false);
+                appendStream.close();
+                transactionStream.close();
+                System.out.println("Number of successful checkouts: "+count);
+            }
         }
         catch (ParseException | IOException e) {
             System.out.println(e.getMessage());
             formatter.printHelp(commandSyntex, options);
         }
     }
+
+    public static ArrayList<Checkout> GetBundleCheckouts(ArrayList<Checkout> bundleCheckouts, BundleDb bundleDb) {
+        var bookCheckouts = new ArrayList<Checkout>();
+        for (var bundleCheckout: bundleCheckouts) {
+            var bundle = bundleDb.GetBookBundle(bundleCheckout.Id);
+            if (bundle == null) {
+                PrintUtilities.PrintWarningLine("Invalid bundle id:"+bundleCheckout.Id);
+                continue;
+            }
+            for (var bookId: bundle.BookIds) {
+                bookCheckouts.add(new Checkout(bookId, bundleCheckout.UserId, bundleCheckout.Email, bundleCheckout.CheckoutDate, bundleCheckout.DueDate));
+            }
+        }
+        return bookCheckouts;
+    }
+
     public static int CheckoutBooks(CheckoutDb checkoutDb, ArrayList<Checkout> checkouts,
                                     OutputStream appendStream, OutputStream transactionStream, boolean forceCommit){
 

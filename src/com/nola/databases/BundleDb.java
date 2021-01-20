@@ -1,6 +1,7 @@
 package com.nola.databases;
 
 import com.nola.dataStructures.Bundle;
+import com.nola.utilities.TimeUtilities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,6 +32,14 @@ public class BundleDb {
         return null;
     }
 
+    public static final String[] HeaderLines = new String[]{
+            "#Onkur library book bundle records\n",
+            "#Id = Onkur book bundle id. Value = <String>\n",
+            "#Description = Bundle description. Value = <Integer>\n",
+            "#Book Ids = Comma separated book ids. Value = <YYYY-MM-DD HH:MM:ss>\n",
+            "#Date = Entry date. Value = <YYYY-MM-DD HH:MM:ss>\n"
+    };
+
     public String TryAdd(String[] bookIds, String description, BookDb bookDb){
         var validIds = new ArrayList<String>();
         for (var bookId: bookIds) {
@@ -39,7 +48,7 @@ public class BundleDb {
             validIds.add(book.GetId());
         }
         var id = _idDb.GenerateShortId();
-        _bookBundles.put(id, new Bundle(id, description, (String[]) validIds.toArray()));
+        _bookBundles.put(id, new Bundle(id, description, (String[]) validIds.toArray(), TimeUtilities.GetCurrentTime()));
         return id;
     }
 }

@@ -1,5 +1,6 @@
 package com.nola.testUtilities;
 
+import com.nola.databases.BundleDb;
 import com.nola.databases.CheckoutDb;
 import com.nola.parsers.FlatObjectParser;
 
@@ -391,5 +392,29 @@ public class TestStreams {
         return new ByteArrayInputStream(buffer);
     }
 
+    public static InputStream  GetBundleStream() throws IOException {
+        var memStream = new ByteArrayOutputStream();
+        var writer = new OutputStreamWriter(memStream);
 
+        for (var line: BundleDb.HeaderLines
+        ) {
+            writer.write(line+'\n');
+        }
+        writer.write(FlatObjectParser.RecordSeparator+"\n");
+        writer.write("Id:\tUKI33\n");
+        writer.write("Description:\tKokil Bundle 1\n");
+        writer.write("BookIds:\t\t7890788-(1),678564-(1)\n");
+        writer.write("Date:\t\t2021-01-03 10:33:10\n");
+        writer.write(FlatObjectParser.RecordSeparator+"\n");
+        writer.write("Id:\tFIN83\n");
+        writer.write("Description:\tKokil Bundle two\n");
+        writer.write("BookIds:\t\t7890788-(2),456098-(1)\n");
+        writer.write("Date:\t\t2021-01-03 10:33:10\n");
+        writer.write(FlatObjectParser.RecordSeparator+"\n");
+        writer.close();
+
+        var buffer = memStream.toByteArray();
+        memStream.close();
+        return new ByteArrayInputStream(buffer);
+    }
 }

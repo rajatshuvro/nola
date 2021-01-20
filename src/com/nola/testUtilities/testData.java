@@ -1,10 +1,8 @@
 package com.nola.testUtilities;
 
-import com.nola.dataStructures.Book;
-import com.nola.dataStructures.Checkout;
-import com.nola.dataStructures.Transaction;
-import com.nola.dataStructures.User;
+import com.nola.dataStructures.*;
 import com.nola.databases.BookDb;
+import com.nola.databases.BundleDb;
 import com.nola.databases.UserDb;
 import com.nola.utilities.TimeUtilities;
 
@@ -23,6 +21,14 @@ public class testData {
                 2018, 15, 12, "Fiction", 6,1, null, null, null));
 
         return books;
+    }
+
+    public static BundleDb GetBundleDb(){
+        var bundles = new ArrayList<Bundle>();
+        bundles.add(new Bundle("BUN01", "Bundle one", new String[]{"7890788-(1)", "678564-(1)"}, TimeUtilities.GetCurrentTime()));
+        bundles.add(new Bundle("DUN02", "Bundle two", new String[]{"7890788-(2)", "456098-(1)"}, TimeUtilities.GetCurrentTime()));
+
+        return new BundleDb(bundles);
     }
 
 

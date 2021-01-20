@@ -5,14 +5,14 @@ import com.nola.utilities.TimeUtilities;
 import java.util.Date;
 
 public class Checkout implements Comparable<Checkout>{
-    public final String BookId;
+    public final String Id;
     public final String UserId;
     public final String Email;
     public final Date CheckoutDate;
     public final Date DueDate;
 
-    public Checkout(String bookId, String userId, String email, Date checkoutDate, Date dueDate ){
-        BookId = bookId;
+    public Checkout(String id, String userId, String email, Date checkoutDate, Date dueDate ){
+        Id = id;
         UserId = userId;
         Email = email;
         CheckoutDate = checkoutDate;
@@ -22,7 +22,7 @@ public class Checkout implements Comparable<Checkout>{
     @Override
     public String toString(){
         return
-                "Book Id:        "+ BookId+'\n'+
+                "Resource Id:    "+ Id +'\n'+
                 "User Id:        "+ UserId+'\n'+
                 "Checkout Date:  "+ TimeUtilities.ToString(CheckoutDate)+'\n'+
                 "Due Date:       "+TimeUtilities.ToString(DueDate);

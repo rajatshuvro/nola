@@ -25,7 +25,7 @@ public class CheckoutDb {
         if(checkouts!=null)
             for (var checkout:
                  checkouts) {
-                _checkouts.put(checkout.BookId, checkout);
+                _checkouts.put(checkout.Id, checkout);
             }
     }
 
@@ -48,9 +48,9 @@ public class CheckoutDb {
     }
 
     public Checkout TryAdd(Checkout checkout)  {
-        var book =_bookDb.GetBook(checkout.BookId);
+        var book =_bookDb.GetBook(checkout.Id);
         if( book == null) {
-            PrintUtilities.PrintWarningLine("WARNING: Invalid book id:"+checkout.BookId+". Ignoring transaction.");
+            PrintUtilities.PrintWarningLine("WARNING: Invalid book id:"+checkout.Id +". Ignoring transaction.");
             return null;
         }
         var user = _userDb.ResolveUser(checkout.UserId, checkout.Email);
@@ -62,7 +62,7 @@ public class CheckoutDb {
 
         var bookId = book.GetId();
         if(IsCheckedOut(bookId)) {
-            PrintUtilities.PrintWarningLine("Can not checkout the same book twice:"+checkout.BookId);
+            PrintUtilities.PrintWarningLine("Can not checkout the same book twice:"+checkout.Id);
             return null;
         }
         var checkouts = GetUserCheckouts(user.Id);

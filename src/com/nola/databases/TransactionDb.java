@@ -53,7 +53,7 @@ public class TransactionDb {
         var transactions = new ArrayList<Transaction>();
         for (var checkout:
              checkouts) {
-            transactions.add(Transaction.Create(checkout.BookId, checkout.UserId, checkout.CheckoutDate, Transaction.CheckoutTag));
+            transactions.add(Transaction.Create(checkout.Id, checkout.UserId, checkout.CheckoutDate, Transaction.CheckoutTag));
         }
         return transactions;
     }
@@ -116,7 +116,7 @@ public class TransactionDb {
             if(transaction != null)
             {
                 transactions.add(transaction);
-                PrintUtilities.PrintSuccessLine(checkout.BookId +" has been checked out by "+ checkout.UserId);
+                PrintUtilities.PrintSuccessLine(checkout.Id +" has been checked out by "+ checkout.UserId);
             }
             else PrintUtilities.PrintWarningLine("Checkout attempt was unsuccessful!!");
         }
@@ -125,7 +125,7 @@ public class TransactionDb {
     }
 
     public Transaction AddCheckout(Checkout co) {
-        return AddCheckout(co.BookId, co.UserId);
+        return AddCheckout(co.Id, co.UserId);
     }
     public boolean Return(Return record){
         var transaction = GetLatest(record.BookId);
