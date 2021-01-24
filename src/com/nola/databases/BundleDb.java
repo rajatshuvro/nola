@@ -1,6 +1,7 @@
 package com.nola.databases;
 
 import com.nola.dataStructures.Bundle;
+import com.nola.parsers.ParserUtilities;
 import com.nola.utilities.TimeUtilities;
 
 import java.util.ArrayList;
@@ -40,15 +41,19 @@ public class BundleDb {
             "#Date = Entry date. Value = <YYYY-MM-DD HH:MM:ss>\n"
     };
 
-    public String TryAdd(String[] bookIds, String description, BookDb bookDb){
-        var validIds = new ArrayList<String>();
-        for (var bookId: bookIds) {
+    public Bundle TryAdd(Bundle bundle, BookDb bookDb){
+        for (var bookId: bundle.BookIds) {
             var book = bookDb.GetBook(bookId);
             if (book == null) return null;
-            validIds.add(book.GetId());
         }
-        var id = _idDb.GenerateShortId();
-        _bookBundles.put(id, new Bundle(id, description, (String[]) validIds.toArray(), TimeUtilities.GetCurrentTime()));
-        return id;
+        var id = ParserUtilities.IsNullOrEmpty(bundle.Id)? _idDb.GenerateShortId(): bundle.Id;
+
+        var newBundle = new Bundle(id, bundle.Description, bundle.BookIds, TimeUtilities.GetCurrentTime());
+        _bookBundles.put(id, newBundle);
+        return newBundle;
+    }
+
+    public int Count() {
+        return _bookBundles.size();
     }
 }

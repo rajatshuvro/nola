@@ -32,6 +32,29 @@ public class TestStreams {
         return new ByteArrayInputStream(buffer);
     }
 
+    public static InputStream GetBundleCsvStream() {
+        var memStream = new ByteArrayOutputStream();
+        var writer = new OutputStreamWriter(memStream);
+
+        try {
+            writer.write("\"Timestamp\",\"Id\",\"Description\",\"Book ids\"\n");
+            writer.write("\"2021/01/23 10:08:42 PM PST\",\"KK-01\",\"Kokil Bundle 1\",\"CAT12, BAT12\"\n");
+            writer.write("\"2021/01/23 10:09:21 PM PST\",\"KK-02\",\"Kakatua Bundle 2\",\"DOG99, PIG07\"");
+            writer.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        var buffer = memStream.toByteArray();
+        try {
+            memStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new ByteArrayInputStream(buffer);
+    }
+
     public static InputStream GetReturnCsvStream() {
         var memStream = new ByteArrayOutputStream();
         var writer = new OutputStreamWriter(memStream);
@@ -417,4 +440,6 @@ public class TestStreams {
         memStream.close();
         return new ByteArrayInputStream(buffer);
     }
+
+
 }
