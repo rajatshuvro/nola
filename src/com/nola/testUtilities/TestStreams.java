@@ -32,6 +32,29 @@ public class TestStreams {
         return new ByteArrayInputStream(buffer);
     }
 
+    public static InputStream GetBundleCheckoutCsvStream() {
+        var memStream = new ByteArrayOutputStream();
+        var writer = new OutputStreamWriter(memStream);
+
+        try {
+            writer.write("\"Timestamp\",\"Username\",\"Book id\",\"User id\",\"Due Date\"\n");
+            writer.write("\"2020/09/30 9:29:20 AM MDT\",\"someone@email.com\",\"BUN01\",\"name.1\",\"2020-10-07\"\n");
+            writer.write("\"2020/09/22 8:05:04 AM MDT\",\"someone@email.com\",\"DUN02\",\"name.2\",\"2020-10-07\"\n");
+            writer.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        var buffer = memStream.toByteArray();
+        try {
+            memStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new ByteArrayInputStream(buffer);
+    }
+
     public static InputStream GetBundleCsvStream() {
         var memStream = new ByteArrayOutputStream();
         var writer = new OutputStreamWriter(memStream);

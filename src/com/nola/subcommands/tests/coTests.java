@@ -4,6 +4,7 @@ import com.nola.databases.CheckoutDb;
 import com.nola.parsers.CheckoutCsvParser;
 import com.nola.subcommands.co;
 import com.nola.testUtilities.TestStreams;
+import com.nola.testUtilities.testData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -28,5 +29,21 @@ public class coTests {
 
         var transactionsString = transactionStream.toString();
         Assertions.assertTrue(transactionsString.contains("Checkout"));
+    }
+
+    @Test
+    public void BundleCheckout(){
+        var checkoutDb = new CheckoutDb(null, GetUserDb(), GetBookDb());
+
+        var appendStream = new ByteArrayOutputStream();
+        var transactionStream = new ByteArrayOutputStream();
+        var csvParser = new CheckoutCsvParser(TestStreams.GetBundleCheckoutCsvStream());
+
+        var checkouts = co.GetBundleCheckouts(csvParser.GetCheckouts(), testData.GetBundleDb());
+        co.CheckoutBooks(checkoutDb, checkouts, appendStream, transactionStream, true);
+
+        var allCheckouts = checkoutDb.GetAllCheckouts();
+        assertEquals(4, allCheckouts.length);
+
     }
 }

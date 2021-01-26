@@ -2,9 +2,9 @@ package com.nola.databases;
 
 import com.nola.dataStructures.Bundle;
 import com.nola.parsers.ParserUtilities;
+import com.nola.utilities.PrintUtilities;
 import com.nola.utilities.TimeUtilities;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BundleDb {
@@ -44,7 +44,10 @@ public class BundleDb {
     public Bundle TryAdd(Bundle bundle, BookDb bookDb){
         for (var bookId: bundle.BookIds) {
             var book = bookDb.GetBook(bookId);
-            if (book == null) return null;
+            if (book == null) {
+                PrintUtilities.PrintErrorLine("Invalid book id: "+ bookId+ " in bundle: "+ bundle.Id);
+                return null;
+            }
         }
         var id = ParserUtilities.IsNullOrEmpty(bundle.Id)? _idDb.GenerateShortId(): bundle.Id;
 

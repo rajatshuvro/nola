@@ -25,8 +25,8 @@ public class testData {
 
     public static BundleDb GetBundleDb(){
         var bundles = new ArrayList<Bundle>();
-        bundles.add(new Bundle("BUN01", "Bundle one", new String[]{"7890788-(1)", "678564-(1)"}, TimeUtilities.GetCurrentTime()));
-        bundles.add(new Bundle("DUN02", "Bundle two", new String[]{"7890788-(2)", "456098-(1)"}, TimeUtilities.GetCurrentTime()));
+        bundles.add(new Bundle("BUN01", "Bundle one", new String[]{"7890788-(2)", "678564-(1)"}, TimeUtilities.GetCurrentTime()));
+        bundles.add(new Bundle("DUN02", "Bundle two", new String[]{"678564-(2)", "456098-(1)"}, TimeUtilities.GetCurrentTime()));
 
         return new BundleDb(bundles);
     }
