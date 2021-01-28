@@ -2,6 +2,7 @@ package com.nola.parsers;
 
 import com.nola.dataStructures.User;
 import com.nola.databases.UserDb;
+import com.nola.utilities.PrintUtilities;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
@@ -27,9 +28,15 @@ public class UserCsvParser {
     }
 
 
-    public ArrayList<User> GetUsers() throws IOException {
+    public ArrayList<User> GetUsers()  {
         var users = new ArrayList<User>();
-        Iterable<CSVRecord> records = CSVFormat.RFC4180.withHeader(TimeTag, NameTag, RoleTag, EmailTag, PhoneTag).parse(_reader);
+        Iterable<CSVRecord> records = null;
+        try {
+            records = CSVFormat.RFC4180.withHeader(TimeTag, NameTag, RoleTag, EmailTag, PhoneTag).parse(_reader);
+        } catch (IOException e) {
+            PrintUtilities.PrintErrorLine("Error parsing user csv file");
+            return null;
+        }
         var isHeaderRecord = true;
         for (CSVRecord record : records) {
             //the first line is also reported as entry. We need to skip it

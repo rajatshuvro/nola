@@ -2,9 +2,11 @@ package com.nola.subcommands;
 
 import com.nola.dataStructures.Book;
 import com.nola.dataStructures.Bundle;
+import com.nola.dataStructures.User;
 import com.nola.databases.*;
 import com.nola.parsers.BookCsvParser;
 import com.nola.parsers.BundleCsvParser;
+import com.nola.parsers.UserCsvParser;
 import com.nola.utilities.FileUtilities;
 import com.nola.utilities.PrintUtilities;
 import org.apache.commons.cli.*;
@@ -61,13 +63,42 @@ public class add {
                 var appendStream = DbUtilities.GetAppendStream(DbCommons.getBundleFilePath());
                 var count = AddBundles(DbUtilities.LoadBookDb(), DbUtilities.LoadBundleDb(), new FileInputStream(filePath), appendStream, false);
                 appendStream.close();
-                System.out.println("Number of new books added: "+count);
+                System.out.println("Number of new bundles added: "+count);
+            }
+            if (cmd.hasOption("user")){
+                var filePath = cmd.getOptionValue("user");
+                if(!FileUtilities.Exists(filePath)){
+                    PrintUtilities.PrintErrorLine("Specified file does not exist: "+filePath);
+                }
+                var appendStream = DbUtilities.GetAppendStream(DbCommons.getUsersFilePath());
+                var userParser = new UserCsvParser( new FileInputStream(filePath));
+                var newUsers = userParser.GetUsers();
+                var count = AddUsers(DbUtilities.LoadUserDb(), newUsers, appendStream, false);
+                appendStream.close();
+                System.out.println("Number of new users added: "+count);
             }
         }
         catch (ParseException | IOException e) {
             System.out.println(e.getMessage());
             formatter.printHelp(commandSyntex, options);
         }
+    }
+
+    public static int AddUsers(UserDb userDb, ArrayList<User> users, OutputStream appendStream, boolean forceCommit) {
+        if(users == null || users.size() ==0 || appendStream == null) return 0;
+
+        var validEntries = new ArrayList<User>();
+        for (var user : users) {
+            var newUser = userDb.AddNewUser(user.Name, user.Role, user.Email, user.Phone);
+            if (newUser != null) validEntries.add(newUser);
+        }
+
+        if(validEntries.size()>0){
+            if(!forceCommit && !PromptUtilities.CommitValidEntries(validEntries)) return 0;
+
+            AppendUtilities.AppendItems(validEntries, appendStream);
+        }
+        return validEntries.size();
     }
 
     public static int AddBundles(BookDb bookDb, BundleDb bundleDb, InputStream inputStream, OutputStream appendStream, boolean forceCommit) {

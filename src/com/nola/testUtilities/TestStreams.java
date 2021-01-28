@@ -115,19 +115,25 @@ public class TestStreams {
         }
         return null;
     }
-    public static InputStream GetNewUserCsvStream() throws IOException{
+    public static InputStream GetNewUserCsvStream() {
         var memStream = new ByteArrayOutputStream();
         var writer = new OutputStreamWriter(memStream);
 
-        writer.write("\"Timestamp\",\"Name\",\"Role\",\"Email\",\"Phone\"\n");
-        writer.write("\"2020/01/24 8:37:32 AM PST\",\"Tanni Chakraborty \",\"Teacher\",\"tanni.chakraborty@gmail.com\",\"732-668-7269\"\n");
-        writer.write("\"2020/01/24 8:38:11 AM PST\",\"Totini Tonu\",\"Student\",\"rajatshuvro@gmail.com\",\"732-666-7242\"\n");
-        writer.write("\"2020/01/24 8:39:31 AM PST\",\"Homayara Chowdhury\",\"Administrator\",\"sharmin@onkur.com\",\"(619) 204-5111\"\n");
-        writer.close();
 
-        var buffer = memStream.toByteArray();
-        memStream.close();
-        return new ByteArrayInputStream(buffer);
+        try {
+            writer.write("\"Timestamp\",\"Name\",\"Role\",\"Email\",\"Phone\"\n");
+            writer.write("\"2020/01/24 8:37:32 AM PST\",\"Tanni Chakraborty \",\"Teacher\",\"tanni.chakraborty@gmail.com\",\"732-668-7269\"\n");
+            writer.write("\"2020/01/24 8:38:11 AM PST\",\"Totini Tonu\",\"Student\",\"rajatshuvro@gmail.com\",\"732-666-7242\"\n");
+            writer.write("\"2020/01/24 8:39:31 AM PST\",\"Homayara Chowdhury\",\"Administrator\",\"sharmin@onkur.com\",\"(619) 204-5111\"\n");
+            writer.close();
+
+            var buffer = memStream.toByteArray();
+            memStream.close();
+            return new ByteArrayInputStream(buffer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
     public static InputStream GetBookCsvStream() {
         var memStream = new ByteArrayOutputStream();
