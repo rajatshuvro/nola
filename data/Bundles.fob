@@ -1,0 +1,6 @@
+#Onkur library book bundle records
+#Id = Onkur book bundle id. Value = <String>
+#Description = Bundle description. Value = <Integer>
+#Book Ids = Comma separated book ids. Value = <YYYY-MM-DD HH:MM:ss>
+#Date = Entry date. Value = <YYYY-MM-DD HH:MM:ss>\n
+***************************************************************
