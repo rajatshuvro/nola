@@ -54,6 +54,7 @@ public class add {
                 var count = AddBooks(DbUtilities.LoadBookDb(), new FileInputStream(filePath), appendStream, false);
                 appendStream.close();
                 System.out.println("Number of new books added: "+count);
+                return;
             }
             if (cmd.hasOption("bundle")){
                 var filePath = cmd.getOptionValue("bundle");
@@ -64,6 +65,7 @@ public class add {
                 var count = AddBundles(DbUtilities.LoadBookDb(), DbUtilities.LoadBundleDb(), new FileInputStream(filePath), appendStream, false);
                 appendStream.close();
                 System.out.println("Number of new bundles added: "+count);
+                return;
             }
             if (cmd.hasOption("user")){
                 var filePath = cmd.getOptionValue("user");
@@ -76,7 +78,10 @@ public class add {
                 var count = AddUsers(DbUtilities.LoadUserDb(), newUsers, appendStream, false);
                 appendStream.close();
                 System.out.println("Number of new users added: "+count);
+                return;
             }
+            formatter.printHelp(commandSyntex, options);
+
         }
         catch (ParseException | IOException e) {
             System.out.println(e.getMessage());
@@ -129,6 +134,7 @@ public class add {
         for (var book: csvParser.GetBooks()) {
             var newBook = bookDb.Add(book);
             if (newBook != null) validEntries.add(newBook);
+            else PrintUtilities.PrintErrorLine("Failed to add book:" + book.Title);
         }
 
         if(validEntries.size()>0){

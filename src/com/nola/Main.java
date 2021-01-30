@@ -49,6 +49,7 @@ public class Main {
         PrintUtilities.PrintInfoLine("\tco             (checkout books)");
         PrintUtilities.PrintInfoLine("\tret            (return books)");
         PrintUtilities.PrintInfoLine("\tstatus         (checkout status)");
+        PrintUtilities.PrintInfoLine("\tlabel          (print out labels)");
         PrintUtilities.PrintInfoLine("\thelp           (print this menu)");
         PrintUtilities.PrintInfoLine("\t[Type sub-command to get detailed help]");
     }
