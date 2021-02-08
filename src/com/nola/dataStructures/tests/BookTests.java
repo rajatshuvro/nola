@@ -14,9 +14,9 @@ public class BookTests {
         Book book2 = Book.Create(9_789_849_195_290L,"Binoy Bormon", "Panite Jhopat Jhopat", "Sisimpur",
                 2016,16, 5, "Fiction/Social", 3, 2, null, null, "learning to swim");
 
-        assertEquals("9789849195290-FIC-3-(1)", book.GetUserFriendlyId());
+        //assertEquals("9789849195290-FIC-3-(1)", book.GetUserFriendlyId());
         assertEquals("9789849195290-(1)", book.GetId());
-        assertEquals("9789849195290-FIC-SOC-3-(2)", book2.GetUserFriendlyId());
+        //assertEquals("9789849195290-FIC-SOC-3-(2)", book2.GetUserFriendlyId());
     }
 
     @Test

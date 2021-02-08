@@ -3,6 +3,7 @@ package com.nola.subcommands;
 import com.nola.dataStructures.Book;
 import com.nola.databases.BookDb;
 import com.nola.databases.DbUtilities;
+import com.nola.parsers.FlatObjectParser;
 import com.nola.utilities.PrintUtilities;
 import com.nola.utilities.TimeUtilities;
 import org.apache.commons.cli.*;
@@ -50,8 +51,9 @@ public class label {
             var outputStream = new FileOutputStream(outFilePath);
             var writer       = new OutputStreamWriter(outputStream);
             var bookDb = DbUtilities.LoadBookDb();
-            WriteLabels(bookDb.GetAllBooks(), writer, afterDate, beforeDate);
-            System.out.println("Printed out labels to output file.");
+            var count = WriteLabels(bookDb.GetAllBooks(), writer, afterDate, beforeDate);
+            //ReWriteBooks(bookDb.GetAllBooks(), writer);
+            System.out.println("Printed out "+count +" labels to output file.");
             writer.close();
         }
         catch (ParseException | IOException e) {
@@ -60,12 +62,24 @@ public class label {
         }
     }
 
-    private static void WriteLabels(Iterable<Book> books, OutputStreamWriter writer, Date afterDate, Date beforeDate) throws IOException {
+    private static int WriteLabels(Iterable<Book> books, OutputStreamWriter writer, Date afterDate, Date beforeDate) throws IOException {
         var bookList = GetSortedBooks(books, afterDate, beforeDate);
 
         PrintUtilities.PrintLine(bookList.size() + " book labels to print.");
         for (var book: bookList ) {
-            writer.write(book.Title+'\n'+book.GetUserFriendlyId()+'\n'+book.ShortId+"\n\n");
+            writer.write(book.Title+'\n'+book.GetId()+'\n'+book.ShortId+"\n\n");
+        }
+        return bookList.size();
+    }
+
+    private static void ReWriteBooks(Iterable<Book> books, OutputStreamWriter writer) throws IOException {
+
+        for (var line: BookDb.HeaderLines ) {
+            writer.write(line+'\n');
+        }
+        writer.write(FlatObjectParser.RecordSeparator+'\n');
+        for (var book: books ) {
+            writer.write(book.toString()+"\n"+ FlatObjectParser.RecordSeparator+'\n');
         }
     }
 

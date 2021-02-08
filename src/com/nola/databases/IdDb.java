@@ -1,18 +1,14 @@
 package com.nola.databases;
-import com.nola.dataStructures.IdMap;
-import com.nola.parsers.FlatObjectParser;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
+import com.nola.dataStructures.IdMap;
+
 import java.util.HashMap;
 import java.util.Random;
 
 public class IdDb {
     private HashMap<String, String> _shortToLong;
     private HashMap<String, String> _longToShort;
-    private static final String shortIdChars= "THEEQUUIICKBROOEEWNFOUXJUAAMPSOOVUEERTHELAAZEYDOOG1234567890";
+    private static final String shortIdChars= "theequuiickbrooeewnfouxjuaampsoovueerthelaazeydoog1234567890";
     public static final int ShortIdLength = 5;
 
     public IdDb(Iterable<IdMap> idMaps){

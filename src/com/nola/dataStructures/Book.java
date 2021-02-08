@@ -127,9 +127,9 @@ public class Book implements Comparable<Book>{
         return s.equals("")? 0: ParserUtilities.ParseUInt(s);
     }
 
-    public String GetUserFriendlyId(){
-        return String.join("-", Long.toString(Isbn), GetAbbreviation(Genre), Integer.toString(ReadingLevel), '('+Integer.toString(CopyNum)+')');
-    }
+//    public String GetUserFriendlyId(){
+//        return String.join("-", Long.toString(Isbn), GetAbbreviation(Genre), Integer.toString(ReadingLevel), '('+Integer.toString(CopyNum)+')');
+//    }
 
     public static String GenerateId(long isbn, int copyNum){
         return isbn +"-("+ copyNum +')';
@@ -146,7 +146,7 @@ public class Book implements Comparable<Book>{
         return  "Title:           "+Title+'\n'+
                 "Author:          "+Author+'\n'+
                 "ISBN:            "+Isbn+'\n'+
-                "ID:              "+GetUserFriendlyId()+'\n'+
+                "ID:              "+GetId()+'\n'+
                 "Publisher:       "+Publisher+'\n'+
                 "Year:            "+Year+'\n'+
                 "Genre:           "+Genre+'\n'+
@@ -156,7 +156,7 @@ public class Book implements Comparable<Book>{
                 "Reading level:   "+ReadingLevel+'\n'+
                 "Entry date:      "+ TimeUtilities.ToString(EntryDate)+'\n'+
                 "Expiry date:     "+ TimeUtilities.ToString(ExpiryDate)+'\n'+
-                "ShortId:         "+ ShortId;
+                "ShortId:         "+ ShortId.toLowerCase();
 
     }
 

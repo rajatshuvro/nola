@@ -255,4 +255,22 @@ public class BookDb {
         return FilterByLevel(booksByGenre, level);
     }
 
+    public static final String[] HeaderLines = new String[]{
+            "#Onkur library books",
+            "#Schema number: 1",
+            "#Title = Book title. Value = <String>",
+            "#Author = Author name. Value = <String>",
+            "#ISBN = ISBN number (-1 if unknown). Value = <Integer>",
+            "#Publisher = Publisher name. Value = <String>",
+            "#Year = Year of publication. Value = <Integer>",
+            "#Genre = Book genre. Value = General/Fiction/Science/Social/Religion/History/Geography/Culture/Biography/Fairy tale/Factual",
+            "#Copy number = Copy number. Value = <Integer>",
+            "#Page count = Page count. Value = <Integer>",
+            "#Price = Book price (to be charged if lost). Value = <Decimal>",
+            "#Reading level = Estimated reading level. Value = [1,2,3...10]",
+            "#Entry date = Date the book was added to library. Value = <YYYY-MM-DD HH:MM>",
+            "#Expiry date = Date the book was removed from library (due to loss or damage), blank otherwise. Value = <YYYY-MM-DD HH:MM>"
+    };
+
+
 }
