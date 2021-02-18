@@ -2,6 +2,7 @@ package com.nola.dataStructures;
 
 import com.nola.parsers.ParserUtilities;
 import com.nola.utilities.FormatUtilities;
+import com.nola.utilities.PrintUtilities;
 
 import java.util.HashSet;
 
@@ -30,20 +31,20 @@ public class User{
 
     private static boolean IsValid(String id, String name, String role, String email, String phn) {
         if(ParserUtilities.IsNullOrEmpty(name)){
-            System.out.println("User name cannot be empty");
+            PrintUtilities.PrintErrorLine("User name cannot be empty");
             return false;
         }
         if(!IsValidRole(role)){
-            System.out.println("Role has to be one of:"+ String.join("/",RoleTags));
+            PrintUtilities.PrintErrorLine("Role has to be one of:"+ String.join("/",RoleTags));
             return false;
         }
         if(!FormatUtilities.IsValidEmail(email)){
-            System.out.println("Please provide a valid email address. e.g. user@onkur.com");
+            PrintUtilities.PrintErrorLine("Please provide a valid email address. e.g. user@onkur.com");
             return false;
         }
         if(!FormatUtilities.IsValidPhoneNumber(phn)){
-            System.out.println("Please provide a valid phone number. e.g. XXX-XXX-XXXX");
-            return false;
+            PrintUtilities.PrintWarningLine("Warning:Please provide a valid phone number. e.g. XXX-XXX-XXXX");
+            return true;
         }
         return !ParserUtilities.IsNullOrEmpty(id);
     }
