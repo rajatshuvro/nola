@@ -114,12 +114,6 @@ Role:     Teacher
 Email:    Nur.ul.arafat@gmail.com
 Phone:    7402749648
 ***************************************************************
-Id:       afia.hossain
-Name:     Afia Tasnim Hossain
-Role:     Student
-Email:    deloarhossain13@gmail.com
-Phone:    8587171604
-***************************************************************
 Id:       eshita.islam
 Name:     Eshita Islam
 Role:     Teacher
@@ -372,38 +366,14 @@ Role:     Student
 Email:    imamrana@gmail.com
 Phone:    123-456-7890
 ***************************************************************
-Id:       noureen.chowdhury.1
-Name:     Noureen Chowdhury
-Role:     Student
-Email:    h_sharmin10@yahoo.com
-Phone:    619-204-5111
-***************************************************************
-Id:       aruni.bhattacharjee.1
-Name:     Aruni Bhattacharjee
-Role:     Student
-Email:    abeshbhattacharjee@yahoo.com
-Phone:    240-205-5009
-***************************************************************
-Id:       amelie.roy.1
-Name:     Amelie Roy
-Role:     Student
-Email:    sudeeptoroy@yahoo.com
-Phone:    858-761-2458
-***************************************************************
-Id:       suha.roni.1
-Name:     Suha Roni
-Role:     Student
-Email:    sroni25@gmail.com
-Phone:    858-610-1614
-***************************************************************
 Id:       prisha.mitra
 Name:     Prisha Mitra
 Role:     Student
 Email:    roy.nandita@gmail.com
 Phone:    123-456-7890
 ***************************************************************
-Id:       afia.(teeha)
-Name:     Afia Tasnim Hossain (Teeha)
+Id:       afia.hossain
+Name:     Afia Tasnim Hossain
 Role:     Student
 Email:    tahmina4692@gmail.com
 Phone:    858-717-1604
@@ -413,22 +383,4 @@ Name:     Nayaz Khan
 Role:     Student
 Email:    Nujhath08@hotmail.com
 Phone:    716-400-4373
-***************************************************************
-Id:       irfan.chowdhury.1
-Name:     Irfan Oyon Chowdhury
-Role:     Student
-Email:    zohir.chowdhury@sdsu.edu
-Phone:    619-204-5222
-***************************************************************
-Id:       samina.dossani.1
-Name:     Samina Nahar Dossani
-Role:     Student
-Email:    samina.dossani@gmail.com
-Phone:    650-798-4711
-***************************************************************
-Id:       trinish.chatterjee.1
-Name:     Trinish Chatterjee
-Role:     Student
-Email:    trinchatterjee@gmail.com
-Phone:    123-456-7890
 ***************************************************************
