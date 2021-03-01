@@ -1,12 +1,13 @@
 package com.nola.dataStructures;
 
+import com.nola.NativeSearch.ISearchDocument;
 import com.nola.parsers.ParserUtilities;
 import com.nola.utilities.FormatUtilities;
 import com.nola.utilities.PrintUtilities;
 
 import java.util.HashSet;
 
-public class User{
+public class User implements ISearchDocument {
     public final String Id;
     public final String Name;
     public final String Role;

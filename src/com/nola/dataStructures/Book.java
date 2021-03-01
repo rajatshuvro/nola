@@ -1,5 +1,6 @@
 package com.nola.dataStructures;
 
+import com.nola.NativeSearch.ISearchDocument;
 import com.nola.databases.IdDb;
 import com.nola.parsers.ParserUtilities;
 import com.nola.utilities.PrintUtilities;
@@ -10,7 +11,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class Book implements Comparable<Book>{
+public class Book implements Comparable<Book>, ISearchDocument {
     public final long Isbn;
     public final String Author;
     public final String Title;

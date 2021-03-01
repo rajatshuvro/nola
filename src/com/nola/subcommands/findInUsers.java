@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 import static com.nola.subcommands.FindUtilities.*;
 
-public class findInBooks {
-    private static String commandSyntax = "nola find-b [search text]";
+public class findInUsers {
+    private static String commandSyntax = "nola find-u [search text]";
 
     public static void Run(String[] args){
         if(args.length <= 1) {
@@ -18,8 +18,8 @@ public class findInBooks {
         }
         String queryText = ConstructQuery(args);
 
-        var bookDb = DbUtilities.LoadBookDb();
-        var books = new ArrayList<ISearchDocument>(bookDb.GetAllBooks());
+        var bookDb = DbUtilities.LoadUserDb();
+        var books = new ArrayList<ISearchDocument>(bookDb.GetAllUsers());
 
         InvertedIndex searchIndex = getInvertedIndex(books);
         ArrayList<String> results = search(queryText, books, searchIndex);

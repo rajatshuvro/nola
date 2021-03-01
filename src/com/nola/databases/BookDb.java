@@ -24,7 +24,7 @@ public class BookDb {
         return ids;
     }
 
-    public Iterable<Book> GetAllBooks(){
+    public Collection<Book> GetAllBooks(){
         return _books.values();
     };
     public int Count(){

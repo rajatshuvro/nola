@@ -28,6 +28,12 @@ public class Main {
             case "label":
                 label.Run(args);
                 break;
+            case "find-b":
+                findInBooks.Run(args);
+                break;
+            case "find-u":
+                findInUsers.Run(args);
+                break;
 
 //            case "$":
 //            case "search":
@@ -50,6 +56,8 @@ public class Main {
         PrintUtilities.PrintInfoLine("\tret            (return books)");
         PrintUtilities.PrintInfoLine("\tstatus         (checkout status)");
         PrintUtilities.PrintInfoLine("\tlabel          (print out labels)");
+        PrintUtilities.PrintInfoLine("\tfind-b         (search in books)");
+        PrintUtilities.PrintInfoLine("\tfind-u         (search in users)");
         PrintUtilities.PrintInfoLine("\thelp           (print this menu)");
         PrintUtilities.PrintInfoLine("\t[Type sub-command to get detailed help]");
     }

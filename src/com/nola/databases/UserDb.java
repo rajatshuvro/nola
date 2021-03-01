@@ -34,7 +34,7 @@ public class UserDb {
         return null;
     }
 
-    public Iterable<User> GetAllUsers(){
+    public Collection<User> GetAllUsers(){
         return _users.values();
     }
 
