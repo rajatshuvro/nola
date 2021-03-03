@@ -155,7 +155,8 @@ public class BookDb {
 
         if(!canon.Title.equals(book.Title)){
             if(hasGeneratedIsbn) {
-                System.out.println("ERROR!! Title mismatch found for entry without ISBN. Skipping entry.");
+                PrintUtilities.PrintLine("ERROR!! Title mismatch found for entry without ISBN. Skipping entry.");
+                PrintUtilities.PrintLine("Canonical Title:"+canon.Title);
                 return null;
             }
             System.out.println("WARNING!! Title mismatch found. New value will be overwritten with existing value.");
