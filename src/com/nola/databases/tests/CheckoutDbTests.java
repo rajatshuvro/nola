@@ -41,19 +41,9 @@ public class CheckoutDbTests {
     }
 
     @Test
-    public void Checkout_new_book_without_userid(){
-        var checkoutDb = new CheckoutDb(null, GetUserDb(), GetBookDb());
-        checkoutDb.TryAddRange(GetCheckouts_without_userid());
-
-        assertTrue(checkoutDb.IsCheckedOut("7890788-(2)"));
-        assertFalse(checkoutDb.IsCheckedOut("678564-(1)"));
-        assertEquals("name.4", checkoutDb.GetCheckout("456098-(1)").UserId);
-    }
-
-    @Test
     public void Checkout_invalid_user(){
         var chekoutDb = new CheckoutDb(GetCheckouts(), GetUserDb(), GetBookDb());
-        var invalidCheckout = new Checkout("678564-(2)", "name.10","name10@onkur.com", TimeUtilities.parseGoogleDateTime("2020/09/30 3:21:27 PM MDT"), TimeUtilities.parseDate("2020-10-29") );
+        var invalidCheckout = new Checkout("678564-(2)", "name.10", TimeUtilities.parseGoogleDateTime("2020/09/30 3:21:27 PM MDT"), TimeUtilities.parseDate("2020-10-29") );
 
         assertNull(chekoutDb.TryAdd(invalidCheckout));
     }
@@ -61,7 +51,7 @@ public class CheckoutDbTests {
     @Test
     public void Checkout_invalid_book(){
         var chekoutDb = new CheckoutDb(GetCheckouts(), GetUserDb(), GetBookDb());
-        var invalidCheckout = new Checkout("678564-(3)", "name.3","name1@onkur.com",TimeUtilities.parseGoogleDateTime("2020/09/30 3:21:27 PM MDT"), TimeUtilities.parseDate("2020-10-29") );
+        var invalidCheckout = new Checkout("678564-(3)", "name.3",TimeUtilities.parseGoogleDateTime("2020/09/30 3:21:27 PM MDT"), TimeUtilities.parseDate("2020-10-29") );
 
         assertNull(chekoutDb.TryAdd(invalidCheckout));
     }
@@ -87,19 +77,6 @@ public class CheckoutDbTests {
             assertNotNull(checkoutDb.Return(returnRecord));
         }
         assertNull(checkoutDb.Return(new Return("1234567-(3)", TimeUtilities.GetCurrentTime())));
-    }
-
-    @Test
-    public void Bulk_return_without_userid(){
-        var csvParser = new ReturnCsvParser(TestStreams.GetReturnCsvStream());
-        var checkoutDb = new CheckoutDb(GetCheckouts_without_userid(), GetUserDb(), GetBookDb());
-
-        for (var returnRecord: csvParser.GetReturnes()) {
-            assertNotNull(checkoutDb.Return(returnRecord));
-        }
-
-        assertNull(checkoutDb.Return(new Return("1234567-(3)", TimeUtilities.GetCurrentTime())));
-
     }
 
     @Test

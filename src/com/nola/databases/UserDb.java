@@ -84,25 +84,6 @@ public class UserDb {
     }
 
 
-    public User ResolveUser(String userId, String email) {
-        var user = GetUser(userId);
-        var emailUsers = GetByEmail(email);
-
-        if (user == null && emailUsers==null) return null;
-
-        if(emailUsers == null) return user;
-        if(user == null){
-            return emailUsers.size()==1? emailUsers.get(0): null;
-        }
-
-        for (var emailUser: emailUsers) {
-            if (user.Id == emailUser.Id)
-                return user;
-        }
-        return null;
-    }
-
-
     private List<User> GetByEmail(String email) {
         var users = new ArrayList<User>();
         for (var user: _users.values()) {

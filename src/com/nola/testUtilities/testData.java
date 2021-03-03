@@ -96,36 +96,27 @@ public class testData {
 
     public static ArrayList<Checkout> GetCheckouts(){
         var checkouts = new ArrayList<Checkout>();
-        checkouts.add(new Checkout("7890788-(2)", "name.1", "name1@onkur.com", TimeUtilities.parseGoogleDateTime("2020/09/30 3:20:16 PM MDT"), TimeUtilities.parseDate("2020-10-25")));
-        checkouts.add(new Checkout("678564-(1)", "name.2", "name2@onkur.com",TimeUtilities.parseGoogleDateTime("2020/09/30 3:21:27 PM MDT"), TimeUtilities.parseDate("2020-10-29")));
-        checkouts.add(new Checkout("456098-(1)", "name.3", "name3@onkur.com",TimeUtilities.parseGoogleDateTime("2020/09/30 3:22:04 PM MDT"), TimeUtilities.parseDate("2020-10-28")));
-        checkouts.add(new Checkout("7890788-(2)", "name.1", "name1@onkur.com",TimeUtilities.parseGoogleDateTime("2020/09/30 3:23:30 PM MDT"), TimeUtilities.parseDate("2020-10-26")));
+        checkouts.add(new Checkout("7890788-(2)", "name.1",  TimeUtilities.parseGoogleDateTime("2020/09/30 3:20:16 PM MDT"), TimeUtilities.parseDate("2020-10-25")));
+        checkouts.add(new Checkout("678564-(1)", "name.2", TimeUtilities.parseGoogleDateTime("2020/09/30 3:21:27 PM MDT"), TimeUtilities.parseDate("2020-10-29")));
+        checkouts.add(new Checkout("456098-(1)", "name.3", TimeUtilities.parseGoogleDateTime("2020/09/30 3:22:04 PM MDT"), TimeUtilities.parseDate("2020-10-28")));
+        checkouts.add(new Checkout("7890788-(2)", "name.1",TimeUtilities.parseGoogleDateTime("2020/09/30 3:23:30 PM MDT"), TimeUtilities.parseDate("2020-10-26")));
 
         return checkouts;
     }
 
     public static ArrayList<Checkout> GetCheckouts_shortId(){
         var checkouts = new ArrayList<Checkout>();
-        checkouts.add(new Checkout("CAT12", "name.1", "name1@onkur.com", TimeUtilities.parseGoogleDateTime("2020/09/30 3:20:16 PM MDT"), TimeUtilities.parseDate("2020-10-25")));
-        checkouts.add(new Checkout("BAT12", "name.2", "name2@onkur.com",TimeUtilities.parseGoogleDateTime("2020/09/30 3:21:27 PM MDT"), TimeUtilities.parseDate("2020-10-29")));
-        checkouts.add(new Checkout("PIG07", "name.3", "name3@onkur.com",TimeUtilities.parseGoogleDateTime("2020/09/30 3:22:04 PM MDT"), TimeUtilities.parseDate("2020-10-28")));
-        checkouts.add(new Checkout("CAT12", "name.1", "name1@onkur.com",TimeUtilities.parseGoogleDateTime("2020/09/30 3:23:30 PM MDT"), TimeUtilities.parseDate("2020-10-26")));
+        checkouts.add(new Checkout("CAT12", "name.1", TimeUtilities.parseGoogleDateTime("2020/09/30 3:20:16 PM MDT"), TimeUtilities.parseDate("2020-10-25")));
+        checkouts.add(new Checkout("BAT12", "name.2", TimeUtilities.parseGoogleDateTime("2020/09/30 3:21:27 PM MDT"), TimeUtilities.parseDate("2020-10-29")));
+        checkouts.add(new Checkout("PIG07", "name.3", TimeUtilities.parseGoogleDateTime("2020/09/30 3:22:04 PM MDT"), TimeUtilities.parseDate("2020-10-28")));
+        checkouts.add(new Checkout("CAT12", "name.1", TimeUtilities.parseGoogleDateTime("2020/09/30 3:23:30 PM MDT"), TimeUtilities.parseDate("2020-10-26")));
 
         return checkouts;
     }
 
     public static ArrayList<Checkout> GetNewCheckouts(){
         var checkouts = new ArrayList<Checkout>();
-        checkouts.add(new Checkout("678564-(2)", "name.3", "name3@onkur.com",TimeUtilities.parseGoogleDateTime("2020/09/30 3:21:27 PM MDT"), TimeUtilities.parseDate("2020-10-29")));
-
-        return checkouts;
-    }
-
-    public static ArrayList<Checkout> GetCheckouts_without_userid(){
-        var checkouts = new ArrayList<Checkout>();
-        checkouts.add(new Checkout("7890788-(2)", null, "name1@onkur.com", TimeUtilities.parseGoogleDateTime("2020/09/30 3:20:16 PM MDT"), TimeUtilities.parseDate("2020-10-25")));
-        checkouts.add(new Checkout("678564-(1)", "name.3", "name2@onkur.com",TimeUtilities.parseGoogleDateTime("2020/09/30 3:21:27 PM MDT"), TimeUtilities.parseDate("2020-10-29")));
-        checkouts.add(new Checkout("456098-(1)", "name.4", "name3@onkur.com",TimeUtilities.parseGoogleDateTime("2020/09/30 3:22:04 PM MDT"), TimeUtilities.parseDate("2020-10-28")));
+        checkouts.add(new Checkout("678564-(2)", "name.3", TimeUtilities.parseGoogleDateTime("2020/09/30 3:21:27 PM MDT"), TimeUtilities.parseDate("2020-10-29")));
 
         return checkouts;
     }

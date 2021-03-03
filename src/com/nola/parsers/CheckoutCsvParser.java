@@ -15,8 +15,7 @@ import java.util.ArrayList;
 public class CheckoutCsvParser {
     private InputStreamReader _reader;
     public final String TimeTag = "Timestamp";
-    public final String UsernameTag = "Username";
-    public final String BookIdTag = "Book id";
+    public final String ResourceIdTag = "Resource Id";
     public final String UserIdTag = "User id";
     public final String DueDateTag = "Due Date";
 
@@ -32,7 +31,7 @@ public class CheckoutCsvParser {
         var checkouts = new ArrayList<Checkout>();
         Iterable<CSVRecord> records = null;
         try {
-            records = CSVFormat.RFC4180.withHeader(TimeTag, UsernameTag, BookIdTag, UserIdTag, DueDateTag).parse(_reader);
+            records = CSVFormat.RFC4180.withHeader(TimeTag, ResourceIdTag, UserIdTag, DueDateTag).parse(_reader);
         } catch (IOException e) {
             PrintUtilities.PrintErrorLine("Failed to parse checkout CSV file.");
             return null;
@@ -46,8 +45,7 @@ public class CheckoutCsvParser {
             }
 
             var timeStamp = record.get(TimeTag).trim();
-            var email = record.get(UsernameTag);
-            var bookId = record.get(BookIdTag).trim();
+            var bookId = record.get(ResourceIdTag).trim();
             bookId = Book.GetReducedId(bookId);
 
             var userId = record.get(UserIdTag).trim();
@@ -55,7 +53,7 @@ public class CheckoutCsvParser {
             var dueDate = TimeUtilities.parseDate(dueDateString);
             var checkoutDate = TimeUtilities.parseGoogleDateTime(timeStamp);
 
-            checkouts.add(new Checkout(bookId, userId, email, checkoutDate, dueDate));
+            checkouts.add(new Checkout(bookId, userId, checkoutDate, dueDate));
         }
         return checkouts;
     }

@@ -34,11 +34,6 @@ public class Main {
             case "find-u":
                 findInUsers.Run(args);
                 break;
-
-//            case "$":
-//            case "search":
-//                TokenSearch.Run(subArgs, dataProvider);
-//                break;
             case "help":
                 PrintMainMenu();
                 break;

@@ -105,7 +105,7 @@ public class co {
                 continue;
             }
             for (var bookId: bundle.BookIds) {
-                bookCheckouts.add(new Checkout(bookId, bundleCheckout.UserId, bundleCheckout.Email, bundleCheckout.CheckoutDate, bundleCheckout.DueDate));
+                bookCheckouts.add(new Checkout(bookId, bundleCheckout.UserId, bundleCheckout.CheckoutDate, bundleCheckout.DueDate));
             }
         }
         return bookCheckouts;

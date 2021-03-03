@@ -7,14 +7,12 @@ import java.util.Date;
 public class Checkout implements Comparable<Checkout>{
     public final String Id;
     public final String UserId;
-    public final String Email;
     public final Date CheckoutDate;
     public final Date DueDate;
 
-    public Checkout(String id, String userId, String email, Date checkoutDate, Date dueDate ){
+    public Checkout(String id, String userId, Date checkoutDate, Date dueDate ){
         Id = id;
         UserId = userId;
-        Email = email;
         CheckoutDate = checkoutDate;
         DueDate = dueDate;
     }

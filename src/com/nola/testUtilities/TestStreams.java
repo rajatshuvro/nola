@@ -12,11 +12,11 @@ public class TestStreams {
         var writer = new OutputStreamWriter(memStream);
 
         try {
-            writer.write("\"Timestamp\",\"Username\",\"Book id\",\"User id\",\"Due Date\"\n");
-            writer.write("\"2020/09/30 9:29:20 AM MDT\",\"someone@email.com\",\"7890788-(2)\",\"name.1\",\"2020-10-07\"\n");
-            writer.write("\"2020/09/22 8:05:04 AM MDT\",\"someone@email.com\",\"678564-FIC-5-(1)\",\"name.2\",\"2020-10-07\"\n");
-            writer.write("\"2020/09/22 8:09:24 AM MDT\",\"someone@email.com\",\"DOG99\",\"name.3\",\"2020-10-07\"\n");
-            writer.write("\"2020/09/22 8:11:44 AM MDT\",\"someone@email.com\",\"PIG07\",\"name.4\",\"2020-10-07\"\n");
+            writer.write("\"Timestamp\",\"Resource Id\",\"User id\",\"Due Date\"\n");
+            writer.write("\"2020/09/30 9:29:20 AM MDT\",\"7890788-(2)\",\"name.1\",\"2020-10-07\"\n");
+            writer.write("\"2020/09/22 8:05:04 AM MDT\",\"678564-FIC-5-(1)\",\"name.2\",\"2020-10-07\"\n");
+            writer.write("\"2020/09/22 8:09:24 AM MDT\",\"DOG99\",\"name.3\",\"2020-10-07\"\n");
+            writer.write("\"2020/09/22 8:11:44 AM MDT\",\"PIG07\",\"name.4\",\"2020-10-07\"\n");
             writer.close();
 
         } catch (IOException e) {
@@ -37,9 +37,9 @@ public class TestStreams {
         var writer = new OutputStreamWriter(memStream);
 
         try {
-            writer.write("\"Timestamp\",\"Username\",\"Book id\",\"User id\",\"Due Date\"\n");
-            writer.write("\"2020/09/30 9:29:20 AM MDT\",\"someone@email.com\",\"BUN01\",\"name.1\",\"2020-10-07\"\n");
-            writer.write("\"2020/09/22 8:05:04 AM MDT\",\"someone@email.com\",\"DUN02\",\"name.2\",\"2020-10-07\"\n");
+            writer.write("\"Timestamp\",\"Resource Id\",\"User id\",\"Due Date\"\n");
+            writer.write("\"2020/09/30 9:29:20 AM MDT\",\"BUN01\",\"name.1\",\"2020-10-07\"\n");
+            writer.write("\"2020/09/22 8:05:04 AM MDT\",\"DUN02\",\"name.2\",\"2020-10-07\"\n");
             writer.close();
 
         } catch (IOException e) {

@@ -53,7 +53,7 @@ public class CheckoutDb {
             PrintUtilities.PrintWarningLine("WARNING: Invalid book id:"+checkout.Id +". Ignoring transaction.");
             return null;
         }
-        var user = _userDb.ResolveUser(checkout.UserId, checkout.Email);
+        var user = _userDb.GetUser(checkout.UserId);
 
         if( user == null){
             PrintUtilities.PrintWarningLine("WARNING: Invalid user id:"+checkout.UserId+". Ignoring transaction.");
@@ -74,7 +74,7 @@ public class CheckoutDb {
         }
         _checkouts.put(bookId, checkout);
 
-        return new Checkout(bookId, user.Id, user.Email, checkout.CheckoutDate, checkout.DueDate);
+        return new Checkout(bookId, user.Id, checkout.CheckoutDate, checkout.DueDate);
     }
 
     public ArrayList<Checkout> TryAddRange(Iterable<Checkout> checkouts) {
