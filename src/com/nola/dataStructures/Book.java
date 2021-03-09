@@ -239,7 +239,7 @@ public class Book implements Comparable<Book>, ISearchDocument {
         return GenreTags.contains(genre) || GenreAbbreviations.containsValue(genre);
     }
     private static String GetAbbreviation(String genres){
-        var genreArray = genres.split("/");
+        var genreArray = genres.split(";");
         var abbreviation = new StringBuilder();
         boolean isFirst=true;
         for (String genre: genreArray){
@@ -251,7 +251,7 @@ public class Book implements Comparable<Book>, ISearchDocument {
         }
 
     private static boolean IsValidGenreTag(String genres) {
-        var genreArray = genres.split("/");
+        var genreArray = genres.split(";");
         for (String genre: genreArray) {
             if (!GenreTags.contains(genre)) {
                 PrintUtilities.PrintWarningLine("WARNING!! Invalid genre:" + genre);

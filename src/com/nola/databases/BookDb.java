@@ -165,7 +165,8 @@ public class BookDb {
         }
         if(!canon.Author.equals(book.Author)){
             if(hasGeneratedIsbn) {
-                System.out.println("ERROR!! Author mismatch found for entry without ISBN. Skipping entry.");
+                PrintUtilities.PrintErrorLine("ERROR!! Author mismatch found for entry without ISBN. Skipping entry.");
+                PrintUtilities.PrintErrorLine("Canonical author:"+ canon.Author);
                 return null;
             }
             System.out.println("WARNING!! Author mismatch found. New value will be overwritten with existing value.");
