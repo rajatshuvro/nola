@@ -1,0 +1,9 @@
+#Onkur library per class bundle records
+#Class = Onkur class id/name. Value = <String>
+#BundleIds = Comma separated bundle ids. Value = List<String>
+#StudentIds = Comma separated student ids. Value = List<String>
+***************************************************************
+Class:        Kakatua
+BundleIds:    KK-01, KK-02, KK-03, KK-04, KK-05, KK-06, KK-07, KK-08, KK-09, KK-10, KK-11
+StudentIds:   nameera.rahman, ryaan.ali, ayana.rahim, tairaat.radiah, alisha.mitra, srijon.pal, sadan.roni, sineen.sadi, sunniva.habib, adreesh.dasgupta, totini.tonu
+***************************************************************
