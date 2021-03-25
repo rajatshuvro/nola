@@ -1,40 +1,59 @@
 package com.nola.analytics.tests;
 
+import com.nola.analytics.BundleRotator;
+import com.nola.dataStructures.Bundle;
+import com.nola.dataStructures.ClassBundle;
+import com.nola.dataStructures.Transaction;
+import com.nola.databases.BundleDb;
+import com.nola.databases.TransactionDb;
+import com.nola.parsers.ClassBundleParser;
+import com.nola.utilities.TimeUtilities;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class BundleRotatorTests {
-    private InputStream GetClassBundleStream(){
-        var memStream = new ByteArrayOutputStream();
-        var writer = new OutputStreamWriter(memStream);
 
-        try {
-            writer.write("#Onkur library per class bundle records\n");
-            writer.write("#ClassId = Onkur class id/name. Value = <String>\n");
-            writer.write("#BundleIds = Comma separated bundle ids. Value = List<String>\n");
-            writer.write("#StudentIds = Comma separated student ids. Value = List<String>\n");
-            writer.write("***************************************************************\n");
-            writer.write("Class Id:      Chorui\n");
-            writer.write("Bundle Ids:    CH-01,CH-02,CH-03,CH-04,CH-05\n");
-            writer.write("User Ids:      nameera.rahman,ryaan.ali,ayana.rahim,tairaat.radiah,alisha.mitra,srijon.pal,sadan.roni,sineen.sadi,sunniva.habib,adreesh.dasgupta,totini.tonu\n");
-            writer.write("***************************************************************\n");
-            writer.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        var buffer = memStream.toByteArray();
-        try {
-            memStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return new ByteArrayInputStream(buffer);
-    }
     @Test
-    public void ReadClassBundles(){
+    public void ReadClassBundles() throws IOException {
+        var parser = new ClassBundleParser(dataProviders.GetClassBundleStream());
 
+        var bundles = parser.GetClassBundles();
+
+        assertEquals(1, bundles.size());
+        assertEquals("Chorui", bundles.get(0).ClassId);
+    }
+
+    @Test
+    public void RandomAssignmentTest(){
+        var classBundle = new ClassBundle("kak", new String[]{"bun", "gun", "hat", "mat", "chair", "table"},
+                new String[]{"cat", "bat", "dog", "hog"});
+
+        var assignments = new HashMap<String, String>();
+        BundleRotator.MakeRandomAssignments(assignments, classBundle);
+
+        assertEquals(classBundle.UserIds.length, assignments.size());
+    }
+
+    @Test
+    public void ScoreAssignmentsTest(){
+        var assignment1 = new HashMap<String, String>();
+        assignment1.put("cat", "bun");
+        assignment1.put("bat", "gun");
+        assignment1.put("dog", "hat");
+        assignment1.put("hog", "mat");
+
+        var bundles = new ArrayList<Bundle>();
+        bundles.add(new Bundle("bun", "pack of buns", new String[]{"bread", "loaf", "bagle"}, TimeUtilities.GetCurrentTime()));
+        bundles.add(new Bundle("gun", "rack of guns", new String[]{"pistol", "machine gun", "hand gun"}, TimeUtilities.GetCurrentTime()));
+        bundles.add(new Bundle("hat", "bundle of hats", new String[]{"cap", "sun hat", "cowboy hat"}, TimeUtilities.GetCurrentTime()));
+        bundles.add(new Bundle("mat", "pile of mats", new String[]{"irani", "flying", "jute carpet"}, TimeUtilities.GetCurrentTime()));
+        var bundleDb = new BundleDb(bundles);
+
+        var transactions = new ArrayList<Transaction>();
+        //var transactionsDb = new TransactionDb(transactions)
     }
 }

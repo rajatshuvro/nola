@@ -41,7 +41,7 @@ public class TransactionTests {
     @Test
     public void AppendNewTransactions() throws IOException{
         //initializing with empty transaction list
-        var transactionDb = new TransactionDb(GetTransactions(), testData.GetUserDb_transactionTest(), testData.GetBookDb_transactionTest());
+        var transactionDb = new TransactionDb(testData.GetTransactions(), testData.GetUserDb_transactionTest(), testData.GetBookDb_transactionTest());
         //adding new transactions
         var newTransactions = new ArrayList<Transaction>();
         newTransactions.add(Transaction.Create("7890788-(2)", "234", TimeUtilities.parseDateTime("2019-11-13 10:39:31"), Transaction.CheckoutTag));

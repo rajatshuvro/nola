@@ -5,7 +5,7 @@
 #ISBN = ISBN number (-1 if unknown). Value = <Integer>
 #Publisher = Publisher name. Value = <String>
 #Year = Year of publication. Value = <Integer>
-#Genre = Book genre. Value = General/Fiction/Science/Social/Religion/History/Geography/Culture/Biography/Fairy tale/Factual
+#Genre = Book genre. Value = General;Fiction;Science;Social;Religion;History;Geography;Culture;Biography;Fairy tale;Factual
 #Copy number = Copy number. Value = <Integer>
 #Page count = Page count. Value = <Integer>
 #Price = Book price (to be charged if lost). Value = <Decimal>
@@ -11365,7 +11365,7 @@ Page count:      16
 Price:           5.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         moubu
 ***************************************************************
 Title:           Baazpaakhi Aar Gaaner Paakhi
@@ -11380,7 +11380,7 @@ Page count:      8
 Price:           5.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         3rom1
 ***************************************************************
 Title:           Androcles O Shingho
@@ -11395,7 +11395,7 @@ Page count:      16
 Price:           5.0
 Reading level:   6
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         a9jx4
 ***************************************************************
 Title:           Khhudhaarto Sheaal
@@ -11410,7 +11410,7 @@ Page count:      16
 Price:           5.0
 Reading level:   6
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         dcuuo
 ***************************************************************
 Title:           Gaadhaar Borhaai
@@ -11425,7 +11425,7 @@ Page count:      16
 Price:           5.0
 Reading level:   6
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         oieo1
 ***************************************************************
 Title:           Saahosee Soinno
@@ -11440,7 +11440,7 @@ Page count:      16
 Price:           5.0
 Reading level:   6
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         xuuge
 ***************************************************************
 Title:           Aeshoper Golpo
@@ -11455,7 +11455,7 @@ Page count:      16
 Price:           5.0
 Reading level:   6
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         oooza
 ***************************************************************
 Title:           Sisimpure Vumikom
@@ -11470,7 +11470,7 @@ Page count:      16
 Price:           10.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         3exqa
 ***************************************************************
 Title:           Alur Khoje
@@ -11485,7 +11485,7 @@ Page count:      16
 Price:           10.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         j3aae
 ***************************************************************
 Title:           Borgo Raja Ar Trivuj Rani
@@ -11500,7 +11500,7 @@ Page count:      16
 Price:           10.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         obhms
 ***************************************************************
 Title:           Sobkhanei Shikhte Pari
@@ -11515,7 +11515,7 @@ Page count:      16
 Price:           10.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         ecb1u
 ***************************************************************
 Title:           Ikrir Beguni Rong
@@ -11530,7 +11530,7 @@ Page count:      16
 Price:           10.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         arxae
 ***************************************************************
 Title:           Pani
@@ -11545,7 +11545,7 @@ Page count:      16
 Price:           10.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         oacoc
 ***************************************************************
 Title:           Sundorbone Bonvojon
@@ -11560,7 +11560,7 @@ Page count:      16
 Price:           10.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         eatas
 ***************************************************************
 Title:           Tuktuki Jokhon Boro Hobe
@@ -11575,7 +11575,7 @@ Page count:      16
 Price:           5.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         iu1ux
 ***************************************************************
 Title:           Panite jopath jopath
@@ -11590,7 +11590,7 @@ Page count:      16
 Price:           10.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         vuege
 ***************************************************************
 Title:           Shoti Moti
@@ -11605,7 +11605,7 @@ Page count:      16
 Price:           5.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         khcqh
 ***************************************************************
 Title:           Dekhbo Ghure Jogot Take
@@ -11620,7 +11620,7 @@ Page count:      16
 Price:           5.0
 Reading level:   4
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         0ojue
 ***************************************************************
 Title:           Amra pari
@@ -11635,7 +11635,7 @@ Page count:      14
 Price:           10.0
 Reading level:   4
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         gxuxc
 ***************************************************************
 Title:           Jekhane Sobai Shekhe
@@ -11650,7 +11650,7 @@ Page count:      12
 Price:           5.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         uat2c
 ***************************************************************
 Title:           Bijh  theke thalai
@@ -11665,7 +11665,7 @@ Page count:      20
 Price:           10.0
 Reading level:   3
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         keqwo
 ***************************************************************
 Title:           Ghuri Oranor Mela
@@ -11680,7 +11680,7 @@ Page count:      16
 Price:           5.0
 Reading level:   4
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         j1ul5
 ***************************************************************
 Title:           Ghuri Oranor Mela
@@ -11695,7 +11695,7 @@ Page count:      16
 Price:           5.0
 Reading level:   4
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         vewqe
 ***************************************************************
 Title:           Halum Jabe Onek Dur
@@ -11710,7 +11710,7 @@ Page count:      16
 Price:           5.0
 Reading level:   4
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         spzle
 ***************************************************************
 Title:           Mach dhorar moja
@@ -11725,7 +11725,7 @@ Page count:      16
 Price:           5.0
 Reading level:   4
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         xhe7a
 ***************************************************************
 Title:           Lal Bus
@@ -11740,7 +11740,7 @@ Page count:      17
 Price:           5.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         6yi1e
 ***************************************************************
 Title:           Halumer Grame Jaoa
@@ -11755,7 +11755,7 @@ Page count:      12
 Price:           5.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         aubgu
 ***************************************************************
 Title:           Alur Khoje
@@ -11770,7 +11770,7 @@ Page count:      16
 Price:           5.0
 Reading level:   4
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         xteue
 ***************************************************************
 Title:           Boishakhi melai hoi hollor
@@ -11785,7 +11785,7 @@ Page count:      17
 Price:           5.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         q96tn
 ***************************************************************
 Title:           Nanan kajer nanan nam
@@ -11800,7 +11800,7 @@ Page count:      16
 Price:           5.0
 Reading level:   4
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         a21ao
 ***************************************************************
 Title:           Saladiar soshomo khabar
@@ -11815,7 +11815,7 @@ Page count:      17
 Price:           5.0
 Reading level:   4
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         wue9r
 ***************************************************************
 Title:           Banger dim banger chana
@@ -11830,7 +11830,7 @@ Page count:      16
 Price:           5.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         6xp5j
 ***************************************************************
 Title:           Ikri O projapoti
@@ -11845,7 +11845,7 @@ Page count:      16
 Price:           10.0
 Reading level:   3
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         umoia
 ***************************************************************
 Title:           Mitu Ekdin Sisimpure
@@ -11860,7 +11860,7 @@ Page count:      13
 Price:           5.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         2m0eu
 ***************************************************************
 Title:           Mitu Ekdin Sisimpure
@@ -11875,7 +11875,7 @@ Page count:      13
 Price:           5.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         eah9o
 ***************************************************************
 Title:           Ekdin Sobai Mile
@@ -11890,7 +11890,7 @@ Page count:      12
 Price:           5.0
 Reading level:   4
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         hokuo
 ***************************************************************
 Title:           Eigol paki kothai gelo
@@ -11905,7 +11905,7 @@ Page count:      17
 Price:           10.0
 Reading level:   4
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         u2cx7
 ***************************************************************
 Title:           Goyenda shikur rohossho ovijan
@@ -11920,7 +11920,7 @@ Page count:      15
 Price:           5.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         rshie
 ***************************************************************
 Title:           Bhulomona jadukor
@@ -11935,7 +11935,7 @@ Page count:      16
 Price:           5.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         w4elr
 ***************************************************************
 Title:           Dhuki katbirali
@@ -11950,7 +11950,7 @@ Page count:      20
 Price:           10.0
 Reading level:   4
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         wsoej
 ***************************************************************
 Title:           Baby Rhymes-0
@@ -11965,7 +11965,7 @@ Page count:      16
 Price:           5.0
 Reading level:   4
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         oo5ef
 ***************************************************************
 Title:           Chorar Mela
@@ -11980,7 +11980,7 @@ Page count:      20
 Price:           5.0
 Reading level:   4
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         uldz4
 ***************************************************************
 Title:           Choray Choray
@@ -11995,7 +11995,7 @@ Page count:      6
 Price:           5.0
 Reading level:   4
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         uf6u2
 ***************************************************************
 Title:           Chottur Chora
@@ -12010,7 +12010,7 @@ Page count:      4
 Price:           5.0
 Reading level:   4
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         6cbfo
 ***************************************************************
 Title:           Amar Chorar Boi
@@ -12025,7 +12025,7 @@ Page count:      6
 Price:           5.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         o5zhi
 ***************************************************************
 Title:           Chorar Mela
@@ -12040,7 +12040,7 @@ Page count:      16
 Price:           5.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         eooez
 ***************************************************************
 Title:           Mojar Chora With Rhymes
@@ -12055,7 +12055,7 @@ Page count:      22
 Price:           5.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         huojo
 ***************************************************************
 Title:           Khoka Khukur Mojar Chora
@@ -12070,7 +12070,7 @@ Page count:      6
 Price:           5.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         uczvi
 ***************************************************************
 Title:           Amar Priyo Mishti Chora
@@ -12085,7 +12085,7 @@ Page count:      6
 Price:           5.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         ueeop
 ***************************************************************
 Title:           Khoka Khukur Mishti Chora
@@ -12100,7 +12100,7 @@ Page count:      6
 Price:           5.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         vba86
 ***************************************************************
 Title:           Amar Mishti Chora
@@ -12115,7 +12115,7 @@ Page count:      10
 Price:           5.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         akin9
 ***************************************************************
 Title:           Khoka Khukur Mishti Chora
@@ -12130,7 +12130,7 @@ Page count:      10
 Price:           5.0
 Reading level:   4
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         ee1fe
 ***************************************************************
 Title:           Thakur Dadar Jhuli
@@ -12145,7 +12145,7 @@ Page count:      95
 Price:           10.0
 Reading level:   9
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         neoco
 ***************************************************************
 Title:           Murgi Gulo Gune Rakho
@@ -12160,7 +12160,7 @@ Page count:      4
 Price:           5.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         rahvf
 ***************************************************************
 Title:           Panta Buri
@@ -12175,7 +12175,7 @@ Page count:      4
 Price:           5.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         toaoo
 ***************************************************************
 Title:           Chorar Jhora
@@ -12190,7 +12190,7 @@ Page count:      108
 Price:           10.0
 Reading level:   5
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         ufoqu
 ***************************************************************
 Title:           Shishu Kishor Golpo Somachar
@@ -12205,7 +12205,7 @@ Page count:      99
 Price:           10.0
 Reading level:   6
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         9vnon
 ***************************************************************
 Title:           Mojar Mojar Golper Dali
@@ -12220,7 +12220,7 @@ Page count:      72
 Price:           10.0
 Reading level:   6
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         wraah
 ***************************************************************
 Title:           Robot O Magic Er Golpo
@@ -12235,7 +12235,7 @@ Page count:      64
 Price:           10.0
 Reading level:   6
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         ait08
 ***************************************************************
 Title:           Golpe Golpe Jay Bela
@@ -12250,7 +12250,7 @@ Page count:      48
 Price:           10.0
 Reading level:   7
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         nc1ei
 ***************************************************************
 Title:           Ishoper Golposomogro
@@ -12265,7 +12265,7 @@ Page count:      80
 Price:           10.0
 Reading level:   6
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         4jezh
 ***************************************************************
 Title:           Golpe Golpe Niti Shikkha
@@ -12280,7 +12280,7 @@ Page count:      64
 Price:           10.0
 Reading level:   6
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         msoft
 ***************************************************************
 Title:           Shiba The Great
@@ -12295,7 +12295,7 @@ Page count:      64
 Price:           10.0
 Reading level:   7
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         huiui
 ***************************************************************
 Title:           Thakurmar Jhuli
@@ -12310,7 +12310,7 @@ Page count:      64
 Price:           10.0
 Reading level:   10
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         n3zew
 ***************************************************************
 Title:           Golpo Shudhu Golpo Noy
@@ -12325,7 +12325,7 @@ Page count:      47
 Price:           10.0
 Reading level:   8
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         eirem
 ***************************************************************
 Title:           Uttoradhikar
@@ -12340,7 +12340,7 @@ Page count:      52
 Price:           10.0
 Reading level:   6
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         leya4
 ***************************************************************
 Title:           Calculaser Kando
@@ -12355,7 +12355,7 @@ Page count:      62
 Price:           10.0
 Reading level:   6
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         ssooe
 ***************************************************************
 Title:           Chondroloke Ovijan
@@ -12370,7 +12370,7 @@ Page count:      62
 Price:           10.0
 Reading level:   6
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         aevae
 ***************************************************************
 Title:           Flight 714
@@ -12385,7 +12385,7 @@ Page count:      62
 Price:           10.0
 Reading level:   6
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         jftf9
 ***************************************************************
 Title:           Panna Kothay
@@ -12400,7 +12400,7 @@ Page count:      62
 Price:           10.0
 Reading level:   7
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         uooae
 ***************************************************************
 Title:           Kanvanga Murti
@@ -12415,7 +12415,7 @@ Page count:      62
 Price:           10.0
 Reading level:   7
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         0u3eo
 ***************************************************************
 Title:           Otokarer Rajdondo
@@ -12430,7 +12430,7 @@ Page count:      62
 Price:           10.0
 Reading level:   7
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         ipekz
 ***************************************************************
 Title:           Krishnodiper Rohossho
@@ -12445,7 +12445,7 @@ Page count:      62
 Price:           10.0
 Reading level:   7
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         vauou
 ***************************************************************
 Title:           Kakra Rohossho
@@ -12460,7 +12460,7 @@ Page count:      62
 Price:           10.0
 Reading level:   7
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         thuuo
 ***************************************************************
 Title:           Hangor Roder Bivishika
@@ -12475,7 +12475,7 @@ Page count:      62
 Price:           10.0
 Reading level:   7
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         oot1p
 ***************************************************************
 Title:           Nil Komol
@@ -12490,7 +12490,7 @@ Page count:      62
 Price:           10.0
 Reading level:   7
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         ot9xe
 ***************************************************************
 Title:           Americar Tintin
@@ -12505,7 +12505,7 @@ Page count:      62
 Price:           10.0
 Reading level:   7
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         euvhk
 ***************************************************************
 Title:           Tibbote Tintin
@@ -12520,7 +12520,7 @@ Page count:      62
 Price:           10.0
 Reading level:   7
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         2rpoe
 ***************************************************************
 Title:           Biplobider Dongole
@@ -12535,7 +12535,7 @@ Page count:      62
 Price:           10.0
 Reading level:   7
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         5nuay
 ***************************************************************
 Title:           Momir Ovishap
@@ -12550,7 +12550,7 @@ Page count:      62
 Price:           10.0
 Reading level:   7
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         jeopu
 ***************************************************************
 Title:           Kalo Sonar Deshe
@@ -12565,7 +12565,7 @@ Page count:      62
 Price:           10.0
 Reading level:   7
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         u2oun
 ***************************************************************
 Title:           Bombete Jahaj
@@ -12580,7 +12580,7 @@ Page count:      62
 Price:           10.0
 Reading level:   7
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         aeofo
 ***************************************************************
 Title:           Ashchorjo Ulka
@@ -12595,7 +12595,7 @@ Page count:      62
 Price:           10.0
 Reading level:   7
 Entry date:      2021-03-16 16:44:37
-Expiry date:     
+Expiry date:
 ShortId:         uoce0
 ***************************************************************
 Title:           Sukanto Rochona Somogro
@@ -12610,7 +12610,7 @@ Page count:      191
 Price:           10.0
 Reading level:   10
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         hwhbh
 ***************************************************************
 Title:           Sera Kishor Golpo
@@ -12625,7 +12625,7 @@ Page count:      135
 Price:           10.0
 Reading level:   10
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         1eovh
 ***************************************************************
 Title:           Alif Layla
@@ -12640,7 +12640,7 @@ Page count:      159
 Price:           10.0
 Reading level:   10
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         5emhe
 ***************************************************************
 Title:           Hasir Bisshokosh
@@ -12655,7 +12655,7 @@ Page count:      240
 Price:           10.0
 Reading level:   9
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         7hkao
 ***************************************************************
 Title:           Voyongkor Vuture
@@ -12670,7 +12670,7 @@ Page count:      159
 Price:           10.0
 Reading level:   10
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         ouzec
 ***************************************************************
 Title:           Sera Arobbo Rojoni
@@ -12685,7 +12685,7 @@ Page count:      159
 Price:           10.0
 Reading level:   10
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         k6jeu
 ***************************************************************
 Title:           Cotoder Ishoper Sera Golpo
@@ -12700,7 +12700,7 @@ Page count:      160
 Price:           10.0
 Reading level:   9
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         07oye
 ***************************************************************
 Title:           Ramer Sumoti, Bindur Cele, Mej Didi
@@ -12715,7 +12715,7 @@ Page count:      27
 Price:           10.0
 Reading level:   10
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         whazy
 ***************************************************************
 Title:           Bachai Sera Golpo
@@ -12730,7 +12730,7 @@ Page count:      128
 Price:           10.0
 Reading level:   10
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         7kauq
 ***************************************************************
 Title:           Anu Mamar Ampayaring
@@ -12745,7 +12745,7 @@ Page count:      78
 Price:           10.0
 Reading level:   10
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         u7u9w
 ***************************************************************
 Title:           Hassorosik Gopal Var
@@ -12760,7 +12760,7 @@ Page count:      79
 Price:           10.0
 Reading level:   9
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         etmue
 ***************************************************************
 Title:           Bugabuga
@@ -12775,7 +12775,7 @@ Page count:      40
 Price:           10.0
 Reading level:   9
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         oior7
 ***************************************************************
 Title:           Boner Raja
@@ -12790,7 +12790,7 @@ Page count:      14
 Price:           10.0
 Reading level:   7
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         t6jhv
 ***************************************************************
 Title:           Sujon Horbola
@@ -12805,7 +12805,7 @@ Page count:      86
 Price:           10.0
 Reading level:   10
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         eeuug
 ***************************************************************
 Title:           Vuler Baccha Kotkoti
@@ -12820,7 +12820,7 @@ Page count:      27
 Price:           10.0
 Reading level:   10
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         j8xea
 ***************************************************************
 Title:           Mohajiboner Monikotha
@@ -12835,7 +12835,7 @@ Page count:      55
 Price:           10.0
 Reading level:   10
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         taeou
 ***************************************************************
 Title:           Jol Pore Pata Nore
@@ -12850,7 +12850,7 @@ Page count:      125
 Price:           10.0
 Reading level:   10
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         od1ua
 ***************************************************************
 Title:           Dui Banglar Bachai Golpo
@@ -12865,7 +12865,7 @@ Page count:      244
 Price:           10.0
 Reading level:   10
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         36lah
 ***************************************************************
 Title:           Ganhi The Mahatma
@@ -12880,7 +12880,7 @@ Page count:      80
 Price:           10.0
 Reading level:   7
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         ye7ia
 ***************************************************************
 Title:           Nobi Kahini
@@ -12895,7 +12895,7 @@ Page count:      107
 Price:           10.0
 Reading level:   10
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         iuev8
 ***************************************************************
 Title:           Subhas Chandra Bose Netaji
@@ -12910,7 +12910,7 @@ Page count:      79
 Price:           10.0
 Reading level:   7
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         u7eeb
 ***************************************************************
 Title:           Molla Nasiruddiner 100 Sera Golpo
@@ -12925,7 +12925,7 @@ Page count:      80
 Price:           10.0
 Reading level:   9
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         e4bu0
 ***************************************************************
 Title:           Thakurmar Jhuli
@@ -12940,7 +12940,7 @@ Page count:      79
 Price:           10.0
 Reading level:   9
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         o1eo2
 ***************************************************************
 Title:           Thakurmar Jhuli
@@ -12955,7 +12955,7 @@ Page count:      183
 Price:           10.0
 Reading level:   10
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         ionjd
 ***************************************************************
 Title:           Pagla Dashu
@@ -12970,7 +12970,7 @@ Page count:      84
 Price:           10.0
 Reading level:   10
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         t3aez
 ***************************************************************
 Title:           Gupi Gayen Bagha Bayen
@@ -12985,7 +12985,7 @@ Page count:      80
 Price:           10.0
 Reading level:   10
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         pleea
 ***************************************************************
 Title:           Cotoder Thakurmar Jhulir Sera Golpo
@@ -13000,7 +13000,7 @@ Page count:      159
 Price:           10.0
 Reading level:   10
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         cg7uo
 ***************************************************************
 Title:           Cotoder Birboler Sera Golpo
@@ -13015,6 +13015,6 @@ Page count:      160
 Price:           10.0
 Reading level:   10
 Entry date:      2021-03-23 09:42:23
-Expiry date:     
+Expiry date:
 ShortId:         us6h5
 ***************************************************************

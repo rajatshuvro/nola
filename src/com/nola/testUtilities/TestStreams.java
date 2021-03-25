@@ -379,7 +379,7 @@ public class TestStreams {
         writer.write("ISBN:\t\t\t-1\n");
         writer.write("Publisher:\t\tKalighat prokashoni\n");
         writer.write("Year:\t\t\t1929\n");
-        writer.write("Genre:\t\t\tFiction/Religion\n");
+        writer.write("Genre:\t\t\tFiction;Religion\n");
         writer.write("Page count:\t\t35\n");
         writer.write("Price:\t\t\t15\n");
         writer.write("Reading level:\t4\n");

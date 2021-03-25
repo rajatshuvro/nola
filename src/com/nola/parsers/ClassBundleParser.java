@@ -12,7 +12,7 @@ public class ClassBundleParser {
 
     private final String ClassTag = "Class Id";
     private final String BundleIdsTag = "Bundle Ids";
-    private final String StudentIdsTag = "Student Ids";
+    private final String UserIdsTag = "User Ids";
 
     public ClassBundleParser(InputStream inputStream){
         _inputStream = inputStream;
@@ -21,7 +21,7 @@ public class ClassBundleParser {
     public ArrayList<ClassBundle> GetClassBundles() throws IOException {
         ArrayList<ClassBundle> classBundles = new ArrayList<>();
         var fobParser = new FlatObjectParser(_inputStream, new String[]{
-                ClassTag, BundleIdsTag, StudentIdsTag
+                ClassTag, BundleIdsTag, UserIdsTag
         });
 
         var nextSetOfValues =fobParser.GetNextRecord();
@@ -38,7 +38,7 @@ public class ClassBundleParser {
     private ClassBundle GetClassBundle(HashMap<String, String> keyValues) {
         String classId = null;
         String bundleIds = null;
-        String studentIds = null;
+        String userIds = null;
 
         for (var entry: keyValues.entrySet()) {
             var key = entry.getKey();
@@ -51,13 +51,13 @@ public class ClassBundleParser {
                 case BundleIdsTag:
                     bundleIds = value;
                     break;
-                case StudentIdsTag:
-                    studentIds = value;
+                case UserIdsTag:
+                    userIds = value;
                     break;
             }
 
         }
 
-        return new ClassBundle(classId, bundleIds.split(","), studentIds.split(","));
+        return new ClassBundle(classId, bundleIds.split(","), userIds.split(","));
     }
 }

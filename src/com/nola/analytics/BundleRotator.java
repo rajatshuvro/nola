@@ -61,7 +61,7 @@ public class BundleRotator {
         return bundleScores;
     }
 
-    public void MakeRandomAssignments(HashMap<String, String> assignments, ClassBundle classBundle) {
+    public static void MakeRandomAssignments(HashMap<String, String> assignments, ClassBundle classBundle) {
         var bundleIndices = new int[classBundle.UserIds.length];
         for (var i=0; i < bundleIndices.length; i++)
             bundleIndices[i]=i;
