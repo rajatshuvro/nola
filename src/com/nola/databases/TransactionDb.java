@@ -71,7 +71,7 @@ public class TransactionDb {
         return null;
     }
 
-    public ArrayList<Transaction> GetUserActivity(int userId){
+    public ArrayList<Transaction> GetUserActivity(String userId){
         var transactions = new ArrayList<Transaction>();
         for(var transaction: _transactions){
             if(transaction.UserId.equals(userId)) transactions.add(transaction);

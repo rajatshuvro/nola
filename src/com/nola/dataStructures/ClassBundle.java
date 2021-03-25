@@ -3,18 +3,18 @@ package com.nola.dataStructures;
 public class ClassBundle {
     public final String ClassId;
     public final String[] BundleIds;
-    public final String[] StudentIds;
+    public final String[] UserIds;
 
-    public ClassBundle(String classId, String[] bundleIds, String[] studentIds){
+    public ClassBundle(String classId, String[] bundleIds, String[] userIds){
         ClassId = classId;
         BundleIds = bundleIds;
-        StudentIds = studentIds;
+        UserIds = userIds;
     }
 
     @Override
     public String toString(){
         return  "ClassId:      "+ ClassId+'\n'+
                 "BundleIds:    "+ String.join(",", BundleIds)+'\n'+
-                "StudentIds:   "+ String.join(",", StudentIds);
+                "UserIds:      "+ String.join(",", UserIds);
     }
 }

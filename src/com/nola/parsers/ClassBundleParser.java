@@ -10,9 +10,9 @@ import java.util.HashMap;
 public class ClassBundleParser {
     private InputStream _inputStream;
 
-    private final String ClassTag = "ClassId";
-    private final String BundleIdsTag = "BundleIds";
-    private final String StudentIdsTag = "StudentIds";
+    private final String ClassTag = "Class Id";
+    private final String BundleIdsTag = "Bundle Ids";
+    private final String StudentIdsTag = "Student Ids";
 
     public ClassBundleParser(InputStream inputStream){
         _inputStream = inputStream;
