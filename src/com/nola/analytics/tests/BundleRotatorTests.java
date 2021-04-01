@@ -1,18 +1,13 @@
 package com.nola.analytics.tests;
 
 import com.nola.analytics.BundleRotator;
-import com.nola.dataStructures.Bundle;
 import com.nola.dataStructures.ClassBundle;
-import com.nola.dataStructures.Transaction;
-import com.nola.databases.BundleDb;
-import com.nola.databases.TransactionDb;
 import com.nola.parsers.ClassBundleParser;
-import com.nola.utilities.TimeUtilities;
+import com.nola.testUtilities.testData;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BundleRotatorTests {
@@ -32,28 +27,44 @@ public class BundleRotatorTests {
         var classBundle = new ClassBundle("kak", new String[]{"bun", "gun", "hat", "mat", "chair", "table"},
                 new String[]{"cat", "bat", "dog", "hog"});
 
-        var assignments = new HashMap<String, String>();
-        BundleRotator.MakeRandomAssignments(assignments, classBundle);
+        var assignments = BundleRotator.CreateRandomAssignments(classBundle);
 
         assertEquals(classBundle.UserIds.length, assignments.size());
     }
 
     @Test
-    public void ScoreAssignmentsTest(){
+    public void BundleScoreTest(){
+        var bundleDb = testData.GetBundleDb();
+        var transactionsDb = testData.GetTransactionDb();
+        var classBundle = new ClassBundle("chorui", new String[]{"BUN01", "DUN02"}, new String[]{"123", "234", "456"});
+
+        var scores = BundleRotator.GetBundleScores(classBundle, bundleDb, transactionsDb);
+
+        assertEquals(0, scores.get("456:BUN01"));
+        assertEquals(1, scores.get("123:BUN01"));
+        assertEquals(1, scores.get("234:BUN01"));
+    }
+
+    @Test
+    public void ScoreAssignmentTest(){
         var assignment1 = new HashMap<String, String>();
-        assignment1.put("cat", "bun");
-        assignment1.put("bat", "gun");
-        assignment1.put("dog", "hat");
-        assignment1.put("hog", "mat");
+        assignment1.put("234", "BUN01");
+        assignment1.put("123", "DUN02");
 
-        var bundles = new ArrayList<Bundle>();
-        bundles.add(new Bundle("bun", "pack of buns", new String[]{"bread", "loaf", "bagle"}, TimeUtilities.GetCurrentTime()));
-        bundles.add(new Bundle("gun", "rack of guns", new String[]{"pistol", "machine gun", "hand gun"}, TimeUtilities.GetCurrentTime()));
-        bundles.add(new Bundle("hat", "bundle of hats", new String[]{"cap", "sun hat", "cowboy hat"}, TimeUtilities.GetCurrentTime()));
-        bundles.add(new Bundle("mat", "pile of mats", new String[]{"irani", "flying", "jute carpet"}, TimeUtilities.GetCurrentTime()));
-        var bundleDb = new BundleDb(bundles);
+        var assignment2 = new HashMap<String, String>();
+        assignment2.put("456", "BUN01");
+        assignment2.put("123", "DUN02");
 
-        var transactions = new ArrayList<Transaction>();
-        //var transactionsDb = new TransactionDb(transactions)
+        var bundleDb = testData.GetBundleDb();
+        var transactionsDb = testData.GetTransactionDb();
+        var classBundle = new ClassBundle("chorui", new String[]{"BUN01", "DUN02"}, new String[]{"123", "234", "456"});
+
+        var bundleScores = BundleRotator.GetBundleScores(classBundle, bundleDb, transactionsDb);
+
+        var assignmentScore = BundleRotator.ScoreAssignment(assignment1, bundleScores);
+        assertEquals(1, assignmentScore);
+
+        assignmentScore = BundleRotator.ScoreAssignment(assignment2, bundleScores);
+        assertEquals(0, assignmentScore);
     }
 }

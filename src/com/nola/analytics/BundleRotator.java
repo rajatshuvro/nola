@@ -20,16 +20,25 @@ public class BundleRotator {
     public HashMap<String, String> Rotate(String classId, BundleDb bundleDb, TransactionDb transactionDb){
         if (!_classBundles.containsKey(classId)) return null;
         var classBundle = _classBundles.get(classId);
-        var assignments = new HashMap<String, String>();
 
-        var studentBundleScores = GetStudentBundleScores(classBundle, bundleDb, transactionDb);
+        var bundleScores = GetBundleScores(classBundle, bundleDb, transactionDb);
 
-        MakeRandomAssignments(assignments, classBundle);
-        var score = ScoreAssignment(assignments, studentBundleScores);
-        return assignments;
+        //we will try out 100 random assignments and pick the minimum one
+        var minAssignmentScore = Integer.MAX_VALUE;
+        HashMap<String, String> minAssignment = null;
+        var iterationCount = Integer.min(100, classBundle.BundleIds.length* classBundle.UserIds.length);
+        for (int i=0; i < iterationCount; i++){
+            var assignments = CreateRandomAssignments(classBundle);
+            var assignmentScore = ScoreAssignment(assignments, bundleScores);
+            if (minAssignmentScore > assignmentScore){
+                minAssignmentScore = assignmentScore;
+                minAssignment = assignments;
+            }
+        }
+        return minAssignment;
     }
 
-    private int ScoreAssignment(HashMap<String, String> assignments, HashMap<String, Integer> studentBundleScores) {
+    public static int ScoreAssignment(HashMap<String, String> assignments, HashMap<String, Integer> studentBundleScores) {
         var score = 0;
         for (var userId: assignments.keySet()) {
             var bundleId = assignments.get(userId);
@@ -38,7 +47,7 @@ public class BundleRotator {
         return score;
     }
 
-    public HashMap<String, Integer> GetStudentBundleScores(ClassBundle classBundle, BundleDb bundleDb, TransactionDb transactionDb) {
+    public static HashMap<String, Integer> GetBundleScores(ClassBundle classBundle, BundleDb bundleDb, TransactionDb transactionDb) {
         var bundleScores = new HashMap<String, Integer>();
         for (var userId: classBundle.UserIds) {
             // generate reading list for a user
@@ -61,7 +70,7 @@ public class BundleRotator {
         return bundleScores;
     }
 
-    public static void MakeRandomAssignments(HashMap<String, String> assignments, ClassBundle classBundle) {
+    public static HashMap<String, String> CreateRandomAssignments(ClassBundle classBundle) {
         var bundleIndices = new int[classBundle.UserIds.length];
         for (var i=0; i < bundleIndices.length; i++)
             bundleIndices[i]=i;
@@ -73,13 +82,15 @@ public class BundleRotator {
             swap(bundleIndices, i, j);
         }
 
-        assignments.clear();
+        HashMap<String, String> assignments = new HashMap<>();
+
         for (var i=0; i< bundleIndices.length; i++) {
             var studentId = classBundle.UserIds[i];
             var bundleId = classBundle.BundleIds[bundleIndices[i]];
             assignments.put(studentId, bundleId);
 
         }
+        return assignments;
     }
 
     public static void swap (int[] a, int i, int j) {

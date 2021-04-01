@@ -3,6 +3,7 @@ package com.nola.testUtilities;
 import com.nola.dataStructures.*;
 import com.nola.databases.BookDb;
 import com.nola.databases.BundleDb;
+import com.nola.databases.TransactionDb;
 import com.nola.databases.UserDb;
 import com.nola.utilities.TimeUtilities;
 
@@ -164,6 +165,11 @@ public class testData {
         transactions.add(Transaction.Create("7890788-(2)", "234", TimeUtilities.parseDateTime("2019-11-13 10:30:25"), Transaction.ReturnTag));
 
         return transactions;
+    }
+
+    public static TransactionDb GetTransactionDb(){
+        var transactions = GetTransactions();
+        return new TransactionDb(transactions, GetUserDb_transactionTest(), GetBookDb_transactionTest());
     }
 
 }
