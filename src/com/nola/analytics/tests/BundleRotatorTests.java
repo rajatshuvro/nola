@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BundleRotatorTests {
@@ -65,6 +66,23 @@ public class BundleRotatorTests {
         assertEquals(1, assignmentScore);
 
         assignmentScore = BundleRotator.ScoreAssignment(assignment2, bundleScores);
+        assertEquals(0, assignmentScore);
+    }
+
+    @Test
+    public void RotateTest(){
+        var bundleDb = testData.GetBundleDb();
+        var transactionsDb = testData.GetTransactionDb();
+        var classBundle = new ClassBundle("chorui", new String[]{"BUN01", "DUN02", "GUN03"}, new String[]{"123", "234", "456"});
+
+        var bundleList = new ArrayList<ClassBundle>();
+        bundleList.add(classBundle);
+        var rotator = new BundleRotator(bundleList);
+        var assignments = rotator.Rotate("chorui", bundleDb, transactionsDb);
+
+        var bundleScores = BundleRotator.GetBundleScores(classBundle, bundleDb, transactionsDb);
+
+        var assignmentScore = BundleRotator.ScoreAssignment(assignments, bundleScores);
         assertEquals(0, assignmentScore);
     }
 }

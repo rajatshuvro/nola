@@ -30,6 +30,8 @@ public class BundleRotator {
         for (int i=0; i < iterationCount; i++){
             var assignments = CreateRandomAssignments(classBundle);
             var assignmentScore = ScoreAssignment(assignments, bundleScores);
+            if(assignmentScore == 0) return assignments;
+
             if (minAssignmentScore > assignmentScore){
                 minAssignmentScore = assignmentScore;
                 minAssignment = assignments;
