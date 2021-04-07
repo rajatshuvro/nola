@@ -3,6 +3,7 @@ package com.nola.analytics;
 import com.nola.dataStructures.ClassBundle;
 import com.nola.databases.BundleDb;
 import com.nola.databases.TransactionDb;
+import com.nola.utilities.PrintUtilities;
 
 import java.util.*;
 
@@ -30,14 +31,25 @@ public class BundleRotator {
         for (int i=0; i < iterationCount; i++){
             var assignments = CreateRandomAssignments(classBundle);
             var assignmentScore = ScoreAssignment(assignments, bundleScores);
-            if(assignmentScore == 0) return assignments;
+            if(assignmentScore == 0) {
+                PrintUtilities.PrintInfoLine("Min assignment score: 0");
+                return assignments;
+            }
+
+            //FindLocalMinima(assignments, bundleScores);
 
             if (minAssignmentScore > assignmentScore){
                 minAssignmentScore = assignmentScore;
                 minAssignment = assignments;
             }
         }
+        PrintUtilities.PrintInfoLine("Min assignment score:"+minAssignmentScore);
         return minAssignment;
+    }
+
+    private void FindLocalMinima(HashMap<String, String> assignments, HashMap<String, Integer> bundleScores) {
+        //find the max and min costing assignments and swap them. Keep doing this as long as the results can be improved
+
     }
 
     public static int ScoreAssignment(HashMap<String, String> assignments, HashMap<String, Integer> studentBundleScores) {

@@ -6,6 +6,7 @@ import com.nola.utilities.FileUtilities;
 import com.nola.utilities.PrintUtilities;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class DbUtilities {
@@ -97,6 +98,19 @@ public class DbUtilities {
 
         }
         return null;
+    }
+
+    public static ArrayList<ClassBundle> GetClassBundles(){
+        var filePath = DbCommons.getBooksFilePath();
+        var inputStream = GetFileReadStream(filePath);
+        var parser = new ClassBundleParser(inputStream);
+
+        try {
+            return parser.GetClassBundles();
+        } catch (IOException e) {
+            PrintUtilities.PrintWarningLine("Failed to read ClassBundle.fob");
+            return null;
+        }
     }
 
     public static BookDb LoadBookDb() {

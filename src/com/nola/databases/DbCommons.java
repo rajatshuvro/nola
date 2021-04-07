@@ -9,7 +9,11 @@ public class DbCommons {
     public static final String TransactionsFileName = "Transactions.fob";
     public static final String CheckoutsFileName = "Checkouts.fob";
     public static final String BundleFileName = "Bundles.fob";
+    public static final String ClassBundleFileName = "ClassBundles.fob";
 
+    public static String getClassBundleFilePath(){
+        return PathUtilities.combine(DbCommons.DataDirectory, DbCommons.ClassBundleFileName);
+    }
     public static String getBooksFilePath(){
         return PathUtilities.combine(DbCommons.DataDirectory, DbCommons.BooksFileName);
     }

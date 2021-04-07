@@ -28,6 +28,9 @@ public class Main {
             case "label":
                 label.Run(args);
                 break;
+            case "rotate":
+                rotate.Run(args);
+                break;
             case "find-b":
                 findInBooks.Run(args);
                 break;
@@ -51,6 +54,7 @@ public class Main {
         PrintUtilities.PrintInfoLine("\tret            (return books)");
         PrintUtilities.PrintInfoLine("\tstatus         (checkout status)");
         PrintUtilities.PrintInfoLine("\tlabel          (print out labels)");
+        PrintUtilities.PrintInfoLine("\trotate         (rotate bundles for classes)");
         PrintUtilities.PrintInfoLine("\tfind-b         (search in books)");
         PrintUtilities.PrintInfoLine("\tfind-u         (search in users)");
         PrintUtilities.PrintInfoLine("\thelp           (print this menu)");
