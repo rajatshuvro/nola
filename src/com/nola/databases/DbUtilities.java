@@ -101,7 +101,7 @@ public class DbUtilities {
     }
 
     public static ArrayList<ClassBundle> GetClassBundles(){
-        var filePath = DbCommons.getBooksFilePath();
+        var filePath = DbCommons.getClassBundleFilePath();
         var inputStream = GetFileReadStream(filePath);
         var parser = new ClassBundleParser(inputStream);
 

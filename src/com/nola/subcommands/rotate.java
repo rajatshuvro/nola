@@ -14,15 +14,19 @@ public class rotate {
     public static void Run(String[] args){
         Options options = new Options();
 
-        Option afterOption = new Option("c", "class", true, "class name");
-        afterOption.setRequired(false);
-        options.addOption(afterOption);
+        Option className = new Option("c", "class", true, "class name");
+        className.setRequired(false);
+        options.addOption(className);
+
+        Option allClasses = new Option("a", "all", false, "rotation for all classes");
+        allClasses.setRequired(false);
+        options.addOption(allClasses);
 
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter  = new HelpFormatter();
         CommandLine cmd;
 
-        if(args.length==1) {
+        if(args.length == 0) {
             formatter.printHelp(commandSyntex, options);
             return;
         }
@@ -49,9 +53,11 @@ public class rotate {
     }
 
     private static void PrintBundleAssignments(String classId, HashMap<String, String> assignment) {
+        PrintUtilities.PrintInfoLine(FlatObjectParser.RecordSeparator);
         PrintUtilities.PrintInfoLine("Class:"+classId);
         for (var userId: assignment.keySet()) {
-            PrintUtilities.PrintLine(userId + "=>" + assignment.get(userId));
+            var output = String.format("%20s %5s %10s", userId,"=>", assignment.get(userId));
+            PrintUtilities.PrintLine(output);
         }
         PrintUtilities.PrintInfoLine(FlatObjectParser.RecordSeparator);
     }
