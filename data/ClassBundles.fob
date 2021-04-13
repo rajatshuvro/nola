@@ -4,18 +4,26 @@
 #StudentIds = Comma separated student ids. Value = List<String>
 ***************************************************************
 Class Id:      Kakatua
-Bundle Ids:    KK-01,KK-02,KK-03,KK-04,KK-05,KK-06,KK-07,KK-08,KK-09,KK-10,KK-11
-User Ids:      nameera.rahman,ryaan.ali,ayana.rahim,tairaat.radiah,alisha.mitra,srijon.pal,sadan.roni,sineen.sadi,sunniva.habib,adreesh.dasgupta,totini.tonu
+Bundle Ids:    KK-04,KK-05,KK-06,KK-07,KK-08,KK-09,KK-10,KK-11
+User Ids:      tairaat.radiah,alisha.mitra,srijon.pal,sadan.roni,sineen.sadi,sunniva.habib,adreesh.dasgupta,totini.tonu
 ***************************************************************
-Class Id:      MaBabaAmi
+Class Id:      Kakatua-remote
+Bundle Ids:    KK-01,KK-02,KK-03
+User Ids:      nameera.rahman,ryaan.ali,ayana.rahim
+***************************************************************
+Class Id:      MaBabaAmi-remote
 Bundle Ids:    MBA-01,MBA-02
 User Ids:      syed.imam,zafir.huq
 ***************************************************************
 Class Id:      Tuntuni
-Bundle Ids:    TU-01,TU-02,TU-03,TU-04,TU-05,TU-06,TU-07,TU-08,TU-09,TU-10,TU-11
-User Ids:      rafaz,bineeta.bornomala,zaeem.ahmed,naqeeb.julfiker,shafqat,auroni,elana,adira.saimon
+Bundle Ids:    TU-03,TU-04,TU-05,TU-06,TU-07,TU-08,TU-09,TU-10,TU-11
+User Ids:      zaeem.ahmed,naqeeb.julfiker,shafqat,auroni,elana,adira.saimon
+***************************************************************
+Class Id:      Tuntuni-remote
+Bundle Ids:    TU-01,TU-02
+User Ids:      rafaz,bineeta.bornomala
 ***************************************************************
 Class Id:      Kokil
-Bundle Ids:    KOK-01,KOK-02,KOK-03,KOK-04,KOK-05,KOK-06,KOK-07,KOK-08,KOK-09
-User Ids:      arfia,tanishi.das,oishika.bhattacharjee,aniya,raheel.hasan,yusra.masum
+Bundle Ids:    KOK-02,KOK-03,KOK-04,KOK-05,KOK-07,KOK-08,KOK-09
+User Ids:      tanishi.das,oishika.bhattacharjee,aniya,raheel.hasan,yusra.masum
 ***************************************************************

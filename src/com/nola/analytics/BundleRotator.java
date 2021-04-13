@@ -72,7 +72,11 @@ public class BundleRotator {
             }
             //generate bundle scores
             for (var bundleId: classBundle.BundleIds) {
-                var bookIds = bundleDb.GetBookBundle(bundleId).BookIds;
+                var bundle = bundleDb.GetBookBundle(bundleId);
+                if (bundle==null) {
+                    PrintUtilities.PrintErrorLine("Failed to find bundle:"+bundleId);
+                }
+                var bookIds = bundle.BookIds;
 
                 var score =0;
                 for (var bookId: bookIds) {
