@@ -41,7 +41,7 @@ public class rotate {
 
             var rotator = new BundleRotator(classBundles);
             for (var classBundle: classBundles) {
-                var assignment = rotator.Rotate(classBundle.ClassId, bundleDb, transactionsDb);
+                var assignment = rotator.Rotate(classBundle.ClassId, bookDb, bundleDb, transactionsDb);
                 PrintBundleAssignments(classBundle.ClassId,assignment);
             }
 

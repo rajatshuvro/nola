@@ -36,10 +36,11 @@ public class BundleRotatorTests {
     @Test
     public void BundleScoreTest(){
         var bundleDb = testData.GetBundleDb();
+        var bookDb = testData.GetBookDb();
         var transactionsDb = testData.GetTransactionDb();
         var classBundle = new ClassBundle("chorui", new String[]{"BUN01", "DUN02"}, new String[]{"123", "234", "456"});
 
-        var scores = BundleRotator.GetBundleScores(classBundle, bundleDb, transactionsDb);
+        var scores = BundleRotator.GetBundleScores(classBundle, bookDb, bundleDb, transactionsDb);
 
         assertEquals(0, scores.get("456:BUN01"));
         assertEquals(1, scores.get("123:BUN01"));
@@ -57,30 +58,32 @@ public class BundleRotatorTests {
         assignment2.put("123", "DUN02");
 
         var bundleDb = testData.GetBundleDb();
+        var bookDb = testData.GetBookDb();
         var transactionsDb = testData.GetTransactionDb();
         var classBundle = new ClassBundle("chorui", new String[]{"BUN01", "DUN02"}, new String[]{"123", "234", "456"});
 
-        var bundleScores = BundleRotator.GetBundleScores(classBundle, bundleDb, transactionsDb);
+        var bundleScores = BundleRotator.GetBundleScores(classBundle, bookDb, bundleDb, transactionsDb);
 
         var assignmentScore = BundleRotator.ScoreAssignment(assignment1, bundleScores);
-        assertEquals(1, assignmentScore);
+        assertEquals(2, assignmentScore);
 
         assignmentScore = BundleRotator.ScoreAssignment(assignment2, bundleScores);
-        assertEquals(0, assignmentScore);
+        assertEquals(1, assignmentScore);
     }
 
     @Test
     public void RotateTest(){
         var bundleDb = testData.GetBundleDb();
+        var bookDb = testData.GetBookDb();
         var transactionsDb = testData.GetTransactionDb();
         var classBundle = new ClassBundle("chorui", new String[]{"BUN01", "DUN02", "GUN03"}, new String[]{"123", "234", "456"});
 
         var bundleList = new ArrayList<ClassBundle>();
         bundleList.add(classBundle);
         var rotator = new BundleRotator(bundleList);
-        var assignments = rotator.Rotate("chorui", bundleDb, transactionsDb);
+        var assignments = rotator.Rotate("chorui", bookDb, bundleDb, transactionsDb);
 
-        var bundleScores = BundleRotator.GetBundleScores(classBundle, bundleDb, transactionsDb);
+        var bundleScores = BundleRotator.GetBundleScores(classBundle, bookDb, bundleDb, transactionsDb);
 
         var assignmentScore = BundleRotator.ScoreAssignment(assignments, bundleScores);
         assertEquals(0, assignmentScore);

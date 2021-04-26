@@ -1,6 +1,8 @@
 package com.nola.analytics;
 
+import com.nola.dataStructures.Book;
 import com.nola.dataStructures.ClassBundle;
+import com.nola.databases.BookDb;
 import com.nola.databases.BundleDb;
 import com.nola.databases.TransactionDb;
 import com.nola.utilities.PrintUtilities;
@@ -18,11 +20,11 @@ public class BundleRotator {
 
     }
 
-    public HashMap<String, String> Rotate(String classId, BundleDb bundleDb, TransactionDb transactionDb){
+    public HashMap<String, String> Rotate(String classId, BookDb bookDb, BundleDb bundleDb, TransactionDb transactionDb){
         if (!_classBundles.containsKey(classId)) return null;
         var classBundle = _classBundles.get(classId);
 
-        var bundleScores = GetBundleScores(classBundle, bundleDb, transactionDb);
+        var bundleScores = GetBundleScores(classBundle, bookDb, bundleDb, transactionDb);
 
         //we will try out 100 random assignments and pick the minimum one
         var minAssignmentScore = Integer.MAX_VALUE;
@@ -61,14 +63,15 @@ public class BundleRotator {
         return score;
     }
 
-    public static HashMap<String, Integer> GetBundleScores(ClassBundle classBundle, BundleDb bundleDb, TransactionDb transactionDb) {
+    public static HashMap<String, Integer> GetBundleScores(ClassBundle classBundle, BookDb bookDb, BundleDb bundleDb, TransactionDb transactionDb) {
         var bundleScores = new HashMap<String, Integer>();
         for (var userId: classBundle.UserIds) {
             // generate reading list for a user
             var transactions = transactionDb.GetUserActivity(userId);
-            var readingSet = new HashSet<String>();
+            var readingSet = new HashSet<Long>();
             for (var transaction: transactions) {
-                readingSet.add(transaction.BookId);
+                var isbn = bookDb.GetBook(transaction.BookId).Isbn;
+                readingSet.add(isbn);
             }
             //generate bundle scores
             for (var bundleId: classBundle.BundleIds) {
@@ -77,10 +80,10 @@ public class BundleRotator {
                     PrintUtilities.PrintErrorLine("Failed to find bundle:"+bundleId);
                 }
                 var bookIds = bundle.BookIds;
-
                 var score =0;
                 for (var bookId: bookIds) {
-                    if (readingSet.contains(bookId)) score++;
+                    var isbn = Book.GetIsbn(bookId);
+                    if (readingSet.contains(isbn)) score++;
                 }
                 bundleScores.put(userId+':'+bundleId, score);
             }
