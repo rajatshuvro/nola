@@ -54,11 +54,12 @@ public class status {
                 var bookDb = DbUtilities.LoadBookDb();
                 var checkoutDb = DbUtilities.LoadCheckoutDb(bookDb, userDb);
                 var checkouts = GetUserCheckouts(id, userDb, checkoutDb);
-                if (checkouts == null){
+                if (checkouts == null || checkouts.size()==0){
                     PrintUtilities.PrintInfoLine("No checkout found for user:"+id);
                 }
                 else {
                     for (var checkout: checkouts) {
+                        PrintUtilities.PrintInfoLine("Title:\t\t"+bookDb.GetBook(checkout.Id).Title);
                         PrintUtilities.PrintInfoLine(checkout.toString());
                         PrintUtilities.PrintWarningLine(FlatObjectParser.RecordSeparator);
                     }

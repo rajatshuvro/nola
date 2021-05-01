@@ -43,10 +43,10 @@ public class User implements ISearchDocument {
             PrintUtilities.PrintErrorLine("Please provide a valid email address. e.g. user@onkur.com");
             return false;
         }
-        if(!FormatUtilities.IsValidPhoneNumber(phn)){
-            PrintUtilities.PrintWarningLine("Warning:Please provide a valid phone number. e.g. XXX-XXX-XXXX");
-            return true;
-        }
+//        if(!FormatUtilities.IsValidPhoneNumber(phn)){
+//            PrintUtilities.PrintWarningLine("Warning:Please provide a valid phone number. e.g. XXX-XXX-XXXX");
+//            return true;
+//        }
         return !ParserUtilities.IsNullOrEmpty(id);
     }
 
