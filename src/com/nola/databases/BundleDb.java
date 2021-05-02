@@ -1,10 +1,13 @@
 package com.nola.databases;
 
 import com.nola.dataStructures.Bundle;
+import com.nola.parsers.FlatObjectParser;
 import com.nola.parsers.ParserUtilities;
 import com.nola.utilities.PrintUtilities;
 import com.nola.utilities.TimeUtilities;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -71,5 +74,18 @@ public class BundleDb {
 
     public int Count() {
         return _bookBundles.size();
+    }
+
+    public void PrintAll(BookDb bookDb, OutputStreamWriter writer) throws IOException {
+        for (var bundle: _bookBundles.values()) {
+            writer.write("Bundle ID:\t"+bundle.Id+'\n');
+            for (var bookId: bundle.BookIds) {
+                var book = bookDb.GetBook(bookId);
+                writer.write(book.ShortId+"\t\t"+ bookDb.GetBook(bookId).Title+'\n');
+            }
+            writer.write(FlatObjectParser.RecordSeparator+'\n');
+
+        }
+        writer.flush();
     }
 }

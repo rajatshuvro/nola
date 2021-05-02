@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.Date;
 
 public class label {
-    private static String commandSyntex = "nola label  -a [after entry date(YYYY-MM-DD)] -b [before entry date(YYYY-MM-DD)] -o [output file path]";
+    private static String commandSyntex = "nola label  -a [after entry date(YYYY-MM-DD)] -b [before entry date(YYYY-MM-DD)] -B (print bundles) -o [output file path]";
 
     public static void Run(String[] args){
         Options options = new Options();
@@ -28,6 +28,10 @@ public class label {
         Option beforeOption = new Option("b", "bef", true, "before entry date");
         beforeOption.setRequired(false);
         options.addOption(beforeOption);
+
+        Option bundleOption = new Option("B", "bundle", false, "print bundle labels");
+        bundleOption.setRequired(false);
+        options.addOption(bundleOption);
 
         Option outOption = new Option("o", "out", true, "output file path");
         outOption.setRequired(true);
@@ -44,6 +48,7 @@ public class label {
 
         try {
             cmd = parser.parse(options, args);
+
             Date afterDate = cmd.hasOption('a')? TimeUtilities.parseDate(cmd.getOptionValue('a')): null;
             Date beforeDate = cmd.hasOption('b')?TimeUtilities.parseDate(cmd.getOptionValue('b')): null;
 
@@ -51,6 +56,12 @@ public class label {
             var outputStream = new FileOutputStream(outFilePath);
             var writer       = new OutputStreamWriter(outputStream);
             var bookDb = DbUtilities.LoadBookDb();
+            if (cmd.hasOption('B')) {
+                PrintBundleLabels(bookDb,writer);
+                writer.close();
+                return;
+            }
+
             var count = WriteLabels(bookDb.GetAllBooks(), writer, afterDate, beforeDate);
             //ReWriteBooks(bookDb.GetAllBooks(), writer);
             System.out.println("Printed out "+count +" labels to output file.");
@@ -59,6 +70,15 @@ public class label {
         catch (ParseException | IOException e) {
             System.out.println(e.getMessage());
             formatter.printHelp(commandSyntex, options);
+        }
+    }
+
+    private static void PrintBundleLabels(BookDb bookDb, OutputStreamWriter writer) {
+        var bundleDb = DbUtilities.LoadBundleDb();
+        try {
+            bundleDb.PrintAll(bookDb, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
