@@ -34,7 +34,7 @@ public class statusTests {
 
         var checkouts = status.GetUserCheckouts("name.1", userDb, checkoutDb);
         assertNotNull(checkouts);
-        assertEquals(1, checkouts.size());
+        assertEquals(2, checkouts.size());
 
         checkouts = status.GetUserCheckouts("rajat", userDb, checkoutDb);
         assertNull(checkouts);

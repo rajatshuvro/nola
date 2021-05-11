@@ -16,9 +16,9 @@ public class CheckoutDb {
     private UserDb _userDb;
     private BookDb _bookDb;
 
-    public CheckoutDb(Iterable<Checkout> checkouts, UserDb userDb, BookDb idDb)  {
+    public CheckoutDb(Iterable<Checkout> checkouts, UserDb userDb, BookDb bookDb)  {
         _userDb = userDb;
-        _bookDb = idDb;
+        _bookDb = bookDb;
 
         _checkouts = new HashMap<>();
 

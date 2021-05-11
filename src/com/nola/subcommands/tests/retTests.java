@@ -4,6 +4,7 @@ import com.nola.databases.CheckoutDb;
 import com.nola.parsers.CheckoutCsvParser;
 import com.nola.subcommands.ret;
 import com.nola.testUtilities.TestStreams;
+import com.nola.testUtilities.testData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -33,5 +34,25 @@ public class retTests {
         Assertions.assertTrue(transactionsString.contains("Return"));
         Assertions.assertTrue(checkoutString.contains("DOG99"));
     }
-    
+    @Test
+    public void ReturnBundles(){
+        var checkoutDb = testData.GetCheckoutDb();
+        var bundleDb = testData.GetBundleDb();
+        var rewriteStream = new ByteArrayOutputStream();
+        var transactionStream = new ByteArrayOutputStream();
+
+        var checkouts = checkoutDb.GetAllCheckouts();
+        assertEquals(4, checkouts.length);
+
+        ret.AddReturns(checkoutDb, bundleDb, TestStreams.GetMixedReturnCsvStream(), rewriteStream, transactionStream, true);
+
+        checkouts = checkoutDb.GetAllCheckouts();
+        assertEquals(1, checkouts.length);
+
+        var transactionsString = transactionStream.toString();
+        var checkoutString = rewriteStream.toString();
+
+        Assertions.assertTrue(transactionsString.contains("Return"));
+        Assertions.assertFalse(checkoutString.contains("7890788-(1)"));
+    }
 }

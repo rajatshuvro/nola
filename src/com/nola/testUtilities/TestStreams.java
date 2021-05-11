@@ -96,6 +96,24 @@ public class TestStreams {
         }
         return null;
     }
+    public static InputStream GetMixedReturnCsvStream() {
+        var memStream = new ByteArrayOutputStream();
+        var writer = new OutputStreamWriter(memStream);
+
+        try {
+            writer.write("\"Timestamp\",\"Username\",\"Book id\"\n");
+            writer.write("\"2020/09/30 9:29:20 AM MDT\",\"someone@email.com\",\"BUN01\"\n");
+            writer.write("\"2020/09/22 8:05:04 AM MDT\",\"sometwo@email.com\",\"7890788-(1)\"\n");
+            writer.close();
+
+            var buffer = memStream.toByteArray();
+            memStream.close();
+            return new ByteArrayInputStream(buffer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public static InputStream GetReturnCsvStream_shortId() {
         var memStream = new ByteArrayOutputStream();

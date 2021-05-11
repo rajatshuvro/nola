@@ -1,10 +1,7 @@
 package com.nola.testUtilities;
 
 import com.nola.dataStructures.*;
-import com.nola.databases.BookDb;
-import com.nola.databases.BundleDb;
-import com.nola.databases.TransactionDb;
-import com.nola.databases.UserDb;
+import com.nola.databases.*;
 import com.nola.utilities.TimeUtilities;
 
 import java.util.ArrayList;
@@ -75,6 +72,8 @@ public class testData {
         var books = new ArrayList<Book>();
         books.add(Book.Create(7890788L,"Binoy Bormon", "Panite Jhopat Jhopat", "Sisimpur",
                 2016,16, 5, "Fiction", 3, 2, null, null, "CAT12"));
+        books.add(Book.Create(7890788L,"Binoy Bormon", "Panite Jhopat Jhopat", "Sisimpur",
+                2016,16, 5, "Fiction", 3, 1, null, null, "SAT12"));
         books.add(Book.Create(678564,"Binoy Bormon", "Panite Jhopat Jhopat", "Sisimpur",
                 2016,16, 5, "Fiction", 3, 1, null, null, "BAT12"));
         books.add(Book.Create(678564,"Binoy Bormon", "Panite Jhopat Jhopat", "Sisimpur",
@@ -102,8 +101,12 @@ public class testData {
         checkouts.add(new Checkout("678564-(1)", "name.2", TimeUtilities.parseGoogleDateTime("2020/09/30 3:21:27 PM MDT"), TimeUtilities.parseDate("2020-10-29")));
         checkouts.add(new Checkout("456098-(1)", "name.3", TimeUtilities.parseGoogleDateTime("2020/09/30 3:22:04 PM MDT"), TimeUtilities.parseDate("2020-10-28")));
         checkouts.add(new Checkout("7890788-(2)", "name.1",TimeUtilities.parseGoogleDateTime("2020/09/30 3:23:30 PM MDT"), TimeUtilities.parseDate("2020-10-26")));
+        checkouts.add(new Checkout("7890788-(1)", "name.1",TimeUtilities.parseGoogleDateTime("2020/09/30 3:23:30 PM MDT"), TimeUtilities.parseDate("2020-10-26")));
 
         return checkouts;
+    }
+    public static CheckoutDb GetCheckoutDb(){
+        return new CheckoutDb(GetCheckouts(), GetUserDb(), GetBookDb());
     }
 
     public static ArrayList<Checkout> GetCheckouts_shortId(){
