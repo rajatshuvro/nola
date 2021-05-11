@@ -22,7 +22,7 @@ public class retTests {
 
         var rewriteStream = new ByteArrayOutputStream();
         var transactionStream = new ByteArrayOutputStream();
-        ret.AddReturns(checkoutDb, TestStreams.GetReturnCsvStream(), rewriteStream, transactionStream, true);
+        ret.AddReturns(checkoutDb, null, TestStreams.GetReturnCsvStream(), rewriteStream, transactionStream, true);
 
         var checkouts = checkoutDb.GetAllCheckouts();
         assertEquals(2, checkouts.length);
@@ -33,4 +33,5 @@ public class retTests {
         Assertions.assertTrue(transactionsString.contains("Return"));
         Assertions.assertTrue(checkoutString.contains("DOG99"));
     }
+    
 }

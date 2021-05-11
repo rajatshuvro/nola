@@ -125,7 +125,7 @@ public class CheckoutDb {
     public ArrayList<Return> ReturnRange(ArrayList<Return> records) {
         var validEntries = new ArrayList<Return>();
         for (var record: records) {
-            var newReturn =Return(record);
+            var newReturn = Return(record);
             if (newReturn != null) validEntries.add(newReturn);
         }
         return validEntries;

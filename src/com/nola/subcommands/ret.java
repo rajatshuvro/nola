@@ -1,5 +1,6 @@
 package com.nola.subcommands;
 
+import com.nola.dataStructures.Return;
 import com.nola.databases.*;
 import com.nola.parsers.ReturnCsvParser;
 import com.nola.utilities.FileUtilities;
@@ -9,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 public class ret {
     private static String commandSyntex = "nola ret -f [checkout CSV file]";
@@ -39,9 +41,10 @@ public class ret {
                 var bookDb = DbUtilities.LoadBookDb();
                 var userDb = DbUtilities.LoadUserDb();
                 var checkoutDb = DbUtilities.LoadCheckoutDb(bookDb, userDb);
+                var bundleDb = DbUtilities.LoadBundleDb();
                 var writeStream = DbUtilities.GetWriteStream(DbCommons.getCheckoutsFilePath());
                 var transactionStream = DbUtilities.GetAppendStream(DbCommons.getTransactionsFilePath());
-                var count = AddReturns(checkoutDb, new FileInputStream(filePath),
+                var count = AddReturns(checkoutDb, bundleDb, new FileInputStream(filePath),
                         writeStream, transactionStream, false);
                 writeStream.close();
                 transactionStream.close();
@@ -53,13 +56,14 @@ public class ret {
             formatter.printHelp(commandSyntex, options);
         }
     }
-    public static int AddReturns(CheckoutDb checkoutDb, InputStream inputStream,
-                                 OutputStream writeStream, OutputStream transactionStream , boolean forceCommit){
+    public static int AddReturns(CheckoutDb checkoutDb, BundleDb bundleDb, InputStream inputStream,
+                                 OutputStream writeStream, OutputStream transactionStream, boolean forceCommit){
         if(inputStream == null) return 0;
         var existingCheckouts = checkoutDb.GetAllCheckouts();
         var csvParser = new ReturnCsvParser(inputStream);
 
-        var validEntries = checkoutDb.ReturnRange(csvParser.GetReturnes());
+        var expandedEntries = ExpandBundleEntries(csvParser.GetReturnes(), bundleDb);
+        var validEntries = checkoutDb.ReturnRange(expandedEntries);
         // we need to re-write regardless of valid entries since existing checkouts has to be re-written
         if(!forceCommit && !PromptUtilities.CommitValidEntries(validEntries)) {
             AppendUtilities.Rewrite(CheckoutDb.HeaderLines, existingCheckouts, writeStream, false);
@@ -70,5 +74,23 @@ public class ret {
         var transactions = TransactionDb.GetReturnTransactions(validEntries);
         AppendUtilities.AppendItems(transactions, transactionStream);
         return validEntries.size();
+    }
+
+    private static ArrayList<Return> ExpandBundleEntries(ArrayList<Return> returns, BundleDb bundleDb) {
+        if (bundleDb == null) return returns;
+
+        var returnEntires = new ArrayList<Return>();
+        for (var record:
+             returns) {
+            if (bundleDb.GetBookBundle(record.BookId) == null) {
+                returnEntires.add(record);
+                continue;
+            }
+            //we have a bundle
+            for (var bookId:bundleDb.GetBookBundle(record.BookId).BookIds) {
+                returnEntires.add(new Return(bookId, record.DateTime));
+            }
+        }
+        return returnEntires;
     }
 }
