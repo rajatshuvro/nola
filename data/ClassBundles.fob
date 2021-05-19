@@ -4,12 +4,12 @@
 #StudentIds = Comma separated student ids. Value = List<String>
 ***************************************************************
 Class Id:      Kakatua
-Bundle Ids:    KK-03,KK-04,KK-05,KK-06,KK-07,KK-08,KK-09,KK-10,KK-11
-User Ids:      tairaat.radiah,alisha.mitra,srijon.pal,sadan.roni,sineen.sadi,sunniva.habib,adreesh.dasgupta,totini.tonu,ayana.rahim
+Bundle Ids:    KK-03,KK-04,KK-06,KK-07,KK-08,KK-10
+User Ids:      tairaat.radiah,srijon.pal,sadan.roni,sineen.sadi,adreesh.dasgupta,ayana.rahim
 ***************************************************************
 Class Id:      Kakatua-remote
-Bundle Ids:    KK-01
-User Ids:      nameera.rahman
+Bundle Ids:    KK-01,KK-02
+User Ids:      nameera.rahman,ryaan.ali
 ***************************************************************
 Class Id:      MaBabaAmi-remote
 Bundle Ids:    MBA-01,MBA-02
@@ -17,7 +17,7 @@ User Ids:      syed.imam,zafir.huq
 ***************************************************************
 Class Id:      Tuntuni-remote
 Bundle Ids:    TU-01,TU-02,TU-03,TU-04,TU-05,TU-06,TU-07,TU-08,TU-09,TU-10,TU-11
-User Ids:      rafaz,bineeta.bornomala,zaeem.ahmed,naqeeb.julfiker,shafqat,auroni,elana,adira.saimon
+User Ids:      rafaz,bineeta.bornomala,zaeem.ahmed,naqeeb.julfiker,shafqat,elana,adira.saimon
 ***************************************************************
 Class Id:      Kokil
 Bundle Ids:    KOK-02,KOK-03,KOK-05,KOK-07,KOK-08
