@@ -83,9 +83,9 @@ public class TestStreams {
         var writer = new OutputStreamWriter(memStream);
 
         try {
-            writer.write("\"Timestamp\",\"Username\",\"Book id\"\n");
-            writer.write("\"2020/09/30 9:29:20 AM MDT\",\"someone@email.com\",\"7890788-(2)\"\n");
-            writer.write("\"2020/09/22 8:05:04 AM MDT\",\"someone@email.com\",\"678564-SOC-3-(1)\"\n");
+            writer.write("\"Timestamp\",\"Resource id\"\n");
+            writer.write("\"2020/09/30 9:29:20 AM MDT\",\"7890788-(2)\"\n");
+            writer.write("\"2020/09/22 8:05:04 AM MDT\",\"678564-SOC-3-(1)\"\n");
             writer.close();
 
             var buffer = memStream.toByteArray();
@@ -101,9 +101,9 @@ public class TestStreams {
         var writer = new OutputStreamWriter(memStream);
 
         try {
-            writer.write("\"Timestamp\",\"Username\",\"Book id\"\n");
-            writer.write("\"2020/09/30 9:29:20 AM MDT\",\"someone@email.com\",\"BUN01\"\n");
-            writer.write("\"2020/09/22 8:05:04 AM MDT\",\"sometwo@email.com\",\"7890788-(1)\"\n");
+            writer.write("\"Timestamp\",\"Resource id\"\n");
+            writer.write("\"2020/09/30 9:29:20 AM MDT\",\"BUN01\"\n");
+            writer.write("\"2020/09/22 8:05:04 AM MDT\",\"7890788-(1)\"\n");
             writer.close();
 
             var buffer = memStream.toByteArray();
@@ -120,9 +120,9 @@ public class TestStreams {
         var writer = new OutputStreamWriter(memStream);
 
         try {
-            writer.write("\"Timestamp\",\"Username\",\"Book id\"\n");
-            writer.write("\"2020/09/30 9:29:20 AM MDT\",\"someone@email.com\",\"CAT12\"\n");
-            writer.write("\"2020/09/22 8:05:04 AM MDT\",\"someone@email.com\",\"BAT12\"\n");
+            writer.write("\"Timestamp\",\"Resource id\"\n");
+            writer.write("\"2020/09/30 9:29:20 AM MDT\",\"CAT12\"\n");
+            writer.write("\"2020/09/22 8:05:04 AM MDT\",\"BAT12\"\n");
             writer.close();
 
             var buffer = memStream.toByteArray();
