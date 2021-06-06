@@ -5,7 +5,7 @@
 ***************************************************************
 Class Id:      Kakatua
 Bundle Ids:    KK-03,KK-04,KK-06,KK-07,KK-08,KK-10
-User Ids:      srijon.pal,sadan.roni,adreesh.dasgupta,ayana.rahim,zafir.huq
+User Ids:      srijon.pal,sadan.roni,adreesh.dasgupta
 ***************************************************************
 Class Id:      Kakatua-remote
 Bundle Ids:    KK-01,KK-02
@@ -16,8 +16,8 @@ Bundle Ids:    MBA-01,MBA-02,MBA-03
 User Ids:      syed.imam
 ***************************************************************
 Class Id:      Tuntuni-remote
-Bundle Ids:    TU-01,TU-02,TU-03,TU-04,TU-05,TU-06,TU-07,TU-08,TU-09,TU-10,TU-11
-User Ids:      rafaz,bineeta.bornomala,zaeem.ahmed,naqeeb.julfiker,shafqat,elana,adira.saimon
+Bundle Ids:    TU-01,TU-02,TU-04,TU-06,TU-09,TU-10,TU-11
+User Ids:      rafaz,bineeta.bornomala,naqeeb.julfiker,zafir.huq,sareen
 ***************************************************************
 Class Id:      Kokil
 Bundle Ids:    KOK-02,KOK-03,KOK-05,KOK-07,KOK-08
