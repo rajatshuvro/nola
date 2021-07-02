@@ -33,7 +33,7 @@ public class TransactionDb {
                 PrintUtilities.PrintWarningLine("WARNING: Invalid book id:"+record.BookId+". Ignoring transaction.");
                 continue;
             }
-            if(_userDb.GetUser(record.UserId) == null){
+            if(_userDb.GetUser(record.UserId) == null && !record.Type.equals(Transaction.ReturnTag)){
                 PrintUtilities.PrintWarningLine("WARNING: Invalid user id:"+record.UserId+". Ignoring transaction.");
                 continue;
             }
