@@ -98,11 +98,11 @@ public class TransactionDb {
         var date = TimeUtilities.GetCurrentTime();
         var checkouts = GetPendingCheckouts(userId);
         var checkoutCount = checkouts==null? 0: checkouts.size();
-        if(checkoutCount >= CheckoutLimit)
+        /*if(checkoutCount >= CheckoutLimit)
         {
             PrintUtilities.PrintWarningLine("Checkout limit reached. Cannot issue more books to user id:"+userId);
             return null;
-        }
+        }*/
         bookId = Book.GetReducedId(bookId);
         var transaction =Transaction.Create(bookId, userId, date, Transaction.CheckoutTag);
         return Add(transaction)? transaction: null;

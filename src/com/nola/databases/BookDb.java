@@ -59,6 +59,7 @@ public class BookDb {
     }
 
     public Book GetBook(String id){
+        id = id.toLowerCase();
         if (IdDb.IsValidShortId(id)) {
             if (_idDbb.IsRecognizedId(id)) id = _idDbb.GetLongId(id);
             else return null;
