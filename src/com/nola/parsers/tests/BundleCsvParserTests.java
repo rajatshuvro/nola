@@ -18,10 +18,12 @@ public class BundleCsvParserTests {
         assertEquals("Id:           KK-01\n" +
                 "Description:  Kokil Bundle 1\n" +
                 "BookIds:      CAT12,BAT12\n" +
+                "ReadingLevel: -1\n" +
                 "Date:         2021-01-23 10:08:42", bundles.get(0).toString());
         assertEquals("Id:           KK-02\n" +
                 "Description:  Kakatua Bundle 2\n" +
                 "BookIds:      DOG99,PIG07\n" +
+                "ReadingLevel: -1\n" +
                 "Date:         2021-01-23 10:09:21", bundles.get(1).toString());
     }
 }

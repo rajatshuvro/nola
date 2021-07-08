@@ -16,6 +16,7 @@ public class BundleParser {
     private final String IdTag = "Id";
     private final String DescriptionTag = "Description";
     private final String BookIdsTag = "BookIds";
+    private final String ReadingLevelTag = "ReadingLevel";
     private final String DateTag = "Date";
 
     public BundleParser(InputStream inputStream){
@@ -26,7 +27,7 @@ public class BundleParser {
     public ArrayList<Bundle> GetBundles() throws IOException {
         ArrayList<Bundle> bundles = new ArrayList<>();
         var fobParser = new FlatObjectParser(_inputStream, new String[]{
-                IdTag, DescriptionTag, BookIdsTag, DateTag
+                IdTag, DescriptionTag, BookIdsTag, ReadingLevelTag, DateTag
         });
 
         var nextSetOfValues =fobParser.GetNextRecord();
@@ -44,6 +45,7 @@ public class BundleParser {
         String id = null;
         String description = null;
         String bookIds = null;
+        int readingLevel = -1;
         Date date = null;
 
         for (var entry: keyValues.entrySet()) {
@@ -60,6 +62,8 @@ public class BundleParser {
                 case BookIdsTag:
                     bookIds = value;
                     break;
+                case ReadingLevelTag:
+                    readingLevel = ParserUtilities.ParseUInt(value);
                 case DateTag:
                     date = TimeUtilities.parseDateTime(value);
                     break;
@@ -67,6 +71,6 @@ public class BundleParser {
 
         }
 
-        return new Bundle(id, description, bookIds.split(","), date);
+        return new Bundle(id, description, bookIds.split(","), readingLevel, date);
     }
 }

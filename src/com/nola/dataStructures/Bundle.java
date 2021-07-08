@@ -10,12 +10,14 @@ public class Bundle {
     public final String Description;
     public final String[] BookIds;
     public final Date Date;
+    public final int ReadingLevel;
 
-    public Bundle(String id, String description, String[] bookIds, Date date){
+    public Bundle(String id, String description, String[] bookIds, int readingLevel, Date date){
         Id = id;
         Description = description;
         BookIds = bookIds;
         Date = date;
+        ReadingLevel = readingLevel;
     }
 
     @Override
@@ -23,6 +25,7 @@ public class Bundle {
         return  "Id:           "+Id+'\n'+
                 "Description:  "+Description+'\n'+
                 "BookIds:      "+String.join(",", BookIds)+'\n'+
+                "ReadingLevel: "+ReadingLevel+'\n'+
                 "Date:         "+ TimeUtilities.ToString(Date);
     }
 

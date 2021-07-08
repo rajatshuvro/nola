@@ -53,6 +53,7 @@ public class BundleDb {
     public Bundle TryAdd(Bundle bundle, BookDb bookDb){
         var bookIds = new String[bundle.BookIds.length];
         var i=0;
+        var levelTotal=0;
         for (var bookId: bundle.BookIds) {
             var book = bookDb.GetBook(bookId);
             if (book == null) {
@@ -64,10 +65,11 @@ public class BundleDb {
                 return null;
             }
             bookIds[i++]= book.GetId();
+            levelTotal+=book.ReadingLevel;
         }
         var id = ParserUtilities.IsNullOrEmpty(bundle.Id)? _idDb.GenerateShortId(): bundle.Id;
 
-        var newBundle = new Bundle(id, bundle.Description, bookIds, TimeUtilities.GetCurrentTime());
+        var newBundle = new Bundle(id, bundle.Description, bookIds, levelTotal/ bookIds.length,TimeUtilities.GetCurrentTime());
         _bookBundles.put(id, newBundle);
         return newBundle;
     }
@@ -76,7 +78,7 @@ public class BundleDb {
         return _bookBundles.size();
     }
 
-    public void PrintAll(BookDb bookDb, OutputStreamWriter writer) throws IOException {
+    public void PrintLabels(BookDb bookDb, OutputStreamWriter writer) throws IOException {
         for (var bundle: _bookBundles.values()) {
             writer.write("Bundle ID:\t"+bundle.Id+'\n');
             for (var bookId: bundle.BookIds) {

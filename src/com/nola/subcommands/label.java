@@ -76,7 +76,7 @@ public class label {
     private static void PrintBundleLabels(BookDb bookDb, OutputStreamWriter writer) {
         var bundleDb = DbUtilities.LoadBundleDb();
         try {
-            bundleDb.PrintAll(bookDb, writer);
+            bundleDb.PrintLabels(bookDb, writer);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -20,6 +20,7 @@ public class BundleParserTests {
         assertEquals("Id:           UKI33\n" +
                 "Description:  Kokil Bundle 1\n" +
                 "BookIds:      7890788-(1),678564-(1)\n" +
+                "ReadingLevel: 2\n" +
                 "Date:         2021-01-03 10:33:10", bundles.get(0).toString());
     }
 

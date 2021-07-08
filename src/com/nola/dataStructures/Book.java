@@ -10,6 +10,7 @@ import com.nola.utilities.TimeUtilities;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Locale;
 
 public class Book implements Comparable<Book>, ISearchDocument {
     public final long Isbn;
@@ -72,6 +73,7 @@ public class Book implements Comparable<Book>, ISearchDocument {
     {
         if(!IsValid(isbn, author,title, publisher, year, pageCount, price, genre, readingLevel, copyNum)) return null;
 
+        if (shortId!=null) shortId = shortId.toLowerCase();
         return new Book(isbn, author, title, publisher, year, pageCount,
                         price, genre, readingLevel, copyNum,
                         entryDate, expiryDate, shortId);

@@ -18,7 +18,7 @@ public class BookFobParserTests {
         var books = bookParser.GetBooks();
         var count = books.size();
         assertEquals(4, count);
-        assertEquals("LILDD", books.get(0).ShortId);
+        assertEquals("lildd", books.get(0).ShortId);
         assertNull(books.get(2).ExpiryDate);
     }
 

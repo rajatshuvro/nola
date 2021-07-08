@@ -55,7 +55,7 @@ public class BundleCsvParser {
             }
             var date = TimeUtilities.parseGoogleDateTime(timeStamp);
 
-            bundles.add(new Bundle(id, description, trimmedIds, date));
+            bundles.add(new Bundle(id, description, trimmedIds,-1, date));
         }
         return bundles;
     }

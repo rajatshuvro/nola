@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BundleTests {
     @Test
     public void ContainsTest(){
-        var bundle = new Bundle("BUN01", "Bundle-01", new String[]{"123498-(1)", "837629-(1)"}, TimeUtilities.GetCurrentTime());
+        var bundle = new Bundle("BUN01", "Bundle-01", new String[]{"123498-(1)", "837629-(1)"}, 2, TimeUtilities.GetCurrentTime());
 
         assertTrue(bundle.contains("123498-(1)"));
         assertFalse(bundle.contains("1234598-(1)"));
