@@ -1,7 +1,6 @@
 package com.nola.parsers;
 
 import com.nola.dataStructures.Book;
-import com.nola.dataStructures.Checkout;
 import com.nola.dataStructures.Return;
 import com.nola.utilities.PrintUtilities;
 import com.nola.utilities.TimeUtilities;
@@ -16,7 +15,7 @@ import java.util.ArrayList;
 public class ReturnCsvParser {
     private InputStreamReader _reader;
     public final String TimeTag = "Timestamp";
-    public final String BookIdTag = "Resource id";
+    public final String ResourceIdTag = "Resource id";
 
     public ReturnCsvParser(InputStream stream){
         _reader = new InputStreamReader(stream);
@@ -26,11 +25,11 @@ public class ReturnCsvParser {
         _reader.close();
     }
 
-    public ArrayList<Return> GetReturnes() {
+    public ArrayList<Return> GetReturns() {
         var returns = new ArrayList<Return>();
         Iterable<CSVRecord> records = null;
         try {
-            records = CSVFormat.RFC4180.withHeader(TimeTag, BookIdTag).parse(_reader);
+            records = CSVFormat.RFC4180.withHeader(TimeTag, ResourceIdTag).parse(_reader);
         } catch (IOException e) {
             PrintUtilities.PrintErrorLine("Failed to parse return CSV stream");
         }
@@ -43,9 +42,12 @@ public class ReturnCsvParser {
             }
 
             var dateTime = TimeUtilities.parseGoogleDateTime(record.get(TimeTag));
-            var bookId = record.get(BookIdTag).trim();
-            bookId = Book.GetReducedId(bookId);
-            returns.add(new Return(bookId, dateTime));
+            var resourceId = record.get(ResourceIdTag).trim();
+            for (var resId: resourceId.split(",")) {
+                resourceId = Book.GetReducedId(resId);
+                returns.add(new Return(resId, dateTime));
+            }
+
         }
         return returns;
     }

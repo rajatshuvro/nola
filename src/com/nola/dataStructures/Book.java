@@ -47,6 +47,8 @@ public class Book implements Comparable<Book>, ISearchDocument {
     public static String GetReducedId(String bookId) {
         if(IdDb.IsValidShortId(bookId)) return bookId;
         var splits = bookId.split("-");
+        // bundle ids need to kept unchanged if the first split is not a isbn number
+        if (ParserUtilities.ParseIsbn(splits[0]) < 0) return bookId;
         if (splits.length == 2) return bookId;
         else return splits[0]+'-'+splits[splits.length-1];
     }

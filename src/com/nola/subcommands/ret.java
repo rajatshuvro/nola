@@ -62,7 +62,7 @@ public class ret {
         var existingCheckouts = checkoutDb.GetAllCheckouts();
         var csvParser = new ReturnCsvParser(inputStream);
 
-        var expandedEntries = ExpandBundleEntries(csvParser.GetReturnes(), bundleDb);
+        var expandedEntries = ExpandBundleEntries(csvParser.GetReturns(), bundleDb);
         var validEntries = checkoutDb.ReturnRange(expandedEntries);
         // we need to re-write regardless of valid entries since existing checkouts has to be re-written
         if(!forceCommit && !PromptUtilities.CommitValidEntries(validEntries)) {

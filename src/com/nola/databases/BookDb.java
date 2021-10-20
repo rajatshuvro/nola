@@ -41,7 +41,7 @@ public class BookDb {
             var id = book.GetId();
             if (_books.containsKey(id)) throw new InputMismatchException("Duplicate book id:"+ id);
             _books.put(book.GetId(), book);
-            idMaps.add(new IdMap(book.ShortId, book.GetId()));
+            idMaps.add(new IdMap(book.ShortId.toLowerCase(), book.GetId()));
             UpdateLatestCopyNum(book);
         }
         _idDbb = new IdDb(idMaps);
@@ -59,11 +59,13 @@ public class BookDb {
     }
 
     public Book GetBook(String id){
+        id = Book.GetReducedId(id);
         id = id.toLowerCase();
         if (IdDb.IsValidShortId(id)) {
             if (_idDbb.IsRecognizedId(id)) id = _idDbb.GetLongId(id);
             else return null;
         }
+
         if(! IsValidId(id)){
             PrintUtilities.PrintWarningLine("Invalid book id. Book id format: ISBN-(copy_number). e.g. 123456789-(2)");
             return null;

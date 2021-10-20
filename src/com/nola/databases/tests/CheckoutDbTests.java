@@ -61,7 +61,7 @@ public class CheckoutDbTests {
         var csvParser = new ReturnCsvParser(TestStreams.GetReturnCsvStream());
         var checkoutDb = new CheckoutDb(GetCheckouts(), GetUserDb(), GetBookDb());
 
-        for (var returnRecord: csvParser.GetReturnes()) {
+        for (var returnRecord: csvParser.GetReturns()) {
             assertNotNull(checkoutDb.Return(returnRecord));
         }
 
@@ -73,7 +73,7 @@ public class CheckoutDbTests {
         var csvParser = new ReturnCsvParser(TestStreams.GetReturnCsvStream_shortId());
         var checkoutDb = new CheckoutDb(GetCheckouts(), GetUserDb(), GetBookDb());
 
-        for (var returnRecord: csvParser.GetReturnes()) {
+        for (var returnRecord: csvParser.GetReturns()) {
             assertNotNull(checkoutDb.Return(returnRecord));
         }
         assertNull(checkoutDb.Return(new Return("1234567-(3)", TimeUtilities.GetCurrentTime())));
@@ -84,7 +84,7 @@ public class CheckoutDbTests {
         var csvParser = new ReturnCsvParser(TestStreams.GetReturnCsvStream());
         var checkoutDb = new CheckoutDb(GetCheckouts(), GetUserDb(), GetBookDb());
 
-        for (var bookId: csvParser.GetReturnes()) {
+        for (var bookId: csvParser.GetReturns()) {
             assertNotNull(checkoutDb.Return(bookId));
         }
         var allCheckouts = checkoutDb.GetAllCheckouts();

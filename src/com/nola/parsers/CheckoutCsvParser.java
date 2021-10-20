@@ -45,15 +45,15 @@ public class CheckoutCsvParser {
             }
 
             var timeStamp = record.get(TimeTag).trim();
-            var bookId = record.get(ResourceIdTag).trim();
-            bookId = Book.GetReducedId(bookId);
+            var resourceId = record.get(ResourceIdTag).trim();
+            resourceId = Book.GetReducedId(resourceId);
 
             var userId = record.get(UserIdTag).trim();
             var dueDateString = record.get(DueDateTag).trim();
             var dueDate = TimeUtilities.parseDate(dueDateString);
             var checkoutDate = TimeUtilities.parseGoogleDateTime(timeStamp);
 
-            checkouts.add(new Checkout(bookId, userId, checkoutDate, dueDate));
+            checkouts.add(new Checkout(resourceId, userId, checkoutDate, dueDate));
         }
         return checkouts;
     }
