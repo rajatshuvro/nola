@@ -45,7 +45,7 @@ public class ReturnCsvParser {
             var resourceId = record.get(ResourceIdTag).trim();
             for (var resId: resourceId.split(",")) {
                 resourceId = Book.GetReducedId(resId);
-                returns.add(new Return(resId, dateTime));
+                returns.add(new Return(resourceId, dateTime));
             }
 
         }
