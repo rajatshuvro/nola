@@ -114,6 +114,23 @@ public class TestStreams {
         }
         return null;
     }
+    public static InputStream GetMultiEntryReturnCsvStream() {
+        var memStream = new ByteArrayOutputStream();
+        var writer = new OutputStreamWriter(memStream);
+
+        try {
+            writer.write("\"Timestamp\",\"Resource id\"\n");
+            writer.write("\"2020/09/30 9:29:20 AM MDT\",\"BUN01,DUN02\"\n");
+            writer.close();
+
+            var buffer = memStream.toByteArray();
+            memStream.close();
+            return new ByteArrayInputStream(buffer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public static InputStream GetReturnCsvStream_shortId() {
         var memStream = new ByteArrayOutputStream();

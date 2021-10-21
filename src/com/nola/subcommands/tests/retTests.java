@@ -55,4 +55,26 @@ public class retTests {
         Assertions.assertTrue(transactionsString.contains("Return"));
         Assertions.assertFalse(checkoutString.contains("7890788-(1)"));
     }
+
+    @Test
+    public void ReturnMultipleBundles(){
+        var checkoutDb = testData.GetCheckoutDb();
+        var bundleDb = testData.GetBundleDb();
+        var rewriteStream = new ByteArrayOutputStream();
+        var transactionStream = new ByteArrayOutputStream();
+
+        var checkouts = checkoutDb.GetAllCheckouts();
+        assertEquals(4, checkouts.length);
+
+        ret.AddReturns(checkoutDb, bundleDb, TestStreams.GetMultiEntryReturnCsvStream(), rewriteStream, transactionStream, true);
+
+        checkouts = checkoutDb.GetAllCheckouts();
+        assertEquals(1, checkouts.length);
+
+        var transactionsString = transactionStream.toString();
+        var checkoutString = rewriteStream.toString();
+
+        Assertions.assertTrue(transactionsString.contains("Return"));
+        Assertions.assertTrue(checkoutString.contains("7890788-(1)"));
+    }
 }
