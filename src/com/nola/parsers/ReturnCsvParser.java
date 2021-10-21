@@ -44,7 +44,7 @@ public class ReturnCsvParser {
             var dateTime = TimeUtilities.parseGoogleDateTime(record.get(TimeTag));
             var resourceId = record.get(ResourceIdTag).trim();
             for (var resId: resourceId.split(",")) {
-                resourceId = Book.GetReducedId(resId);
+                resourceId = Book.GetReducedId(resId.trim());
                 returns.add(new Return(resourceId, dateTime));
             }
 
