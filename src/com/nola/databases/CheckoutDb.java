@@ -66,12 +66,6 @@ public class CheckoutDb {
             return null;
         }
         var checkouts = GetUserCheckouts(user.Id);
-        var checkoutCount = checkouts.size();
-//        if(checkoutCount >= CheckoutLimit)
-//        {
-//            PrintUtilities.PrintWarningLine("Checkout limit reached. Cannot issue more books to user id:"+checkout.UserId);
-//            return null;
-//        }
         _checkouts.put(bookId, checkout);
 
         return new Checkout(bookId, user.Id, checkout.CheckoutDate, checkout.DueDate);
