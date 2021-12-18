@@ -37,6 +37,9 @@ public class Main {
             case "find-u":
                 findInUsers.Run(args);
                 break;
+            case "hist":
+                History.Run(args);
+                break;
             case "help":
                 PrintMainMenu();
                 break;
@@ -52,6 +55,7 @@ public class Main {
         PrintUtilities.PrintInfoLine("\tadd            (add new books or users)");
         PrintUtilities.PrintInfoLine("\tco             (checkout books)");
         PrintUtilities.PrintInfoLine("\tret            (return books)");
+        PrintUtilities.PrintInfoLine("\thist           (user or book checkout history)");
         PrintUtilities.PrintInfoLine("\tstatus         (checkout status)");
         PrintUtilities.PrintInfoLine("\tlabel          (print out labels)");
         PrintUtilities.PrintInfoLine("\trotate         (rotate bundles for classes)");
