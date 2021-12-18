@@ -70,6 +70,7 @@ public class History {
                 var book = bookDb.GetBook(bookId);
                 PrintUtilities.PrintLine(book.Title);
             }
+            PrintUtilities.PrintDelimiterLine(FlatObjectParser.RecordSeparator);
         }
     }
 }
