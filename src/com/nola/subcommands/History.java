@@ -43,7 +43,12 @@ public class History {
                 var userDb = DbUtilities.LoadUserDb();
                 var transactionDb = DbUtilities.LoadTransactionsDb(bookDb, userDb);
 
-                PrintUserHistory(userId, bookDb, transactionDb);
+                if (userId.equals("all")){
+                    for (var user: userDb.GetAllUsers()) {
+                        PrintUserHistory(user.Id, bookDb, transactionDb);
+                    }
+                }
+                else PrintUserHistory(userId, bookDb, transactionDb);
             }
 
         }
@@ -56,12 +61,13 @@ public class History {
 
     private static void PrintUserHistory(String userId, BookDb bookDb, TransactionDb transactionDb) {
         var transactions = transactionDb.GetUserActivity(userId);
-        if (transactions == null){
-            PrintUtilities.PrintInfoLine("No transactions found for user:" + userId);
+        if (transactions == null || transactions.size()==0){
+            return;
+            //PrintUtilities.PrintLine("No transactions found for user:" + userId);
         }
         else {
-            PrintUtilities.PrintInfoLine("USER ID:"+ userId);
-            PrintUtilities.PrintDelimiterLine(FlatObjectParser.RecordSeparator);
+            PrintUtilities.PrintLine("USER ID:"+ userId);
+            PrintUtilities.PrintLine(FlatObjectParser.RecordSeparator);
             for (var transaction: transactions) {
 
                 if(! transaction.Type.equals(Transaction.CheckoutTag)) continue;
@@ -70,7 +76,7 @@ public class History {
                 var book = bookDb.GetBook(bookId);
                 PrintUtilities.PrintLine(book.Title);
             }
-            PrintUtilities.PrintDelimiterLine(FlatObjectParser.RecordSeparator);
+            PrintUtilities.PrintLine(FlatObjectParser.RecordSeparator);
         }
     }
 }
