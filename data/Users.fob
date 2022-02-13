@@ -588,12 +588,6 @@ Role:     Student
 Email:    mba.user18@onkur.com
 Phone:
 ***************************************************************
-Id:       raheel.hasan.1
-Name:     Raheel Hasan
-Role:     Student
-Email:    ifthasan27@yahoo.com
-Phone:    469-544-8321
-***************************************************************
 Id:       arshia.hasan
 Name:     Arshia Hasan
 Role:     Student
@@ -605,4 +599,34 @@ Name:     Shyna Hasan
 Role:     Student
 Email:    shasan426@gmail.com
 Phone:    310-347-5541
+***************************************************************
+Id:       rudosi
+Name:     Rudosi
+Role:     Student
+Email:    pragga1000@gmail.com
+Phone:    
+***************************************************************
+Id:       zaayd
+Name:     Zaayd
+Role:     Student
+Email:    susana.faruque@gmail.com
+Phone:    
+***************************************************************
+Id:       neel
+Name:     Neel
+Role:     Student
+Email:    Bipasha.bt@gmail.com
+Phone:    
+***************************************************************
+Id:       rehan
+Name:     Rehan
+Role:     Student
+Email:    naheedbuet104@gmail.com
+Phone:    
+***************************************************************
+Id:       samreen
+Name:     Samreen
+Role:     Student
+Email:    tanvir.ch@gamil.com
+Phone:    
 ***************************************************************
