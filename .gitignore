@@ -18,6 +18,7 @@
 #IntelliJ files and folders
 .idea/
 *.iml
+out/
 
 # Package Files #
 *.jar
