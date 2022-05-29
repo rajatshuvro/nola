@@ -3,16 +3,8 @@
     <output-path>$PROJECT_DIR$/artifacts/</output-path>
     <root id="archive" name="nola.jar">
       <element id="module-output" name="nola" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/lib/junit-jupiter-5.4.2.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/lib/junit-jupiter-api-5.4.2.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/lib/apiguardian-api-1.0.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/lib/opentest4j-1.1.1.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/lib/junit-platform-commons-1.4.2.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/lib/junit-jupiter-params-5.4.2.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/lib/junit-jupiter-engine-5.4.2.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/lib/junit-platform-engine-1.4.2.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/dependencies/commons-csv-1.8.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/dependencies/commons-cli-1.4.jar" path-in-jar="/" />
+      <element id="library" level="project" name="apache.commons.csv" />
+      <element id="library" level="project" name="commons.cli" />
     </root>
   </artifact>
 </component>
