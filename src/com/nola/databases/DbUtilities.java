@@ -155,6 +155,12 @@ public class DbUtilities {
 
         return getTransactionDb(bookDb, userDb, inputStream);
     }
+    public static TransactionDb LoadTransactionArchiveDb(BookDb bookDb, UserDb userDb) {
+        var filePath = DbCommons.getTransactionArchiveFilePath();
+        var inputStream = GetFileReadStream(filePath);
+
+        return getTransactionDb(bookDb, userDb, inputStream);
+    }
 
     private static TransactionDb getTransactionDb(BookDb bookDb, UserDb userDb, InputStream inputStream) {
         var transactions = ReadTransactions(inputStream);

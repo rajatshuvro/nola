@@ -3,7 +3,6 @@ package com.nola.subcommands;
 import com.nola.databases.AppendUtilities;
 import com.nola.databases.DbCommons;
 import com.nola.databases.DbUtilities;
-import com.nola.databases.TransactionDb;
 import com.nola.utilities.PrintUtilities;
 import org.apache.commons.cli.*;
 

@@ -42,13 +42,18 @@ public class History {
                 var bookDb = DbUtilities.LoadBookDb();
                 var userDb = DbUtilities.LoadUserDb();
                 var transactionDb = DbUtilities.LoadTransactionsDb(bookDb, userDb);
+                var archiveDb = DbUtilities.LoadTransactionArchiveDb(bookDb, userDb);
 
                 if (userId.equals("all")){
                     for (var user: userDb.GetAllUsers()) {
+                        PrintUserHistory(user.Id, bookDb, archiveDb);
                         PrintUserHistory(user.Id, bookDb, transactionDb);
                     }
                 }
-                else PrintUserHistory(userId, bookDb, transactionDb);
+                else {
+                    PrintUserHistory(userId, bookDb, archiveDb);
+                    PrintUserHistory(userId, bookDb, transactionDb);
+                }
             }
 
         }
@@ -63,7 +68,6 @@ public class History {
         var transactions = transactionDb.GetUserActivity(userId);
         if (transactions == null || transactions.size()==0){
             return;
-            //PrintUtilities.PrintLine("No transactions found for user:" + userId);
         }
         else {
             PrintUtilities.PrintLine("USER ID:"+ userId);
