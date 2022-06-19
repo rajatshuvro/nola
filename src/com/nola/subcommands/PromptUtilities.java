@@ -7,7 +7,11 @@ import java.util.Scanner;
 
 public class PromptUtilities {
     public static<T> boolean CommitValidEntries(ArrayList<T> validEntries){
-        PrintUtilities.PrintInfoLine(validEntries.size()+ " valid entries found.");
+        return CommitValidEntries(validEntries.size());
+    }
+
+    public static<T> boolean CommitValidEntries(int count){
+        PrintUtilities.PrintInfoLine(count + " valid entries found.");
         PrintUtilities.PrintInfoLine("Would you like to commit the valid entries?(y) or (n)");
         Scanner in = new Scanner(System.in);
         String command = in.nextLine().toLowerCase();

@@ -7,6 +7,7 @@ public class DbCommons {
     public static final String UsersFileName = "Users.fob";
     public static final String BooksFileName = "Books.fob";
     public static final String TransactionsFileName = "Transactions.fob";
+    public static final String TransactionArchiveFileName = "Archive-Transaction.fob";
     public static final String CheckoutsFileName = "Checkouts.fob";
     public static final String BundleFileName = "Bundles.fob";
     public static final String ClassBundleFileName = "ClassBundles.fob";
@@ -22,6 +23,9 @@ public class DbCommons {
     }
     public static String getTransactionsFilePath(){
         return PathUtilities.combine(DbCommons.DataDirectory, DbCommons.TransactionsFileName);
+    }
+    public static String getTransactionArchiveFilePath(){
+        return PathUtilities.combine(DbCommons.DataDirectory, DbCommons.TransactionArchiveFileName);
     }
     public static String getCheckoutsFilePath(){
         return PathUtilities.combine(DbCommons.DataDirectory, DbCommons.CheckoutsFileName);

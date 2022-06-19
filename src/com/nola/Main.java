@@ -13,6 +13,9 @@ public class Main {
 
         String subCommand = args[0];
         switch (subCommand){
+            case "arc":
+                archive.Run(args);
+                break;
             case "add":
                 add.Run(args);
                 break;
@@ -53,6 +56,7 @@ public class Main {
         PrintUtilities.PrintInfoLine("nola sub-command [options] ");
         PrintUtilities.PrintInfoLine("sub-commands:");
         PrintUtilities.PrintInfoLine("\tadd            (add new books or users)");
+        PrintUtilities.PrintInfoLine("\tarc            (archive obsolete books or old transactions)");
         PrintUtilities.PrintInfoLine("\tco             (checkout books)");
         PrintUtilities.PrintInfoLine("\tret            (return books)");
         PrintUtilities.PrintInfoLine("\thist           (user or book checkout history)");
