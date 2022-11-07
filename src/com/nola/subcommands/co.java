@@ -1,6 +1,7 @@
 package com.nola.subcommands;
 
 import com.nola.dataStructures.Checkout;
+import com.nola.dataStructures.Transaction;
 import com.nola.databases.*;
 import com.nola.parsers.CheckoutCsvParser;
 import com.nola.utilities.FileUtilities;
@@ -55,7 +56,7 @@ public class co {
 
                 var appendStream = DbUtilities.GetAppendStream(DbCommons.getCheckoutsFilePath());
                 var transactionStream = DbUtilities.GetAppendStream(DbCommons.getTransactionsFilePath());
-                var count = CheckoutBooks(DbUtilities.LoadCheckoutDb(bookDb, userDb), csvParser.GetCheckouts(),
+                var count = CheckoutBooks(DbUtilities.LoadTransactionsDb(bookDb, userDb), csvParser.GetCheckouts(),
                         appendStream, transactionStream, false);
                 appendStream.close();
                 transactionStream.close();
@@ -83,7 +84,7 @@ public class co {
 
                 var appendStream = DbUtilities.GetAppendStream(DbCommons.getCheckoutsFilePath());
                 var transactionStream = DbUtilities.GetAppendStream(DbCommons.getTransactionsFilePath());
-                var count = CheckoutBooks(DbUtilities.LoadCheckoutDb(bookDb, userDb), checkouts,
+                var count = CheckoutBooks(DbUtilities.LoadTransactionsDb(bookDb, userDb), checkouts,
                         appendStream, transactionStream, false);
                 appendStream.close();
                 transactionStream.close();
@@ -96,25 +97,25 @@ public class co {
         }
     }
 
-    public static ArrayList<Checkout> GetBundleCheckouts(ArrayList<Checkout> bundleCheckouts, BundleDb bundleDb) {
-        var bookCheckouts = new ArrayList<Checkout>();
+    public static ArrayList<Transaction> GetBundleCheckouts(ArrayList<Transaction> bundleCheckouts, BundleDb bundleDb) {
+        var bookCheckouts = new ArrayList<Transaction>();
         for (var bundleCheckout: bundleCheckouts) {
-            var bundle = bundleDb.GetBookBundle(bundleCheckout.Id);
+            var bundle = bundleDb.GetBookBundle(bundleCheckout.BookId);
             if (bundle == null) {
                 PrintUtilities.PrintWarningLine("Invalid bundle id:"+bundleCheckout.Id);
                 continue;
             }
             for (var bookId: bundle.BookIds) {
-                bookCheckouts.add(new Checkout(bookId, bundleCheckout.UserId, bundleCheckout.CheckoutDate, bundleCheckout.DueDate));
+                bookCheckouts.add(new Transaction(bookId, bundleCheckout.UserId, bundleCheckout.Date, Transaction.CheckoutTag));
             }
         }
         return bookCheckouts;
     }
 
-    public static int CheckoutBooks(CheckoutDb checkoutDb, ArrayList<Checkout> checkouts,
+    public static int CheckoutBooks(TransactionDb transactionDb, ArrayList<Transaction> checkouts,
                                     OutputStream appendStream, OutputStream transactionStream, boolean forceCommit){
 
-        var validEntries = checkoutDb.TryAddRange(checkouts);
+        var validEntries = transactionDb.AddCheckouts(checkouts);
         if(validEntries.size()>0){
             if(!forceCommit && !PromptUtilities.CommitValidEntries(validEntries)) return 0;
 

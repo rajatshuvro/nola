@@ -40,12 +40,13 @@ public class ret {
 
                 var bookDb = DbUtilities.LoadBookDb();
                 var userDb = DbUtilities.LoadUserDb();
-                var checkoutDb = DbUtilities.LoadCheckoutDb(bookDb, userDb);
+                //var checkoutDb = DbUtilities.LoadCheckoutDb(bookDb, userDb);
+                var transactionDb = DbUtilities.LoadTransactionsDb(bookDb, userDb);
                 var bundleDb = DbUtilities.LoadBundleDb();
                 var writeStream = DbUtilities.GetWriteStream(DbCommons.getCheckoutsFilePath());
                 var transactionStream = DbUtilities.GetAppendStream(DbCommons.getTransactionsFilePath());
-                var count = AddReturns(checkoutDb, bundleDb, new FileInputStream(filePath),
-                        writeStream, transactionStream, false);
+                var count = AddReturns(transactionDb, bundleDb, new FileInputStream(filePath),
+                        transactionStream, false);
                 writeStream.close();
                 transactionStream.close();
                 System.out.println("Number of successful returns: "+count);
@@ -56,21 +57,18 @@ public class ret {
             formatter.printHelp(commandSyntex, options);
         }
     }
-    public static int AddReturns(CheckoutDb checkoutDb, BundleDb bundleDb, InputStream inputStream,
-                                 OutputStream writeStream, OutputStream transactionStream, boolean forceCommit){
+    public static int AddReturns(TransactionDb transactionDb, BundleDb bundleDb, InputStream inputStream,
+                                 OutputStream transactionStream, boolean forceCommit){
         if(inputStream == null) return 0;
-        var existingCheckouts = checkoutDb.GetAllCheckouts();
+        var existingCheckouts = transactionDb.GetPendingCheckouts();
         var csvParser = new ReturnCsvParser(inputStream);
 
         var expandedEntries = ExpandBundleEntries(csvParser.GetReturns(), bundleDb);
-        var validEntries = checkoutDb.ReturnRange(expandedEntries);
-        // we need to re-write regardless of valid entries since existing checkouts has to be re-written
+        var validEntries = transactionDb.Return(expandedEntries);
         if(!forceCommit && !PromptUtilities.CommitValidEntries(validEntries)) {
-            AppendUtilities.Rewrite(CheckoutDb.HeaderLines, existingCheckouts, writeStream, false);
             return 0;
         }
 
-        AppendUtilities.Rewrite(CheckoutDb.HeaderLines, checkoutDb.GetAllCheckouts(), writeStream, false);
         var transactions = TransactionDb.GetReturnTransactions(validEntries);
         AppendUtilities.AppendItems(transactions, transactionStream);
         return validEntries.size();

@@ -17,7 +17,7 @@ import java.util.HashMap;
 
 public class TransactionDb {
     private ArrayList<Transaction> _transactions;
-    private HashMap<String, Transaction> _latestTransactions;
+    private HashMap<String, Transaction> _latestBookTransactions;
     private UserDb _userDb;
     private BookDb _bookDb;
     public final int CheckoutLimit = 15;
@@ -27,7 +27,9 @@ public class TransactionDb {
         _userDb = userDb;
         _bookDb = bookDb;
         _transactions = new ArrayList<>();
-        _latestTransactions = new HashMap<>();
+        _latestBookTransactions = new HashMap<>();
+
+        if(transactions == null) return;
         for (Transaction record: transactions) {
             if(_bookDb.GetBook(record.BookId)== null) {
                 PrintUtilities.PrintWarningLine("WARNING: Invalid book id:"+record.BookId+". Ignoring transaction.");
@@ -39,21 +41,21 @@ public class TransactionDb {
             }
             _transactions.add(record);
             //updating latest transaction
-            if(!_latestTransactions.containsKey(record.BookId)){
-                _latestTransactions.put(record.BookId, record);
+            if(!_latestBookTransactions.containsKey(record.BookId)){
+                _latestBookTransactions.put(record.BookId, record);
                 continue;
             }
             //update existing record
-            var existingRecord = _latestTransactions.get(record.BookId);
-            if(existingRecord.OlderThan(record)) _latestTransactions.replace(record.BookId, record);
+            var existingRecord = _latestBookTransactions.get(record.BookId);
+            if(existingRecord.OlderThan(record)) _latestBookTransactions.replace(record.BookId, record);
         }
     }
 
-    public static ArrayList<Transaction> GetCheckoutTransactions(ArrayList<Checkout> checkouts) {
+    public static ArrayList<Transaction> GetCheckoutTransactions(ArrayList<Transaction> checkouts) {
         var transactions = new ArrayList<Transaction>();
         for (var checkout:
              checkouts) {
-            transactions.add(Transaction.Create(checkout.Id, checkout.UserId, checkout.CheckoutDate, Transaction.CheckoutTag));
+            transactions.add(Transaction.Create(checkout.BookId, checkout.UserId, TimeUtilities.GetCurrentTime(), Transaction.CheckoutTag));
         }
         return transactions;
     }
@@ -67,7 +69,7 @@ public class TransactionDb {
     }
 
     public Transaction GetLatest(String bookId){
-        if(_latestTransactions.containsKey(bookId)) return _latestTransactions.get(bookId);
+        if(_latestBookTransactions.containsKey(bookId)) return _latestBookTransactions.get(bookId);
         return null;
     }
 
@@ -108,7 +110,7 @@ public class TransactionDb {
         return Add(transaction)? transaction: null;
     }
 
-    public ArrayList<Transaction> AddCheckouts(ArrayList<Checkout> checkouts) throws IOException {
+    public ArrayList<Transaction> AddCheckouts(ArrayList<Transaction> checkouts) {
 
         var transactions = new ArrayList<Transaction>();
         for (var checkout: checkouts) {
@@ -124,8 +126,16 @@ public class TransactionDb {
         return transactions;
     }
 
-    public Transaction AddCheckout(Checkout co) {
-        return AddCheckout(co.Id, co.UserId);
+    public Transaction AddCheckout(Transaction checkout) {
+        return AddCheckout(checkout.BookId, checkout.UserId);
+    }
+    public ArrayList<Return> Return(ArrayList<Return> returnRecords){
+        var validEntries = new ArrayList<Return>();
+        for (var record:
+             returnRecords) {
+            if (Return(record)) validEntries.add(record);
+        }
+        return validEntries;
     }
     public boolean Return(Return record){
         var transaction = GetLatest(record.BookId);
@@ -159,20 +169,20 @@ public class TransactionDb {
             PrintUtilities.PrintWarningLine("WARNING:Unknown user id: "+ record.UserId);
             return false;
         }
-        if(!_latestTransactions.containsKey(record.BookId)){
-            _latestTransactions.put(record.BookId, record);
+        if(!_latestBookTransactions.containsKey(record.BookId)){
+            _latestBookTransactions.put(record.BookId, record);
             _transactions.add(record);
             //AppendTransactions(record);
             return true;
         }
         //if the latest transaction is of type checkout you cannot add another checkout and similarly for return
-        var latestRecord = _latestTransactions.get(record.BookId);
+        var latestRecord = _latestBookTransactions.get(record.BookId);
         if (latestRecord.Type.equals(record.Type)) {
             PrintUtilities.PrintWarningLine("WARNING: cannot "+record.Type+ " a book that is already in that state. Book id:" + record.BookId);
             return false;
         }
 
-        _latestTransactions.replace(record.BookId, record);
+        _latestBookTransactions.replace(record.BookId, record);
         _transactions.add(record);
         //AppendTransactions(record);
         return true;
@@ -202,7 +212,7 @@ public class TransactionDb {
     }
 
     public String GetBookStatus(String bookId) {
-        if(_latestTransactions.containsKey(bookId)) return _latestTransactions.get(bookId).Type;
+        if(_latestBookTransactions.containsKey(bookId)) return _latestBookTransactions.get(bookId).Type;
         return Transaction.UnknownTag;
     }
     public ArrayList<Transaction> GetPendingCheckouts(String userId) {
@@ -215,7 +225,7 @@ public class TransactionDb {
     }
     public ArrayList<Transaction> GetPendingCheckouts() {
         var checkouts = new ArrayList<Transaction>();
-        for (Transaction record: _latestTransactions.values()) {
+        for (Transaction record: _latestBookTransactions.values()) {
             if(record.Type.equals(Transaction.CheckoutTag))
                 checkouts.add(record);
         }
@@ -234,4 +244,36 @@ public class TransactionDb {
         appender.close();
 
     }
+
+    //returns all closed transactions that are older than a year
+    // and not the latest for a book
+    public ArrayList<Transaction> GetOldTransactions() {
+        var oldTransactions = new ArrayList<Transaction>();
+        for (var transaction:
+             _transactions) {
+            var bookId = transaction.BookId;
+            if (_latestBookTransactions.containsKey(bookId)){
+                var latest= _latestBookTransactions.get(bookId);
+                // the latest transaction for a book is never archived
+                if (latest.Id==transaction.Id) continue;
+            }
+            oldTransactions.add(transaction);
+        }
+        return oldTransactions;
+    }
+
+    public ArrayList<Transaction> GetLatestTransactions() {
+        var latest = new ArrayList<Transaction>();
+        for (var transaction:
+             _latestBookTransactions.values()) {
+            latest.add(transaction);
+        }
+        return latest;
+    }
+
+    public Transaction GetPendingCheckout(String bookId) {
+        if(_latestBookTransactions.containsKey(bookId)) return _latestBookTransactions.get(bookId);
+        else return null;
+    }
+
 }

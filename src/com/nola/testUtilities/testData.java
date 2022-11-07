@@ -95,18 +95,18 @@ public class testData {
         return new UserDb(users);
     }
 
-    public static ArrayList<Checkout> GetCheckouts(){
-        var checkouts = new ArrayList<Checkout>();
-        checkouts.add(new Checkout("7890788-(2)", "name.1",  TimeUtilities.parseGoogleDateTime("2020/09/30 3:20:16 PM MDT"), TimeUtilities.parseDate("2020-10-25")));
-        checkouts.add(new Checkout("678564-(1)", "name.2", TimeUtilities.parseGoogleDateTime("2020/09/30 3:21:27 PM MDT"), TimeUtilities.parseDate("2020-10-29")));
-        checkouts.add(new Checkout("456098-(1)", "name.3", TimeUtilities.parseGoogleDateTime("2020/09/30 3:22:04 PM MDT"), TimeUtilities.parseDate("2020-10-28")));
-        checkouts.add(new Checkout("7890788-(2)", "name.1",TimeUtilities.parseGoogleDateTime("2020/09/30 3:23:30 PM MDT"), TimeUtilities.parseDate("2020-10-26")));
-        checkouts.add(new Checkout("7890788-(1)", "name.1",TimeUtilities.parseGoogleDateTime("2020/09/30 3:23:30 PM MDT"), TimeUtilities.parseDate("2020-10-26")));
+    public static ArrayList<Transaction> GetCheckouts(){
+        var checkouts = new ArrayList<Transaction>();
+        checkouts.add(new Transaction("7890788-(2)", "name.1",  TimeUtilities.parseGoogleDateTime("2020/09/30 3:20:16 PM MDT"), Transaction.CheckoutTag));
+        checkouts.add(new Transaction("678564-(1)", "name.2", TimeUtilities.parseGoogleDateTime("2020/09/30 3:21:27 PM MDT"), Transaction.CheckoutTag));
+        checkouts.add(new Transaction("456098-(1)", "name.3", TimeUtilities.parseGoogleDateTime("2020/09/30 3:22:04 PM MDT"), Transaction.CheckoutTag));
+        checkouts.add(new Transaction("7890788-(2)", "name.1",TimeUtilities.parseGoogleDateTime("2020/09/30 3:23:30 PM MDT"), Transaction.CheckoutTag));
+        checkouts.add(new Transaction("7890788-(1)", "name.1",TimeUtilities.parseGoogleDateTime("2020/09/30 3:23:30 PM MDT"), Transaction.CheckoutTag));
 
         return checkouts;
     }
-    public static CheckoutDb GetCheckoutDb(){
-        return new CheckoutDb(GetCheckouts(), GetUserDb(), GetBookDb());
+    public static TransactionDb GetCheckoutDb(){
+        return new TransactionDb(GetCheckouts(), GetUserDb(), GetBookDb());
     }
 
     public static ArrayList<Checkout> GetCheckouts_shortId(){
