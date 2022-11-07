@@ -1,10 +1,8 @@
 package com.nola.subcommands;
 
 import com.nola.dataStructures.Checkout;
-import com.nola.databases.BookDb;
-import com.nola.databases.CheckoutDb;
-import com.nola.databases.DbUtilities;
-import com.nola.databases.UserDb;
+import com.nola.dataStructures.Transaction;
+import com.nola.databases.*;
 import com.nola.parsers.FlatObjectParser;
 import com.nola.utilities.PrintUtilities;
 import org.apache.commons.cli.*;
@@ -39,7 +37,7 @@ public class status {
                 var id = cmd.getOptionValue("book");
                 var bookDb = DbUtilities.LoadBookDb();
                 var userDb = DbUtilities.LoadUserDb();
-                var checkoutDb = DbUtilities.LoadCheckoutDb(bookDb, userDb);
+                var checkoutDb = DbUtilities.LoadTransactionsDb(bookDb, userDb);
 
                 var checkout = GetBookCheckout(id, bookDb, checkoutDb);
                 if (checkout == null){
@@ -52,15 +50,15 @@ public class status {
                 var id = cmd.getOptionValue("user");
                 var userDb = DbUtilities.LoadUserDb();
                 var bookDb = DbUtilities.LoadBookDb();
-                var checkoutDb = DbUtilities.LoadCheckoutDb(bookDb, userDb);
-                var checkouts = GetUserCheckouts(id, userDb, checkoutDb);
-                if (checkouts == null || checkouts.size()==0){
+                var transactionDb = DbUtilities.LoadTransactionsDb(bookDb, userDb);
+                var transactions = GetUserCheckouts(id, userDb, transactionDb);
+                if (transactions == null || transactions.size()==0){
                     PrintUtilities.PrintInfoLine("No checkout found for user:"+id);
                 }
                 else {
-                    for (var checkout: checkouts) {
-                        PrintUtilities.PrintInfoLine("Title:\t\t"+bookDb.GetBook(checkout.Id).Title);
-                        PrintUtilities.PrintInfoLine(checkout.toString());
+                    for (var transaction: transactions) {
+                        PrintUtilities.PrintInfoLine("Title:\t\t"+bookDb.GetBook(transaction.BookId).Title);
+                        PrintUtilities.PrintInfoLine(transaction.toString());
                         PrintUtilities.PrintWarningLine(FlatObjectParser.RecordSeparator);
                     }
 
@@ -73,23 +71,23 @@ public class status {
         }
     }
 
-    public static Checkout GetBookCheckout(String id, BookDb bookDb, CheckoutDb checkoutDb){
+    public static Transaction GetBookCheckout(String id, BookDb bookDb, TransactionDb transactionDb){
         var book = bookDb.GetBook(id);
         if (book == null){
             PrintUtilities.PrintWarningLine("Invalid book id:"+id);
             return null;
         }
 
-        return checkoutDb.GetCheckout(book.GetId());
+        return transactionDb.GetPendingCheckout(book.GetId());
     }
 
-    public static ArrayList<Checkout> GetUserCheckouts(String id, UserDb userDb, CheckoutDb checkoutDb){
+    public static ArrayList<Transaction> GetUserCheckouts(String id, UserDb userDb, TransactionDb transactionDb){
         var user = userDb.GetUser(id);
         if (user == null){
             PrintUtilities.PrintWarningLine("Invalid user id:"+id);
             return null;
         }
-        return checkoutDb.GetUserCheckouts(user.Id);
+        return transactionDb.GetPendingCheckouts(user.Id);
 
     }
 

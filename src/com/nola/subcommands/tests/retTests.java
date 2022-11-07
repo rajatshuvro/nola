@@ -1,6 +1,6 @@
 package com.nola.subcommands.tests;
 
-import com.nola.databases.CheckoutDb;
+import com.nola.databases.TransactionDb;
 import com.nola.parsers.CheckoutCsvParser;
 import com.nola.subcommands.ret;
 import com.nola.testUtilities.TestStreams;
@@ -19,35 +19,33 @@ public class retTests {
     public void AddReturns(){
         var parser = new CheckoutCsvParser(TestStreams.GetCheckoutCsvStream());
 
-        var checkoutDb = new CheckoutDb(parser.GetCheckouts(), GetUserDb(), GetBookDb());
+        var transactionDb = new TransactionDb(parser.GetCheckouts(), GetUserDb(), GetBookDb());
 
         var rewriteStream = new ByteArrayOutputStream();
         var transactionStream = new ByteArrayOutputStream();
-        ret.AddReturns(checkoutDb, null, TestStreams.GetReturnCsvStream(), rewriteStream, transactionStream, true);
+        ret.AddReturns(transactionDb, null, TestStreams.GetReturnCsvStream(), transactionStream, true);
 
-        var checkouts = checkoutDb.GetAllCheckouts();
-        assertEquals(2, checkouts.length);
+        var checkouts = transactionDb.GetPendingCheckouts();
+        assertEquals(2, checkouts.size());
 
         var transactionsString = transactionStream.toString();
-        var checkoutString = rewriteStream.toString();
 
         Assertions.assertTrue(transactionsString.contains("Return"));
-        Assertions.assertTrue(checkoutString.contains("DOG99"));
     }
     @Test
     public void ReturnBundles(){
-        var checkoutDb = testData.GetCheckoutDb();
+        var transactionDb = testData.GetCheckoutDb();
         var bundleDb = testData.GetBundleDb();
         var rewriteStream = new ByteArrayOutputStream();
         var transactionStream = new ByteArrayOutputStream();
 
-        var checkouts = checkoutDb.GetAllCheckouts();
-        assertEquals(4, checkouts.length);
+        var checkouts = transactionDb.GetPendingCheckouts();
+        assertEquals(4, checkouts.size());
 
-        ret.AddReturns(checkoutDb, bundleDb, TestStreams.GetMixedReturnCsvStream(), rewriteStream, transactionStream, true);
+        ret.AddReturns(transactionDb, bundleDb, TestStreams.GetMixedReturnCsvStream(), transactionStream, true);
 
-        checkouts = checkoutDb.GetAllCheckouts();
-        assertEquals(1, checkouts.length);
+        checkouts = transactionDb.GetPendingCheckouts();
+        assertEquals(1, checkouts.size());
 
         var transactionsString = transactionStream.toString();
         var checkoutString = rewriteStream.toString();
@@ -58,23 +56,21 @@ public class retTests {
 
     @Test
     public void ReturnMultipleBundles(){
-        var checkoutDb = testData.GetCheckoutDb();
+        var transactionDb = testData.GetCheckoutDb();
         var bundleDb = testData.GetBundleDb();
-        var rewriteStream = new ByteArrayOutputStream();
         var transactionStream = new ByteArrayOutputStream();
 
-        var checkouts = checkoutDb.GetAllCheckouts();
-        assertEquals(4, checkouts.length);
+        var checkouts = transactionDb.GetPendingCheckouts();
+        assertEquals(4, checkouts.size());
 
-        ret.AddReturns(checkoutDb, bundleDb, TestStreams.GetMultiEntryReturnCsvStream(), rewriteStream, transactionStream, true);
+        ret.AddReturns(transactionDb, bundleDb, TestStreams.GetMultiEntryReturnCsvStream(), transactionStream, true);
 
-        checkouts = checkoutDb.GetAllCheckouts();
-        assertEquals(1, checkouts.length);
+        checkouts = transactionDb.GetPendingCheckouts();
+        assertEquals(1, checkouts.size());
 
         var transactionsString = transactionStream.toString();
-        var checkoutString = rewriteStream.toString();
 
         Assertions.assertTrue(transactionsString.contains("Return"));
-        Assertions.assertTrue(checkoutString.contains("7890788-(1)"));
+        Assertions.assertTrue(transactionsString.contains("7890788-(2)"));
     }
 }

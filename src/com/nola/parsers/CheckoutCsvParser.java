@@ -2,6 +2,7 @@ package com.nola.parsers;
 
 import com.nola.dataStructures.Book;
 import com.nola.dataStructures.Checkout;
+import com.nola.dataStructures.Transaction;
 import com.nola.utilities.PrintUtilities;
 import com.nola.utilities.TimeUtilities;
 import org.apache.commons.csv.CSVFormat;
@@ -27,8 +28,8 @@ public class CheckoutCsvParser {
         _reader.close();
     }
 
-    public ArrayList<Checkout> GetCheckouts() {
-        var checkouts = new ArrayList<Checkout>();
+    public ArrayList<Transaction> GetCheckouts() {
+        var checkouts = new ArrayList<Transaction>();
         Iterable<CSVRecord> records = null;
         try {
             records = CSVFormat.RFC4180.withHeader(TimeTag, ResourceIdTag, UserIdTag, DueDateTag).parse(_reader);
@@ -55,7 +56,7 @@ public class CheckoutCsvParser {
                 var dueDate = TimeUtilities.parseDate(dueDateString);
                 var checkoutDate = TimeUtilities.parseGoogleDateTime(timeStamp);
 
-                checkouts.add(new Checkout(resourceId, userId, checkoutDate, dueDate));
+                checkouts.add(new Transaction(resourceId, userId, checkoutDate, Transaction.CheckoutTag));
             }
 
         }

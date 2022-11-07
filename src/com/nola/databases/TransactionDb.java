@@ -28,6 +28,8 @@ public class TransactionDb {
         _bookDb = bookDb;
         _transactions = new ArrayList<>();
         _latestBookTransactions = new HashMap<>();
+
+        if(transactions == null) return;
         for (Transaction record: transactions) {
             if(_bookDb.GetBook(record.BookId)== null) {
                 PrintUtilities.PrintWarningLine("WARNING: Invalid book id:"+record.BookId+". Ignoring transaction.");
@@ -49,11 +51,11 @@ public class TransactionDb {
         }
     }
 
-    public static ArrayList<Transaction> GetCheckoutTransactions(ArrayList<Checkout> checkouts) {
+    public static ArrayList<Transaction> GetCheckoutTransactions(ArrayList<Transaction> checkouts) {
         var transactions = new ArrayList<Transaction>();
         for (var checkout:
              checkouts) {
-            transactions.add(Transaction.Create(checkout.Id, checkout.UserId, checkout.CheckoutDate, Transaction.CheckoutTag));
+            transactions.add(Transaction.Create(checkout.BookId, checkout.UserId, TimeUtilities.GetCurrentTime(), Transaction.CheckoutTag));
         }
         return transactions;
     }
@@ -108,7 +110,7 @@ public class TransactionDb {
         return Add(transaction)? transaction: null;
     }
 
-    public ArrayList<Transaction> AddCheckouts(ArrayList<Checkout> checkouts) throws IOException {
+    public ArrayList<Transaction> AddCheckouts(ArrayList<Transaction> checkouts) {
 
         var transactions = new ArrayList<Transaction>();
         for (var checkout: checkouts) {
@@ -124,8 +126,16 @@ public class TransactionDb {
         return transactions;
     }
 
-    public Transaction AddCheckout(Checkout co) {
-        return AddCheckout(co.Id, co.UserId);
+    public Transaction AddCheckout(Transaction checkout) {
+        return AddCheckout(checkout.BookId, checkout.UserId);
+    }
+    public ArrayList<Return> Return(ArrayList<Return> returnRecords){
+        var validEntries = new ArrayList<Return>();
+        for (var record:
+             returnRecords) {
+            if (Return(record)) validEntries.add(record);
+        }
+        return validEntries;
     }
     public boolean Return(Return record){
         var transaction = GetLatest(record.BookId);
@@ -260,4 +270,10 @@ public class TransactionDb {
         }
         return latest;
     }
+
+    public Transaction GetPendingCheckout(String bookId) {
+        if(_latestBookTransactions.containsKey(bookId)) return _latestBookTransactions.get(bookId);
+        else return null;
+    }
+
 }

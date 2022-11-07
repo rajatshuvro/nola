@@ -1,6 +1,7 @@
 package com.nola.subcommands.tests;
 
 import com.nola.databases.CheckoutDb;
+import com.nola.databases.TransactionDb;
 import com.nola.subcommands.status;
 import org.junit.jupiter.api.Test;
 
@@ -13,15 +14,15 @@ public class statusTests {
     public void StatusByBookTest(){
         var bookDb = GetBookDb();
         var userDb = GetUserDb();
-        var checkoutDb = new CheckoutDb(GetCheckouts(), userDb, bookDb);
+        var transactionDb = new TransactionDb(GetCheckouts(), userDb, bookDb);
 
-        var checkout = status.GetBookCheckout("7890788-(2)", bookDb, checkoutDb);
+        var checkout = status.GetBookCheckout("7890788-(2)", bookDb, transactionDb);
         assertNotNull(checkout);
 
-        checkout = status.GetBookCheckout("CAT12", bookDb, checkoutDb);
+        checkout = status.GetBookCheckout("CAT12", bookDb, transactionDb);
         assertNotNull(checkout);
 
-        checkout = status.GetBookCheckout("HAT12", bookDb, checkoutDb);
+        checkout = status.GetBookCheckout("HAT12", bookDb, transactionDb);
         assertNull(checkout);
 
     }
@@ -30,13 +31,13 @@ public class statusTests {
     public void StatusByUserTest(){
         var bookDb = GetBookDb();
         var userDb = GetUserDb();
-        var checkoutDb = new CheckoutDb(GetCheckouts(), userDb, bookDb);
+        var transactionDb = new TransactionDb(GetCheckouts(), userDb, bookDb);
 
-        var checkouts = status.GetUserCheckouts("name.1", userDb, checkoutDb);
+        var checkouts = status.GetUserCheckouts("name.1", userDb, transactionDb);
         assertNotNull(checkouts);
         assertEquals(2, checkouts.size());
 
-        checkouts = status.GetUserCheckouts("rajat", userDb, checkoutDb);
+        checkouts = status.GetUserCheckouts("rajat", userDb, transactionDb);
         assertNull(checkouts);
     }
 }

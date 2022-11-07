@@ -12,7 +12,7 @@ public class Transaction {
     public final String Type;
     public final long Id;
 
-    private Transaction(String bookId, String userId, Date date, String type){
+    public Transaction(String bookId, String userId, Date date, String type){
         BookId = bookId;
         UserId = userId;
         Date = date;
