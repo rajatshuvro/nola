@@ -24,12 +24,12 @@ public class BookTests {
         var isbn = Book.GenerateIsbn("Chotoder Ramayan", "Upendrakishore Roy Choudhury"
                 ,"Kalighat prokashoni", 1929, 35);
 
-        assertEquals(232192935, isbn);
+        assertEquals(1855609383, isbn);
 
         isbn = Book.GenerateIsbn("Borno porichoy", "Ishwarchandra Viddyasagar"
                 ,"Bengal publishers", 1881, 20);
 
-        assertEquals(222188120, isbn);
+        assertEquals(1640080796, isbn);
 
     }
 }

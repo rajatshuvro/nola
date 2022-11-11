@@ -109,15 +109,15 @@ public class Book implements Comparable<Book>, ISearchDocument {
         // we use a more reliable and stable parameter - word counts of these strings
         if(pageCount == -1) pageCount = 12;//some books don't have page count
         if(year == -1) year = 1789;
-        var titleWordCount = StringUtilities.GetWordCount(title);
-        var authorWordCount = StringUtilities.GetWordCount(author);
-        var publisherWordCount = StringUtilities.GetWordCount(publisher);
-        var titleNumeric = GetNumericChars(title);
-        var isbnString = Integer.toString(titleWordCount+titleNumeric) + authorWordCount + publisherWordCount
-                        + year + pageCount;
-        if(isbnString.length()>9) {
-            System.out.println("Failed to generate isbn smaller than 10 characters");
-            return 999999999L;
+        var titleHash = title.hashCode();
+        var authorHash = author.hashCode();
+        var publisherHash = publisher.hashCode();
+        var isbn = titleHash^ authorHash ^ publisherHash^ pageCount^year;
+        isbn = isbn < 0? -isbn: isbn;
+        var isbnString = Integer.toString(isbn);
+        if(isbnString.length()>11) {
+            System.out.println("Failed to generate isbn smaller than 12 characters");
+            return 9999999999L;
         }
         return Long.parseLong(isbnString);
     }
