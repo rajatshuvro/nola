@@ -92,18 +92,6 @@ public class Book implements Comparable<Book>, ISearchDocument {
                 IsValidReadingLevel(readingLevel);
     }
 
-    public static boolean IsLegacyValid(long isbn, String author, String title, String publisher, int year,
-                                  int pageCount, float price, String genre, int readingLevel, int copyNumber) {
-        return isbn != 0 &&
-                !(ParserUtilities.IsNullOrEmpty(author)) &&
-                !(ParserUtilities.IsNullOrEmpty(title)) &&
-                !(ParserUtilities.IsNullOrEmpty(publisher)) &&
-                price > 0 &&
-                pageCount > 0 &&
-                IsValidGenreTag(genre) &&
-                IsValidReadingLevel(readingLevel);
-    }
-
     public static long GenerateIsbn(String title, String author, String publisher, int year, int pageCount) {
         // since the spelling of the title, author and publisher is subjective,
         // we use a more reliable and stable parameter - word counts of these strings
@@ -114,25 +102,14 @@ public class Book implements Comparable<Book>, ISearchDocument {
         var publisherHash = publisher.hashCode();
         var isbn = titleHash^ authorHash ^ publisherHash^ pageCount^year;
         isbn = isbn < 0? -isbn: isbn;
+        isbn = isbn % 1000000000 ; //limiting them to 9 characters
         var isbnString = Integer.toString(isbn);
-        if(isbnString.length()>11) {
-            System.out.println("Failed to generate isbn smaller than 12 characters");
+        if(isbnString.length()>9) {
+            System.out.println("Failed to generate isbn smaller than 10 characters");
             return 9999999999L;
         }
         return Long.parseLong(isbnString);
     }
-
-    private static int GetNumericChars(String title) {
-        var s = "";
-        for(var c: title.toCharArray()){
-            if(Character.isDigit(c))  s+=c;
-        }
-        return s.equals("")? 0: ParserUtilities.ParseUInt(s);
-    }
-
-//    public String GetUserFriendlyId(){
-//        return String.join("-", Long.toString(Isbn), GetAbbreviation(Genre), Integer.toString(ReadingLevel), '('+Integer.toString(CopyNum)+')');
-//    }
 
     public static String GenerateId(long isbn, int copyNum){
         return isbn +"-("+ copyNum +')';

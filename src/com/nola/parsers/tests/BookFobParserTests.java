@@ -31,8 +31,8 @@ public class BookFobParserTests {
         stream.close();
         var count = books.size();
         assertEquals(2, count);
-        assertEquals(1855609383, books.get(0).Isbn);
-        assertEquals(1640080796, books.get(1).Isbn);
+        assertEquals(855609383, books.get(0).Isbn);
+        assertEquals(640080796, books.get(1).Isbn);
 
     }
 

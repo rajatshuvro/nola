@@ -224,7 +224,7 @@ public class BookDb {
 
     private boolean IsGeneratedIsbn(Long isbn) {
         var s = isbn.toString();
-        return s.length() < 12;
+        return s.length() < 10;
     }
 
     public ArrayList<Book> Filter(String genre, int level) {
