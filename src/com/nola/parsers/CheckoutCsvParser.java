@@ -32,7 +32,7 @@ public class CheckoutCsvParser {
         var checkouts = new ArrayList<Transaction>();
         Iterable<CSVRecord> records = null;
         try {
-            records = CSVFormat.RFC4180.withHeader(TimeTag, ResourceIdTag, UserIdTag, DueDateTag).parse(_reader);
+            records = CSVFormat.RFC4180.withHeader(TimeTag, ResourceIdTag, UserIdTag).parse(_reader);
         } catch (IOException e) {
             PrintUtilities.PrintErrorLine("Failed to parse checkout CSV file.");
             return null;
@@ -52,8 +52,6 @@ public class CheckoutCsvParser {
                 resourceId = Book.GetReducedId(resourceId);
 
                 var userId = record.get(UserIdTag).trim();
-                var dueDateString = record.get(DueDateTag).trim();
-                var dueDate = TimeUtilities.parseDate(dueDateString);
                 var checkoutDate = TimeUtilities.parseGoogleDateTime(timeStamp);
 
                 checkouts.add(new Transaction(resourceId, userId, checkoutDate, Transaction.CheckoutTag));

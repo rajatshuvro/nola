@@ -118,7 +118,7 @@ public class TransactionDb {
             if(transaction != null)
             {
                 transactions.add(transaction);
-                PrintUtilities.PrintSuccessLine(checkout.Id +" has been checked out by "+ checkout.UserId);
+                PrintUtilities.PrintSuccessLine(checkout.BookId +" has been checked out by "+ checkout.UserId);
             }
             else PrintUtilities.PrintWarningLine("Checkout attempt was unsuccessful!!");
         }
